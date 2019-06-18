@@ -1,0 +1,230 @@
+{
+	"ajax": {
+		"prefix": "ajax",
+		"body": "\r\n//CONSULTA AJAX\r\n$.ajax({\r\n\turl: \"${2:enviarForm.php}\", \r\n\tdata: $(\"${1:form}\").serialize(),\r\n    error: function(xhr){\r\n        console.log(\"Ocurrió un error: \" + xhr.status + \" \" + xhr.statusText);\r\n    },\r\n\tsuccess: function(result){\r\n        ${3:var respuesta = result;\r\n        $(\"#modal\").html(respuesta.message);\r\n        $(\"#modal\").fadeIn();\r\n        setTimeout(function(){\r\n        \t$(\"#modal\").fadeOut();\r\n        \\},3000);}\r\n    },\r\n    dataType: \"${4:json}\"\r\n});\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"ajaxform": {
+		"prefix": "ajaxform",
+		"body": "\r\n//CONSULTA AJAX\r\n$(\"${1:form}\").submit(function(e){\r\n\te.stopPropagation();\r\n\te.preventDefault();\r\n\t$.ajax({\r\n\t\turl: \"${2:enviarForm.php}\", \r\n\t\tdata: $(\"${1:form}\").serialize(),\r\n\t    error: function(xhr){\r\n\t        console.log(\"Ocurrió un error: \" + xhr.status + \" \" + xhr.statusText);\r\n\t    },\r\n\t\tsuccess: function(result){\r\n\t        ${3:var respuesta = result;\r\n\t        $(\"#modal\").html(respuesta.message);\r\n\t        $(\"#modal\").fadeIn();\r\n\t        setTimeout(function(){\r\n\t        \t$(\"#modal\").fadeOut();\r\n\t        \\},3000);}\r\n\t    },\r\n\t    dataType: \"${4:json}\"\r\n\t});\r\n});\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"component": {
+		"prefix": "component",
+		"body": "\r\nimport { Component, Input } from \"@angular/core\";\r\nimport { ${1:NombreServicio}Service } from '../services/${2:nombreServicio}.service';\r\nimport { Router, ActivatedRoute, Params } from '@angular/router';\r\n\r\ndeclare var jquery:any;\r\ndeclare var $:any;\r\n\r\n@Component({\r\n\tselector: \"${3:nombreComponente}\",\r\n\ttemplateUrl: \"./${3:nombreComponente}.component.html\",\r\n\t// styleUrls: ['./style.css'],\r\n\tproviders: [${1:NombreServicio}Service]\r\n})\r\n\r\n\r\nexport class ${4:NombreComponente}Component{\r\n\tpublic titulo = \"Página ${3:nombreComponente}\";\r\n\tpublic parametro;\r\n\t//Luego se llama al parametro1 desde el html: <${3:nombreComponente} [parametro1]=\"valor\"></${3:nombreComponente}>\r\n\t@Input() parametro1:string;\r\n\r\n\tconstructor(\r\n\t\tprivate ${2:nombreServicio}Service:${1:NombreServicio}Service,\r\n\t\tprivate _route: ActivatedRoute,\r\n\t\tprivate _router: Router\r\n\t){}\r\n\r\n\tngOnInit(){\r\n\t\tthis._route.params.forEach((params: Params) =>{\r\n\t\t\tthis.parametro = params['page'];\r\n\t\t})\r\n\t}\r\n\r\n\tredirigir(){\r\n\t\tthis._router.navigate(['/${3:nombreComponente}','valorPage']);\r\n\t}\r\n\r\n}\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"formangular": {
+		"prefix": "formangular",
+		"body": "\r\n<form #formCoche=\"ngForm\" (ngSubmit)=\"onSubmit()\">\r\n\t<label for=\"nombre\">NOMBRE Y APELLIDO</label>\r\n\t<input type=\"text\" name=\"nombre\" #nombre=\"ngModel\" [(ngModel)]=\"nombreForm\" required pattern=\"[a-z]+\" placeholder=\"Ingrese su nombre y apellido\">\r\n\t<span *ngIf=\"nombre.touched && !nombre.valid\">Formato de nombre incorrecto</span>\r\n\r\n\t<label for=\"dni\">DNI</label>\r\n\t<input type=\"text\" name=\"dni\" #dni=\"ngModel\" [(ngModel)]=\"dniForm\" required pattern=\"[0-9]+\" placeholder=\"Ingrese su dni\">\r\n\t<span *ngIf=\"dni.touched && !dni.valid\">Formato de dni incorrecto</span>\r\n\r\n\t<label for=\"email\">E-MAIL</label>\r\n\t<input type=\"text\" name=\"email\" #email=\"ngModel\" [(ngModel)]=\"emailForm\" required pattern=\"^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$\" placeholder=\"Ingrese su e-mail\">\r\n\t<span *ngIf=\"email.touched && !email.valid\">Formato de email incorrecto</span>\r\n\r\n\t<label for=\"mensaje\">MENSAJE</label>\r\n\t<textarea name=\"mensaje\" #mensaje=\"ngModel\" [(ngModel)]=\"mensajeForm\" placeholder=\"Escriba su consulta\"></textarea>\r\n\t<span *ngIf=\"mensaje.touched && !mensaje.valid\">Formato de email incorrecto</span>\r\n</form>\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"module": {
+		"prefix": "module",
+		"body": "\r\nimport { BrowserModule } from '@angular/platform-browser';\r\nimport { NgModule } from '@angular/core';\r\nimport { FormsModule } from '@angular/forms';\r\nimport { HttpModule } from '@angular/http';\r\nimport { routing, appRoutingProviders } from './app.routing';\r\n\r\nimport { AppComponent } from './app.component';\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent\r\n  ],\r\n  imports: [\r\n    BrowserModule,\r\n    FormsModule,\r\n    HttpModule,\r\n    routing\r\n  ],\r\n  providers: [appRoutingProviders],\r\n  bootstrap: [AppComponent]\r\n})\r\nexport class AppModule { }\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"ngFor": {
+		"prefix": "ngFor",
+		"body": "\r\n<option *ngFor=\"let item of arrayDeItems; let i = index\" value=\"{{item[0]}}\">{{item[1]}}</option>\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"pipe": {
+		"prefix": "pipe",
+		"body": "\r\nimport {Pipe, PipeTransform} from \"@angular/core\";\r\n\r\n@Pipe({ name: '${1:nombrePipe}'})\r\nexport class ${2:NombrePipe}Pipe implements PipeTransform {\r\n\ttransform(value, por) {\r\n\t\tlet value_one = parseInt(value);\r\n\t\tlet value_two = parseInt(por);\r\n\r\n\t\tlet result = \"Resultado: \"+(value_one * value_two);\r\n\r\n\t\tresult result;\r\n\t}\r\n}\r\n//se llama a este pipe: {{ 5 | ${1:nombrePipe} : 7}}\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"routing": {
+		"prefix": "routing",
+		"body": "\r\nimport { ModuleWithProviders } from '@angular/core';\r\nimport { Routes, RouterModule } from '@angular/router';\r\n\r\n//Importar componentes\r\nimport { HomeComponent } from './home/home.component';\r\nimport { ${1:ComponenteDePrueba}Component } from './${1:ComponenteDePrueba}/${2:componenteDePrueba}.component';\r\n\r\n//Crear rutas\r\nconst appRoutes: Routes = [\r\n\t{path: '', component:HomeComponent},\r\n\t{path: 'home/:page', component:HomeComponent},\r\n\t{path: '**', component:HomeComponent},\r\n\t{path: '${3:rutaDePrueba}', component:${1:ComponenteDePrueba}Component,\r\n\t\tchildren: [\r\n\t\t\t{ path: '', redirectTo: 'overview', pathMatch: 'full' },\r\n\t\t\t{ path: 'overview', component: Overview },\r\n\t\t\t{ path: 'specs', component: Specs }\r\n\t\t]\r\n\t}\r\n];\r\n\r\n//Se crea el nav html de esta forma: <a [routerLink]=\"['/${3:rutaDePrueba}']\" [routerLinkActive]=\"['claseLinkActivo']\"></a> <router-outlet></router-outlet>\t\r\n//Agregar routing en imports y appRoutingProviders en providers para \"modules\"\r\nexport const appRoutingProviders: any[] = [];\r\n\r\nexport const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"service": {
+		"prefix": "service",
+		"body": "\r\nimport { Injectable } from '@angular/core';\r\nimport { Http, Response, Headers } from '@angular/http';\r\nimport { Observable, Subject } from 'rxjs';\r\nimport { map, take } from 'rxjs/operators';\r\n\r\ndeclare var jquery:any;\r\ndeclare var $:any;\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\n\r\nexport class PeticionesService{\r\n\tpublic url: string;\r\n\tpublic respuesta: any;\r\n\r\n\tconstructor(private _http:Http){}\r\n\r\n\tget(id){\r\n\t\tthis.url = \"http://www.soyunaURL.com.ar/index.php?peticion=301&nrodoc=\" + id + \"&fechaNac='01/01/0001'&rnos=101604\";\r\n\t\tvar respuesta;\r\n\t\t$.ajax({\r\n\t\t\turl: this.url, \r\n\t\t\tasync: false,\r\n\t\t\terror: function(xhr){\r\n\t\t\t\trespuesta = \"Ocurrió un error: \" + xhr.status + \" \" + xhr.statusText;\r\n\t\t    },\r\n\t\t    success: function(result){\r\n\t\t        respuesta = result;\r\n\t\t    },\r\n\t\t    dataType: \"xml\"\r\n\t\t});\r\n\t\treturn respuesta;\r\n\t}\r\n\r\n\tget_integrantes(){\r\n\t\tthis.url = \"http://ciqabackend.diezweb.com.ar/wp-json/wp/v2/integrantes?fields=id,nombre_completo,cargo,email,telefono,foto.guid,es_investigador,contenido_investigador\";\r\n\t\tthis.respuesta = this._http.get(this.url).pipe(map(res => res.json()));\r\n\t\treturn this.respuesta;\r\n\t}\r\n\t//\tluego se llama en el component.ts de la siguiente forma:\r\n\t//\tthis.peticionesService.get_integrantes().subscribe(\r\n\t//\t\tdata => this.integrantes = data, \r\n\t//\t\t(err) => console.log(err), \r\n\t//\t\t(complete) => {console.log(this.integrantes);}\r\n\t//\t);\r\n\r\n\tpost(id, name){\r\n\t\tthis.url = \"https://api.trello.com/1/cards\";\r\n\t\tconst req = this._http.post(this.url, {\r\n\t\t\tidList : id,\r\n\t\t\tname : name,\r\n\t\t\tkey : \"b1691298dac8eacbce129b3672ae023c\",\r\n\t\t\ttoken : \"5e61f4f5f7f2c22c1d08c6a9fa10a0bf31bdd9d7338aa4c90359e5517334748e\"\r\n\t\t}).subscribe(\r\n\t\t\tresult => {this.respuesta = result},\r\n\t\t\terror => {this.respuesta = \"Error occured\"}\r\n\t\t);\r\n\t\treturn this.respuesta;\r\n\t}\r\n}\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"sliderAngular": {
+		"prefix": "sliderAngular",
+		"body": "\r\n\t<!-- HTML -->\r\n\t\t<div class=\"slider\" id=\"${1:nombreSlide}\">\r\n\t\t\t<div class=\"col-xs-1\">\r\n\t\t\t\t<div class=\"prev\" style=\"cursor: pointer\" (click)=\"moverSlider(${1:nombreSlide}Actual-1)\"><span class=\"glyphicon glyphicon-menu-left\"></span></div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"sliderMarco col-xs-10\">\r\n\t\t\t\t<div class=\"sliderContainer\">\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/1.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/2.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/3.gif') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/4.png') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/5.png') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/6.png') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/7.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/8.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/9.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/10.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/11.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/12.png') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/13.jpg') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/14.png') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/15.png') no-repeat\"></div>\r\n\t\t\t\t\t<div class=\"sliderItem col-xs-12 col-sm-4\" style=\"background: url('../assets/img/home/slider2/16.svg') no-repeat\"></div>\r\n\t\t\t\t</div>\r\n\t\t\t</div>\r\n\t\t\t<div class=\"col-xs-1\">\r\n\t\t\t\t<div class=\"next\" style=\"cursor: pointer\" (click)=\"moverSlider(${1:nombreSlide}Actual+1)\"><span class=\"glyphicon glyphicon-menu-right\"></span></div>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<style>\r\n\t\t\t#${1:nombreSlide} .slider .sliderItem {\r\n\t\t\t\theight: 200px;\r\n\t\t\t\tfloat: left;\r\n\t\t\t}\r\n\r\n\t\t\t#${1:nombreSlide} .sliderContainer {\r\n\t\t\t\tfloat: left;\r\n\t\t\t\twidth: 100%;\r\n\t\t\t    transition: margin-left 1s ease;\r\n\t\t\t}\r\n\t\t\t#${1:nombreSlide} .sliderMarco {\r\n\t\t\t\toverflow: hidden;\r\n\t\t\t\tpadding: 0px;\r\n\t\t\t}\r\n\t\t</style>\r\n\t<!-- FIN HTML -->\r\n\t<!-- COMPONENT -->\r\n\t\tdeclare var TweenMax:any;\r\n\t\tdeclare var Power4:any;\r\n\r\n\t\tpublic ${1:nombreSlide}Slides = [{margin: 0}];\r\n\t\tpublic ${1:nombreSlide}Actual = 0;\r\n\r\n\t\tincializarSlider${1:nombreSlide}() {\r\n\t\t\tvar totalItems = $(\"#${1:nombreSlide} .sliderItem\").length;\r\n\t\t\tvar itemPorPantalla = 3;\r\n\t\t\tif ($(window).width() < 768) {\r\n\t\t\t\titemPorPantalla = 1;\r\n\t\t\t}\r\n\t\t\tvar widthCoeficiente = totalItems / itemPorPantalla;\r\n\t\t\tvar widthActual = $(\"#${1:nombreSlide} .sliderContainer\").outerWidth();\r\n\t\t\t$(\"#${1:nombreSlide} .sliderContainer\").width(widthActual * widthCoeficiente);\r\n\t\t\t$(\"#${1:nombreSlide} .sliderItem\").each(function(index, element){\r\n\t\t\t\t$(element).outerWidth(widthActual / itemPorPantalla);\r\n\t\t\t});\r\n\r\n\t\t\tthis.${1:nombreSlide}Slides = [];\r\n\t\t\tfor (var i = 0; i < widthCoeficiente; ++i) {\r\n\t\t\t\tif (i+1 > widthCoeficiente) {\r\n\t\t\t\t\tthis.${1:nombreSlide}Slides.push({margin: -(widthCoeficiente-1)*widthActual});\r\n\t\t\t\t} else {\r\n\t\t\t\t\tthis.${1:nombreSlide}Slides.push({margin: -i*widthActual});\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tmoverSlider(posicion) {\r\n\t\t\tif (posicion == -1) {\r\n\t\t\t\tposicion = this.${1:nombreSlide}Slides.length-1;\r\n\t\t\t} else if (posicion == this.${1:nombreSlide}Slides.length) {\r\n\t\t\t\tposicion = 0;\r\n\t\t\t}\r\n\t\t\t//new TweenMax.to($(\"#${1:nombreSlide} .sliderContainer\"), 3, {marginLeft: this.${1:nombreSlide}Slides[posicion].margin, ease: Power4.easeOut});\r\n\t\t\t$(\"#${1:nombreSlide} .sliderContainer\").css({\"marginLeft\":this.${1:nombreSlide}Slides[posicion].margin})\r\n\t\t\tthis.${1:nombreSlide}Actual = posicion;\r\n\t\t\tconsole.log(this.${1:nombreSlide}Actual);\r\n\t\t}\r\n\t<!-- FIN COMPONENT -->\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"animation": {
+		"prefix": "animation",
+		"body": "\r\n<!-- INCLUDE SCROLLMAGIC + GSAP -->\r\n<script src=\"http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js\"></script>\r\n<script src=\"//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.js\"></script>\r\n<script src=\"//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.js\"></script>\r\n<script src=\"//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js\"></script>\r\n<!-- FIN INCLUDE -->\r\n\r\n//INICIALIZAR CONTROLLER\r\nvar scrollMagicController = new ScrollMagic.Controller();\r\n    \r\nvar i = 0;\r\nvar offsetAnterior = 0;\r\n$(\".${1:claseAnimada}\").each(function(index,element){\r\n    var offset = $(element).offset().top;\r\n    if (offsetAnterior == offset) {\r\n        i += 0.2;\r\n    } else {\r\n        i = 0;\r\n    }\r\n    offsetAnterior = $(element).offset().top;\r\n    // CREANDO ANIMACIÓN\r\n    var ${2:nombreAnimacion} = new TweenMax.fromTo(element, 0.5, {opacity:0, y:50},{y: 0, opacity: 1, delay: i});\r\n    //ASIGNANDO TRIGGERS\r\n    var scene${2:nombreAnimacion} = new ScrollMagic.Scene({triggerElement: element, offset: -250, duration: 400}).setTween(${2:nombreAnimacion}).addTo(scrollMagicController).addIndicators();\r\n})\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"curlphp": {
+		"prefix": "curlphp",
+		"body": "\n\t$curl = curl_init();\n\t\tcurl_setopt_array($curl, array(\n\t\tCURLOPT_URL => \"https://myacomercial.vtexcommercestable.com.br/api/catalog_system/pvt/sku/stockkeepingunitbyean/\".$row[1],\n\t\tCURLOPT_RETURNTRANSFER => true,\n\t\tCURLOPT_TIMEOUT => 30,\n\t\tCURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n\t\tCURLOPT_CUSTOMREQUEST => \"GET\",\n\t\tCURLOPT_HTTPHEADER => array(\n\t\t\t\"cache-control: no-cache\"\n\t\t),\n\t));\n\n\t$response = curl_exec($curl);\n\t$err = curl_error($curl);\n\n\tcurl_close($curl);\n",
+		"description": "",
+		"scope": ""
+	},
+	"curlphppost": {
+		"prefix": "curlphppost",
+		"body": "\n\t$data[\"price\"] = $price;\n    $data[\"stock\"] = $stock;\n\n    $curl = curl_init();\n    curl_setopt_array($curl, array(\n        CURLOPT_URL => \"https://api.tiendanube.com/v1/808724/products/\".$id.\"/variants/\".$id_sku,\n        CURLOPT_RETURNTRANSFER => true,\n        CURLOPT_TIMEOUT => 120,\n        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,\n        CURLOPT_CUSTOMREQUEST => \"PUT\",\n        CURLOPT_POSTFIELDS => json_encode($data), \n        CURLOPT_HTTPHEADER => array(\n            \"Authentication: bearer f65d278761a83bdf2e5887200f51f6373030ee39 \",\n            \"User-Agent: App ERP-TiendaNube (ezequielcrosa@diezweb.com.ar)\",\n            \"Content-Type: application/json\"\n        ),\n    ));\n\n    $response = curl_exec($curl);\n\t$err = curl_error($curl);\n\n\tcurl_close($curl);\n",
+		"description": "",
+		"scope": ""
+	},
+	"errorPHP": {
+		"prefix": "errorPHP",
+		"body": "\r\nini_set('display_errors', 1);\r\nini_set('display_startup_errors', 1);\r\nerror_reporting(E_ALL);\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"flush": {
+		"prefix": "flush",
+		"body": "\r\nob_implicit_flush(true);\r\nob_end_flush();\r\nset_time_limit(0);\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"ajax1": {
+		"prefix": "ajax",
+		"body": "\r\n<html>\r\n<?php\r\nerror_reporting(0);\r\n\r\n$text = \"\";\r\nforeach ($_POST as $key => $value) {\r\n    $text .= \"<b>$key</b>: $value<br>\";\r\n    if ($key == \"nombre\") {\r\n        $nombre = $value;\r\n    }\r\n    if ($key == \"email\") {\r\n        $email = $value;\r\n    }\r\n    if ($key == \"mensaje\") {\r\n        $mensaje = $value;\r\n    }\r\n    if ($key == \"tel\") {\r\n        $tel = $value;\r\n    }\r\n}\r\n\r\n$to = \"gezeac@gmail.com\";\r\n$subject = \"Contacto Web\";\r\n\r\n$headers = \"MIME-Version: 1.0\" . \"\\r\\n\";\r\n$headers .= \"Content-type:text/html;charset=UTF-8\" . \"\\r\\n\";\r\n\r\nmail($to,$subject,$text,$headers);\r\n\r\n?>\r\n\r\n<iframe style=\"display:none\" src=\"http://www.diezweb.com.ar/wp-content/themes/diezweb/cargarEnBBDD.php?nombre=<?php echo $nombre; ?>&email=<?php echo $email; ?>&tel=<?php echo $tel; ?>&mensaje=<?php echo $mensaje; ?>&sitio=tenetuauto.com\"></iframe>\r\n\r\n¡GRACIAS POR ESCRIBIRNOS!\r\nEn breve estaremos respondiendo tu consulta.\r\n\r\n</html>\r\n});\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"generarPagTipografias": {
+		"prefix": "generarPagTipografias",
+		"body": "\r\n//CREAR CARPETA ${1:fonts} EN EL MISMO LUGAR DONDE ESTÁ ESTE SCRIPT Y EJECUTARLO EN PHP\r\nfunction listar_directorios_ruta($ruta){ \r\n   // crear archivo css a escribir \r\n   $arch = fopen(\"tipografias.css\", \"w\");\r\n   // abrir un directorio y listarlo recursivo \r\n   if (is_dir($ruta)) { \r\n      if ($dh = opendir($ruta)) { \r\n         while (($file = readdir($dh)) !== false) { \r\n\t\t\t\t\t\tif (is_dir($ruta . $file) == FALSE && $file!=\".\" && $file!=\"..\"){\r\n\t\t\t\t\t\t\t$fileCortado = substr($file, 0, -4);\r\n\t\t\t\t\t\t\techo \"@font-face {<br>font-family: $fileCortado;<br>src: url($ruta$file);<br>}<br><br>\"; \r\n\t\t\t\t\t\t\tfwrite($arch, \"@font-face {\" . PHP_EOL);\r\n\t\t\t\t\t\t\tfwrite($arch, \"font-family: $fileCortado;\" . PHP_EOL);\r\n\t\t\t\t\t\t\tfwrite($arch, \"src: url($ruta$file);\" . PHP_EOL);\r\n\t\t\t\t\t\t\tfwrite($arch, \"}\" . PHP_EOL);\r\n\t\t\t\t\t\t\tfwrite($arch, \"\" . PHP_EOL);\r\n\t\t\t\t\t\t}\r\n         } \r\n      closedir($dh); \r\n      } \r\n\tfclose($arch);\r\n   }else \r\n      echo \"<br>No es ruta valida\"; \r\n}\r\n\r\nlistar_directorios_ruta(\"./${1:fonts}/\");\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"gitIgnoreSourceTree": {
+		"prefix": "gitIgnoreSourceTree",
+		"body": "\r\ngit update-index --assume-unchanged ${1:rutaDelArchivo}\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"imprimir": {
+		"prefix": "imprimir",
+		"body": "\r\nlet printContents, popupWin;\r\nprintContents = document.getElementById('${1:IdItemAImprimir}').innerHTML;\r\npopupWin = window.open('', '_blank', 'top=0,left=0');\r\npopupWin.document.open();\r\npopupWin.document.write(`\r\n  <html>\r\n\t<head>\r\n  \t<title>Print tab</title>\r\n  \t<style>\r\n\t\t//ESTILOS INLINE\t\r\n\t</style>\r\n\t</head>\r\n\t<body onload=\"window.print();window.close()\">${printContents}</body>\r\n  </html>`\r\n);\r\npopupWin.document.close();\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"blockCall": {
+		"prefix": "blockCall",
+		"body": "\r\n${2:<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('${1:block_id}')->toHtml(); ?>}${3:\\{\\{block type=\"cms/block\" block_id=\"${1:block_id}\"\\}\\}}\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"magento2_create_user": {
+		"prefix": "magento2_create_user",
+		"body": "\nphp bin/magento admin:user:create --admin-user=\"develop1\" --admin-password=\"Developers2017\" --admin-email=\"admin@example.com\" --admin-firstname=\"Admin\" --admin-lastname=\"Admin\"\n",
+		"description": "",
+		"scope": ""
+	},
+	"magento2_customscript_php": {
+		"prefix": "magento2_customscript_php",
+		"body": "\nini_set('display_errors', 1);\nini_set('display_startup_errors', 1);\nerror_reporting(E_ALL);\n\nrequire 'app/bootstrap.php';\n$bootstrap = Magento\\Framework\\App\\Bootstrap::create(BP, $_SERVER);\n$obj = $bootstrap->getObjectManager();\n\n$test = $obj->create('Magento\\Backend\\Cron\\CleanCache')->execute();\nvar_dump($test);\n",
+		"description": "",
+		"scope": ""
+	},
+	"table_migration_magento": {
+		"prefix": "table_migration_magento",
+		"body": "\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/js/merge_files';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/js/enable_js_bundling';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/js/minify_files';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/css/merge_css_files';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/css/minify_files';\n",
+		"description": "",
+		"scope": ""
+	},
+	"magento2_log": {
+		"prefix": "magento2_log",
+		"body": "\n        $writer = new \\Zend\\Log\\Writer\\Stream(BP . '/var/log/test.log');\n        $logger = new \\Zend\\Log\\Logger();\n        $logger->addWriter($writer);\n        $logger->info('Your text message');\n",
+		"description": "",
+		"scope": ""
+	},
+	"magento2resetPassword": {
+		"prefix": "magento2resetPassword",
+		"body": "\nUPDATE admin_user SET password = CONCAT(SHA2('xxxxxxDevelopers2017', 256), ':xxxxxx:1') WHERE username like 'develop%';\n",
+		"description": "",
+		"scope": ""
+	},
+	"mediaCall": {
+		"prefix": "mediaCall",
+		"body": "\r\nMagento1: <img src=\"<?php echo Mage::getBaseUrl('media') ?>wysiwyg/${1:nombreDeImagen.png}\" alt=\"\" />${2:<img src=\"\\{\\{media url=\"wysiwyg/${1:nombreDeImagen.png}\"\\}\\}\" alt=\"\" />}\r\nMagento2: $block->getViewFileUrl('images/logo_kudos.png')\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"owl": {
+		"prefix": "owl",
+		"body": "\r\njQuery(function($){\r\n    $(\".marcasCont\").owlCarousel({\r\n        loop:true,\r\n\t    margin:10,\r\n\t\tmouseDrag: true,\r\n\t\ttouchDrag: true,\r\n\t\titems : 7, //10 items above 1000px browser width\r\n\t\titemsTablet: [768,2], //2 items between 600 and 0\r\n\t\titemsMobile : false // itemsMobile disabled - inherit from itemsTablet option\r\n    });\r\n});\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"table_migration_magento1": {
+		"prefix": "table_migration_magento",
+		"body": "\nupdate core_config_data set value = \"http://ezequiel.nhautopiezas.com.ar/\" where path like \"%base_url%\" or path like \"%base_link_url%\";\nupdate sales_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate customer_entity set email = replace(email, \"@\", \"@testk\");\n",
+		"description": "",
+		"scope": ""
+	},
+	"table_migration_magento2": {
+		"prefix": "table_migration_magento",
+		"body": "\nDELETE FROM customer_visitor WHERE last_visit_at < DATE_SUB(NOW(), INTERVAL 3 DAY);\nDELETE FROM report_event WHERE logged_at < DATE_SUB(NOW(), INTERVAL 3 DAY);\nDELETE FROM report_viewed_product_index WHERE added_at < DATE_SUB(NOW(), INTERVAL 3 DAY);\nOPTIMIZE TABLE customer_visitor;\n",
+		"description": "",
+		"scope": ""
+	},
+	"magento2_fullsite_backup": {
+		"prefix": "magento2_fullsite_backup",
+		"body": "\nmysqldump --quick --single-transaction --lock-tables=false -u magento -p${1:BBDD_password} ${2:BBDD_name} | gzip -9 > bbdd_backup_$(date -I).sql.gz && zip --exclude \"*cache/*\" --exclude \"*.git/*\" --exclude \"*var/log/*\" --exclude \"*import/*\" --exclude \"*generated/*\" --exclude \"*pub/static/*\" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup_$(date -I).sql.gz\n",
+		"description": "",
+		"scope": ""
+	},
+	"mail": {
+		"prefix": "mail",
+		"body": "\r\n$to = \"${1:gezeac@gmail.com}\";\r\n$subject = \"${2:Consulta desde la web}\";\r\n$headers = \"MIME-Version: 1.0\" . \"\\r\\n\";\r\n$headers .= \"Content-type:text/html;charset=UTF-8\" . \"\\r\\n\";\r\n//$headers .= 'From: <desde@ejemplo.com>' . \"\\r\\n\";\r\n//$headers .= 'Cc: copia@ejemplo.com' . \"\\r\\n\";\r\n$message = \"\";\r\nforeach ($_POST as $key => $value) {\r\n    $message .= \"<b>\".$key.\"</b>: \".$value.\"<br>\";\r\n}\r\n\r\nmail($to,$subject,$message,$headers);\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"module_template_magento1": {
+		"prefix": "module_template_magento1",
+		"body": "\n\nvim app/etc/modules/${1:Namespace}_${2:Name}.xml;\n<?xml version=\"1.0\"?>\n<config>\n    <modules>\n        <${1:Namespace}_${2:Name}>\n            <active>true</active>\n            <codePool>local</codePool>\n            <depends>\n                <Mage_Page />\n            </depends>\n        </${1:Namespace}_${2:Name}>\n    </modules>\n</config>\n\nmkdir -p \"app/code/local/${1:Namespace}/${2:Name}/etc\";\nvim app/code/local/${1:Namespace}/${2:Name}/etc/config.xml;\n<?xml version=\"1.0\"?>\n<config>\n    <modules>\n        <${1:Namespace}_${2:Name}>\n            <version>0.0.1</version>\n        </${1:Namespace}_${2:Name}>\n    </modules>\n    <global>\n        <page>\n            <layouts>\n                <${5:custom_template} module=\"page\" translate=\"label\">\n                    <label>Custom layout</label>\n                    <template>page/${5:custom_template}.phtml</template>\n                    <layout_handle>${5:custom_template}</layout_handle>\n                </${5:custom_template}>\n            </layouts>\n        </page>\n    </global>\n    <frontend>\n        <layout>\n            <updates>\n                <${3:namespace}_${4:name}>\n                    <file>${3:namespace}_${4:name}.xml</file>\n                </${3:namespace}_${4:name}>\n            </updates>\n        </layout>\n    </frontend>\n</config>\n\nvim app/design/frontend/base/default/layout/${3:namespace}_${4:name}.xml;\n<?xml version=\"1.0\"?>\n<layout>\n    <${5:custom_template} translate=\"label\">\n        <label>Custom layout</label>\n        <reference name=\"root\">\n            <action method=\"setTemplate\"><template>page/${5:custom_template}.phtml</template></action>\n            <action method=\"setIsHandle\"><applied>1</applied></action>\n        </reference>\n    </${5:custom_template}>\n</layout>\n\nmkdir -p \"app/design/frontend/base/default/template/page\";\nvim app/design/frontend/base/default/template/page/${5:custom_template}.phtml;\n<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"<?php echo $this->getLang() ?>\" lang=\"<?php echo $this->getLang() ?>\">\n\n</html>\n\n\n{{block type=\"core/template\" template=\"page/${5:custom_template}.phtml\"}}\n",
+		"description": "",
+		"scope": ""
+	},
+	"modulejs": {
+		"prefix": "modulejs",
+		"body": "\n// Modulo1 CORE\n(function (){\n\tjQuery.modulo1 = function (options){\n\t\tvar _settings = $.extend({\n\t\t\tanimated: true, // activar animación para abrir/cerrar pop-up (true | false)\n\t\t},options);\n\n\t\tvar _module = {\n\t\t\t_info_container: \"precio-en-cuotas\",\n\t\t\t_modal_container: \"payment-method-source\",\n\t\t\tinit: function() {\n\t\t\t\tif(_settings.animated) { _module.otra_func() }\n\t\t\t\tif (options == undefined) { return \"todo ok\" } \n\t\t\t\telse { return options }\n\t\t\t},\n\t\t\totra_func: function() {\n\t\t\t\tconsole.log(\"ejecuta otra func.\");\n\t\t\t}\n\t\t};\n\t\treturn _module.init();\n\t}\n}());\n\n// Inicializamos Modulo1\n$(document).ready(function(){\n\t$.modulo1();\n});\n\n",
+		"description": "",
+		"scope": ""
+	},
+	"slider": {
+		"prefix": "slider",
+		"body": "\r\n<div id=\"${1:myCarousel}\" class=\"carousel slide\" data-ride=\"carousel\">\r\n\t<!-- Indicators -->\r\n\t<ol class=\"carousel-indicators\">\r\n\t\t<li data-target=\"#${1:myCarousel}\" data-slide-to=\"0\" class=\"active\"></li>\r\n\t\t<li data-target=\"#${1:myCarousel}\" data-slide-to=\"1\"></li>\r\n\t\t<li data-target=\"#${1:myCarousel}\" data-slide-to=\"2\"></li>\r\n\t</ol>\r\n\r\n\t<!-- Wrapper for slides -->\r\n\t<div class=\"carousel-inner\">\r\n\t\t<div class=\"item active\">\r\n\t\t\t<img src=\"la.jpg\" alt=\"Los Angeles\">\r\n\t\t</div>\r\n\r\n\t\t<div class=\"item\">\r\n\t\t\t<img src=\"chicago.jpg\" alt=\"Chicago\">\r\n\t\t</div>\r\n\r\n\t\t<div class=\"item\">\r\n\t\t\t<img src=\"ny.jpg\" alt=\"New York\">\r\n\t\t</div>\r\n\t</div>\r\n\r\n\t<!-- Left and right controls -->\r\n\t<a class=\"left carousel-control\" href=\"#${1:myCarousel}\" data-slide=\"prev\">\r\n\t\t<span class=\"glyphicon glyphicon-chevron-left\"></span>\r\n\t\t<span class=\"sr-only\">Previous</span>\r\n\t</a>\r\n\t<a class=\"right carousel-control\" href=\"#${1:myCarousel}\" data-slide=\"next\">\r\n\t\t<span class=\"glyphicon glyphicon-chevron-right\"></span>\r\n\t\t<span class=\"sr-only\">Next</span>\r\n\t</a>\r\n</div>\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"sliderAuto": {
+		"prefix": "sliderAuto",
+		"body": "\r\n<!-- INCLUDE SCROLLMAGIC + GSAP -->\r\n\t<script src=\"http://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js\"></script>\r\n\t<script src=\"//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.js\"></script>\r\n\t<script src=\"//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.js\"></script>\r\n\t<script src=\"//cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js\"></script>\r\n<!-- FIN INCLUDE -->\r\n\r\n\t\t\r\n// CREANDO ANIMACIÓN\r\nvar slideIndex = 0;\r\ncambiarSlide();\r\n\r\nfunction cambiarSlide() {\r\n\t$(\".imagenSlider\").each(function(index, element){\r\n\t\tif ((index == slideIndex-1) || (slideIndex == 0 && index == $(\".imagenSlider\").length-1)) {\r\n\t\t\tnew TweenMax.fromTo(element, 3, {opacity:1, scale: 1}, {opacity: 0, scale: 1.05, ease: Power4.easeOut});\r\n\t\t} else if (slideIndex == index) {\r\n\t\t\tnew TweenMax.fromTo(element, 3, {opacity: 0, scale: 1.05}, {opacity: 1, scale: 1, ease: Power4.easeOut});\r\n\t\t} else {\r\n\t\t\t$(element).css({\"opacity\":\"0\"});\r\n\t\t}\r\n\t})\r\n\tslideIndex++;\r\n\tif (slideIndex >= $(\".imagenSlider\").length) {\r\n\t\tslideIndex = 0;\r\n\t} \r\n\tsetTimeout(cambiarSlide, 4000);\r\n}\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"sliderMultiItemr": {
+		"prefix": "sliderMultiItemr",
+		"body": "\r\n<!-- HTML -->\r\n<div class=\"slider\" id=\"${1:nombreSlide}\">\r\n\t<div class=\"col-xs-1\">\r\n\t\t<div class=\"${1:nombreSlide}Prev\" style=\"cursor: pointer\" onClick=\"moverSlider${1:nombreSlide}(event)\"><span class=\"glyphicon glyphicon-menu-left\"></span></div>\r\n\t</div>\r\n\t<div class=\"${1:nombreSlide}Marco col-xs-10\" style=\"overflow: hidden\">\r\n\t\t<div class=\"${1:nombreSlide}Container\">\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_04.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_05.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_06.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_07.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_08.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_09.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_10.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_11.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_12.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_13.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_14.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_15.jpg\"></div>\r\n\t\t\t<div class=\"${1:nombreSlide}Item col-xs-12 col-sm-4\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/home/slider${1:nombreSlide}/slide${1:nombreSlide}_16.jpg\"></div>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"col-xs-1\">\r\n\t\t<div class=\"${1:nombreSlide}Next\" style=\"cursor: pointer\" onClick=\"moverSlider${1:nombreSlide}(event)\"><span class=\"glyphicon glyphicon-menu-right\"></span></div>\r\n\t</div>\r\n\t<div id=\"${1:nombreSlide}ItemActual\" data-to=0></div>\r\n</div>\r\n<!-- FIN HTML -->\r\n<script>\r\n\tvar ${1:nombreSlide}Slides = [{margin: 0}];\r\n\tincializarSlider${1:nombreSlide}();\r\n\tfunction incializarSlider${1:nombreSlide}() {\r\n\t\tvar totalItems = $(\"#${1:nombreSlide} .${1:nombreSlide}Item\").length;\r\n\t\tvar itemPorPantalla = 3;\r\n\t\tif ($(window).width() < 768) {\r\n\t\t\titemPorPantalla = 1;\r\n\t\t}\r\n\t\tvar widthCoeficiente = totalItems / itemPorPantalla;\r\n\t\tvar widthActual = $(\"#${1:nombreSlide} .${1:nombreSlide}Container\").outerWidth();\r\n\t\t$(\"#${1:nombreSlide} .${1:nombreSlide}Container\").width(widthActual * widthCoeficiente);\r\n\t\t$(\"#${1:nombreSlide} .${1:nombreSlide}Item\").each(function(index, element){\r\n\t\t\t$(element).outerWidth(widthActual / itemPorPantalla);\r\n\t\t});\r\n\r\n\t\t${1:nombreSlide}Slides = [];\r\n\t\tfor (var i = 0; i < widthCoeficiente; ++i) {\r\n\t\t\tif (i+1 > widthCoeficiente) {\r\n\t\t\t\t${1:nombreSlide}Slides.push({margin: -(widthCoeficiente-1)*widthActual});\r\n\t\t\t} else {\r\n\t\t\t\t${1:nombreSlide}Slides.push({margin: -i*widthActual});\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tfunction moverSlider${1:nombreSlide}(e) {\r\n\t\te.preventDefault();\r\n\t\tposicion = $(\"#${1:nombreSlide}ItemActual\").data(\"to\");\r\n\t\tif ($(e.srcElement).parent().hasClass(\"${1:nombreSlide}Next\")){\r\n\t\t\tposicion++;\r\n\t\t} else {\r\n\t\t\tposicion--;\r\n\t\t}\r\n\t\tif (posicion == -1) {\r\n\t\t\tposicion = ${1:nombreSlide}Slides.length-1;\r\n\t\t} else if (posicion == ${1:nombreSlide}Slides.length) {\r\n\t\t\tposicion = 0;\r\n\t\t}\r\n\t\tnew TweenMax.to($(\"#${1:nombreSlide} .${1:nombreSlide}Container\"), 3, {marginLeft: ${1:nombreSlide}Slides[posicion].margin, ease: Power4.easeOut});\r\n\t\t$(\"#${1:nombreSlide}ItemActual\").data(\"to\", posicion);\r\n\r\n\t\tconsole.log(posicion);\r\n\t}\r\n</script>\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"sliderMultiItemr1": {
+		"prefix": "sliderMultiItemr",
+		"body": "\r\n<!-- HTML -->\r\n<div class=\"sliderVideos\">\r\n\t<div class=\"seccion mediaVideosCont\">\r\n\t\t//controladores\r\n\t\t<div class=\"navButtons\">\r\n\t\t\t<div class=\"prev\" onclick=\"moverSliderVideos(event, 'prev')\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/svg/prev2.svg\" alt=\"\"></div>\r\n\t\t\t<div class=\"next\" onclick=\"moverSliderVideos(event, 'next')\"><img src=\"<?php echo get_stylesheet_directory_uri() ?>/imagenes/svg/next2.svg\" alt=\"\"></div>\r\n\t\t</div>\r\n\r\n\t\t//reproductor del video\r\n\t\t<div class=\"videoPreview col-sm-9\">\r\n\t\t\t<div class=\"videoItem\" id=\"video0\"><iframe class=\"videoMediaItem\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/SHq2qrFUlGY?modestbranding=1&rel=0&controls=0&showinfo=0&fs=1\" frameborder=\"0\" gesture=\"media\" allow=\"encrypted-media\" allowfullscreen></iframe></div>\r\n\t\t</div>\r\n\r\n\t\t//miniaturas de videos\r\n\t\t<div class=\"videosMedia col-sm-3\">\r\n\t\t\t<div class=\"videoItem\" id=\"video1\"><iframe class=\"videoMediaItem\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/RBumgq5yVrA?modestbranding=1&rel=0&controls=0&showinfo=0&fs=1\" frameborder=\"0\" gesture=\"media\" allow=\"encrypted-media\" allowfullscreen></iframe></div>\r\n\t\t\t<div class=\"videoItem\" id=\"video2\"><iframe class=\"videoMediaItem\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/nSDgHBxUbVQ?modestbranding=1&rel=0&controls=0&showinfo=0&fs=1\" frameborder=\"0\" gesture=\"media\" allow=\"encrypted-media\" allowfullscreen></iframe></div>\r\n\t\t\t<div class=\"videoItem\" id=\"video3\"><iframe class=\"videoMediaItem\" width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/K0ibBPhiaG0?modestbranding=1&rel=0&controls=0&showinfo=0&fs=1\" frameborder=\"0\" gesture=\"media\" allow=\"encrypted-media\" allowfullscreen></iframe></div>\r\n\t\t</div>\r\n\r\n\t\t//seguidor oculto id del video actual\r\n\t\t<div id=\"videoIdActual\" data-idvideo=0></div>\r\n\t</div>\r\n</div>\r\n\r\n<!-- FUNCIONES JAVASCRIPT -->\r\n<script>\r\n\tfunction moverSliderVideos(e, flag){\r\n\t\te.preventDefault();\r\n\t\tvar idActual = $(\"#videoIdActual\").data(\"idvideo\");\r\n\t\tvar idSiguiente;\r\n\t\tif (flag == \"prev\") {\r\n\t\t\tidSiguiente = idActual-1;\r\n\t\t} else if (flag == \"next\"){\r\n\t\t\tidSiguiente = idActual+1\r\n\t\t}\r\n\t\tif (idSiguiente == -1) {\r\n\t\t\tidSiguiente = $(\".videoMediaItem\").length;\r\n\t\t} else if (idSiguiente == $(\".videoMediaItem\").length) {\r\n\t\t\tidSiguiente = 0;\r\n\t\t}\r\n\r\n\t\t$(\".videoPreview .videoItem\").stop().fadeOut(300);\r\n\t\t$(\"#video\"+idSiguiente).stop().animate({\"height\":\"0\"},300);\r\n\t\tsetTimeout(function(){\r\n\t\t\tif (flag == \"prev\") {\r\n\t\t\t\t$(\".videoPreview .videoItem\").stop().removeAttr(\"style\").fadeIn(0).prependTo($(\".videosMedia\"));\r\n\t\t\t} else {\r\n\t\t\t\t$(\".videoPreview .videoItem\").stop().removeAttr(\"style\").fadeIn(0).appendTo($(\".videosMedia\"));\r\n\t\t\t}\r\n\t\t\t$(\"#video\"+idSiguiente).stop().appendTo($(\".videoPreview\"));\r\n\t\t\t$(\"#video\"+idSiguiente).stop().animate({\"height\":\"100%\"},1000)\r\n\t\t},300);\r\n\t\t$(\"#videoIdActual\").data(\"idvideo\",idSiguiente);\r\n\t}\r\n\r\n\r\n\t$(\".videoItem\").click(function(e){\r\n\t\te.preventDefault();\r\n\t\tvar idClick = $(this).attr(\"id\");\r\n\t\tvar cont = 1;\r\n\t\t$(\".videosMedia .videoItem\").each(function(index, element){\r\n\t\t\tif ($(element).attr(\"id\") != idClick){\r\n\t\t\t\tcont++;\r\n\t\t\t} else {\r\n\t\t\t\treturn false;\r\n\t\t\t}\r\n\t\t});\r\n\t\tfor (var i = 0; i < cont; i++) {\r\n\t\t\tmoverSliderVideos(e, \"next\");\r\n\t\t}\r\n\t})\r\n</script>\r\n\r\n<!-- ESTILOS -->\r\n<style>\r\n.videoMediaItem {\r\n    width: 150px;\r\n    float: left;\r\n    height: auto;\r\n}\r\n\r\n.videoMediaItem.active {\r\n    width: 100%;\r\n    height: 600px;\r\n}\r\n\r\n.navButtons > div {\r\n    width: 35px;\r\n    position: absolute;\r\n    right: 5px;\r\n    cursor: pointer;\r\n    top: -65px;\r\n}\r\n\r\n.navButtons {\r\n    clear: both;\r\n    float: left;\r\n    width: 100%;\r\n    position: relative;\r\n}\r\n\r\n.videoPreview {\r\n    height: 400px;\r\n}\r\n\r\n.videoPreview iframe {\r\n    width: 100%;\r\n    height: 100%;\r\n}\r\n\r\n.videosMedia {\r\n    overflow-y: scroll;\r\n    height: 400px;\r\n}\r\n\r\n.navButtons .prev {\r\n    right: 50px;\r\n}\r\n\r\n.videoPreview,.videosMedia {\r\n    margin-top: 30px;\r\n}\r\n\r\n.videoItem {\r\n    float: left;\r\n    width: 100%;\r\n}\r\n\r\n.videosMedia .videoItem:before {\r\n    content: \"\";\r\n    position: absolute;\r\n    z-index: 1;\r\n    width: 100%;\r\n    height: 100%;\r\n    /* border: 2px solid red; */\r\n}\r\n</style>\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"vue_axios": {
+		"prefix": "vue_axios",
+		"body": "\r\n        let url = this.$store.state.config.mage_endpoint.base_magento_url + '/chart/index'\r\n        axios({\r\n        method: 'GET',\r\n        'url': url,\r\n        'params': {\r\n          'prodId': this.product.parent_id\r\n        }\r\n        }).then(\r\n        result => {\r\n          result.data.result[0].image = this.$store.state.config.mage_endpoint.base_magento_url + '/media/chart/image' + result.data.result[0].image\r\n          this.size = result.data.result['0']\r\n          console.log(result.data.result)\r\n        },\r\n        error => {\r\n          console.log(error)\r\n        }\r\n        )\r\n",
+		"description": "",
+		"scope": ""
+	}
+}
