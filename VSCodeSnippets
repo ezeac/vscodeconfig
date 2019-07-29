@@ -131,12 +131,6 @@
 		"description": "",
 		"scope": ""
 	},
-	"table_migration_magento": {
-		"prefix": "table_migration_magento",
-		"body": "\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/js/merge_files';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/js/enable_js_bundling';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/js/minify_files';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/css/merge_css_files';\nUPDATE `core_config_data` SET `value`='1' WHERE `path`='dev/css/minify_files';\n",
-		"description": "",
-		"scope": ""
-	},
 	"magento2_log": {
 		"prefix": "magento2_log",
 		"body": "\n        $writer = new \\Zend\\Log\\Writer\\Stream(BP . '/var/log/test.log');\n        $logger = new \\Zend\\Log\\Logger();\n        $logger->addWriter($writer);\n        $logger->info('Your text message');\n",
@@ -161,14 +155,14 @@
 		"description": "",
 		"scope": ""
 	},
-	"table_migration_magento1": {
+	"table_migration_magento": {
 		"prefix": "table_migration_magento",
 		"body": "\nupdate core_config_data set value = \"http://ezequiel.nhautopiezas.com.ar/\" where path like \"%base_url%\" or path like \"%base_link_url%\";\nupdate sales_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate customer_entity set email = replace(email, \"@\", \"@testk\");\n",
 		"description": "",
 		"scope": ""
 	},
-	"table_migration_magento2": {
-		"prefix": "table_migration_magento",
+	"optimize_table_magento": {
+		"prefix": "optimize_table_magento",
 		"body": "\nDELETE FROM customer_visitor WHERE last_visit_at < DATE_SUB(NOW(), INTERVAL 3 DAY);\nDELETE FROM report_event WHERE logged_at < DATE_SUB(NOW(), INTERVAL 3 DAY);\nDELETE FROM report_viewed_product_index WHERE added_at < DATE_SUB(NOW(), INTERVAL 3 DAY);\nOPTIMIZE TABLE customer_visitor;\n",
 		"description": "",
 		"scope": ""
@@ -227,4 +221,4 @@
 		"description": "",
 		"scope": ""
 	}
-}
+

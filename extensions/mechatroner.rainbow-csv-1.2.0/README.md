@@ -18,26 +18,46 @@ Another way to do this: select one separator character with mouse cursor -> righ
 
 |Language name    | Separator            | Extension | Properties                          |
 |-----------------|----------------------|-----------|-------------------------------------|
-|CSV              | , (comma)            | .csv      | Ignored inside double-quoted fields |
-|TSV              | \t (TAB)             | .tsv .tab |                                     |
-|CSV (semicolon)  | ; (semicolon)        |           | Ignored inside double-quoted fields |
-|CSV (whitespace) | whitespace           |           | Consecutive whitespaces are merged  |
-|CSV (...)        | &#124; ~ ^ : " = . - |           |                                     |
+|csv              | , (comma)            | .csv      | Ignored inside double-quoted fields |
+|tsv              | \t (TAB)             | .tsv .tab |                                     |
+|csv (semicolon)  | ; (semicolon)        |           | Ignored inside double-quoted fields |
+|csv (whitespace) | whitespace           |           | Consecutive whitespaces are merged  |
+|csv (pipe)       | &#124; (pipe)        |           |                                     |
+|csv (...)        | ~ ^ : " = . -        |           |                                     |
 
 
 #### Content-based separator autodetection
-Rainbow CSV will run spreadsheet autodetection algorithm for all "Plain Text" files. In most cases this is a very cheap operation because autodetection would stop after checking only 1-2 topmost lines.  
-To disable autodetection for the current file press "Rainbow OFF" button inside the status line.  
-You can adjust autodetection parameters or disable it in Rainbow CSV extension settings section.  
+Rainbow CSV will run spreadsheet autodetection algorithm for all "Plain Text" and "*.csv" files. In most cases this is a very cheap operation because autodetection usually stops after checking only 1-2 topmost lines.  
+Autodetection can be disabled at the extension settings page.  
+If a file has less then 10 non-comment lines, autodetection algorithm will skip it; the value can be adjusted in settings.  
+By default only comma, tab, semicolon and pipe are tried for autodetection, but you can adjust the list of candidate separators, add the following line to your VSCode config and edit it by removing or including any of the supported separators:  
+```
+"rainbow_csv.autodetect_separators": ["\t", ",", ";", "|"],
+```
+If the autodetection algorithm made an error and highlighted non-csv file, you can press "Rainbow OFF" button inside the status line.  
+
+
+#### Customizing file extension - separator association
+If you often work with spreadsheet files with one specific extension (e.g. ".dat") and you don't want to rely on the autodetection algorithm, you can associate that extension with one of the supported separators.  
+For example to associate ".dat" extension with pipe-separated files and ".csv" with semicolon-separated files add the following lines to your VS Code json config:  
+
+```
+"files.associations": {
+    "*.dat": "csv (pipe)",
+    "*.csv": "csv (semicolon)"
+},
+```
+
+Important: language identifiers in the config must be specified in **lower case**! E.g. use `csv (semicolon)`, not `CSV (semicolon)`.  
+List of supported language ids: `"csv", "tsv", "csv (semicolon)", "csv (pipe)", "csv (whitespace)", "csv (tilda)", "csv (caret)", "csv (colon)", "csv (double quote)", "csv (equals)", "csv (dot)", "csv (hyphen)"`
 
 
 #### CSVLint consistency check
 
-The linter will check the following:  
+The linter checks the following:  
 * consistency of double quotes usage in CSV rows  
 * consistency of number of fields per CSV row  
 
-To disable automatic CSV Linting set `"rainbow_csv.enable_auto_csv_lint": false` in "Rainbow CSV" section of VS Code settings.  
 To recheck a csv file click on "CSVLint" button.
 
 
@@ -49,13 +69,17 @@ All Rainbow CSV features would be disabled by VSCode if file is bigger than 50MB
 
 #### Working with CSV files with comments
 Some CSV files can contain comment lines e.g. metadata before the header line.  
-To allow CSVLint, content-based autodetection algorithms and _Align_, _Shrink_, _ColumnEdit_ commands work properly with such files you need to adjust `"rainbow_csv.comment_prefix"` setting.  
+To allow CSVLint, content-based autodetection algorithms and _Align_, _Shrink_, _ColumnEdit_ commands work properly with such files you need to adjust your settings.
 
 
 #### Aligning/Shrinking table
 You can align columns in CSV files by clicking "Align" statusline button or use _Align_ command  
 To shrink the table, i.e. remove leading and trailing whitespaces, click "Shrink" statusline button or use _Shrink_ command  
 
+
+### Settings
+You can customize Rainbow CSV at the extension settings section of VSCode settings.  
+There you can find the list of available options and their description.  
 
 
 ### Commands:
@@ -65,7 +89,7 @@ Enter RBQL - SQL-like language query editing mode.
 
 
 #### Align, Shrink
-Align columns with whitepaces or shrink them (remove leading/trailing whitespaces)
+Align columns with whitespaces or shrink them (remove leading/trailing whitespaces)
 
 
 #### ColumnEditBefore, ColumnEditAfter, ColumnEditSelect
@@ -102,7 +126,7 @@ Screenshot of RBQL Console:
 #### Gotchas:
 * Unlike Rainbow CSV, which always treats first line as header, RBQL is header-agnostic i.e. it never treats first line as header, so to skip over header line add `WHERE NR > 1` to your query.  
 * RBQL uses JavaScript or Python backend language. This means that you need to use `==` to check for equality inside WHERE expressions.  
-* If you want to use RBQL with Python backend language instead of JavaScript, make sure you have Python interpreter insatalled and added to PATH variable of your OS.  
+* If you want to use RBQL with Python backend language instead of JavaScript, make sure you have Python interpreter installed and added to PATH variable of your OS.  
 
 ## Other
 ### Comparison of Rainbow CSV technology with traditional graphical column alignment

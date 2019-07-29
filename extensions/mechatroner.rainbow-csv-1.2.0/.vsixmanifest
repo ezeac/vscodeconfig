@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Language="en-US" Id="rainbow-csv" Version="1.1.1" Publisher="mechatroner"/>
+    <Identity Language="en-US" Id="rainbow-csv" Version="1.2.0" Publisher="mechatroner"/>
     <DisplayName>Rainbow CSV</DisplayName>
     <Description xml:space="preserve">Highlight CSV and TSV files in different colors, Run SQL-like queries</Description>
     <Tags>csv,tsv,highlight,CSV,__ext_csv,TSV,__ext_tsv,__ext_tab,csv (pipe),CSV (pipe),csv (tilda),CSV (tilda),csv (whitespace),CSV (whitespace),csv (caret),CSV (caret),csv (colon),CSV (colon),csv (double quote),CSV (double quote),csv (equals),CSV (equals),csv (dot),CSV (dot),csv (hyphen),CSV (hyphen),csv (semicolon),CSV (semicolon),plaintext,sql</Tags>
