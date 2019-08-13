@@ -207,14 +207,15 @@ alias sshpigmentostaging='echo "ssh pigmento staging" && ssh -i ~/pigmento_key_s
 alias sshmodaxprod='echo "ssh modax prod" && echo "pass: M4g3nt02017" && ssh root@modax.com.ar'
 alias sshmodaxstaging='echo "ssh modax staging" && echo "pass: M4g3nt02017" && ssh root@magtest.modax.com.ar'
 #ssh parz
-alias sshparz='echo "ssh parz" && ssh centos@ec2-18-224-117-22.us-east-2.compute.amazonaws.com -i ~/key-parz'
-alias sshparzpwa='echo "ssh parzpwa" && ssh centos@ec2-18-217-43-20.us-east-2.compute.amazonaws.com -i ~/key-parz'
+alias sshparzprod='echo "ssh parz prod" && ssh centos@ec2-18-224-117-22.us-east-2.compute.amazonaws.com -i ~/key-parz'
+alias sshparzprodpwa='echo "ssh parzpwa prod" && ssh centos@ec2-18-217-43-20.us-east-2.compute.amazonaws.com -i ~/key-parz'
+alias sshparzstg='echo "ssh parz stg" && ssh kudos@74.222.3.233 -p32241'
 #ssh fiorani
 alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
 #ssh tucamara
 alias sshtucamaraprod='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamara@m76.siteground.biz -p18765'
 #ssh tiendalosangeles
-alias sshtiendalosangeles='echo "ssh tiendalosangeles liquidweb" && ssh -p32241 kudos@64.91.249.94'
-#alias sshtiendalosangeles='echo "ssh tiendalosangeles" && ssh tiendalosangeleskudos@tiendalosangeles.com.ar'
-#alias sshtiendalosangelesroot='echo "ssh tiendalosangeles, pass: L7878..!!h" && ssh tiendala@tiendalosangeles.com.ar'
+alias sshtiendalosangeles='echo "ssh tiendalosangeles prod" && ssh -p32241 kudos@74.222.3.71'
+#ssh suviex
+alias sshtiendalosangeles='echo "ssh suviex prod" && ssh root@149.56.13.59'
 
