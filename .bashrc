@@ -218,4 +218,5 @@ alias sshtucamaraprod='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamar
 alias sshtiendalosangeles='echo "ssh tiendalosangeles prod" && ssh -p32241 kudos@74.222.3.71'
 #ssh suviex
 alias sshtiendalosangeles='echo "ssh suviex prod" && ssh root@149.56.13.59'
-
+#ssh viditec
+alias sshviditecprod='echo "ssh viditec prod" && ssh ubuntu@18.229.76.252'
