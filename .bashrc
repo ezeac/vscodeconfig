@@ -209,6 +209,7 @@ alias sshmodaxstaging='echo "ssh modax staging" && echo "pass: M4g3nt02017" && s
 #ssh parz
 alias sshparzprod='echo "ssh parz prod" && ssh centos@ec2-18-224-117-22.us-east-2.compute.amazonaws.com -i ~/key-parz'
 alias sshparzprodpwa='echo "ssh parzpwa prod" && ssh centos@ec2-18-217-43-20.us-east-2.compute.amazonaws.com -i ~/key-parz'
+alias sshparzprodpwa2='echo "ssh parzpwa prod 2" && ssh centos@ec2-3-19-74-119.us-east-2.compute.amazonaws.com -i ~/key-parz'
 alias sshparzstg='echo "ssh parz stg" && ssh kudos@74.222.3.233 -p32241'
 #ssh fiorani
 alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
