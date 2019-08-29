@@ -162,6 +162,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="$PATH:/opt/mssql-tools/bin"
 
+#SSH PERSONAL
+#jesusmaria
+alias sshjesusmaria='echo "ssh jesusmaria grupotakuara1421" && ssh root@31.220.52.248'
+
 #SSH NUEVO SERVER KUDOS
 #ssh kudos
 alias sshkudos='echo "ssh kudos prod" && ssh kudos@74.222.3.70 -p32241'
