@@ -222,7 +222,7 @@ alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
 alias sshtucamaraprod='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamara@m76.siteground.biz -p18765'
 #ssh tiendalosangeles
 alias sshtiendalosangelesprod='echo "ssh tiendalosangeles prod" && ssh -p32241 kudos@74.222.3.71'
-alias sshtiendalosangelesstg'echo "ssh tiendalosangeles stg" && ssh -p32241 kudos@74.222.3.233'
+alias sshtiendalosangelesstg='echo "ssh tiendalosangeles stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh suviex
 alias sshsuviex='echo "ssh suviex prod" && ssh root@149.56.13.59'
 #ssh viditec
