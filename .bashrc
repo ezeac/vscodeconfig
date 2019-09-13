@@ -203,6 +203,8 @@ alias sshnexandprod='echo "ssh nexand prod" && ssh kudos@74.222.3.232 -p32241'
 alias sshnexandstg='echo "ssh nexand stg" && ssh kudos@74.222.3.233 -p32241'
 #ssh parallel
 alias sshparallel='echo "ssh parallel prod" && ssh kudos@74.222.3.231 -p32241'
+#ssh hotstocks
+alias sshhotstocks='echo "ssh hotstocks prod pass \"DrK%M?!zgy\", bbdd eazkjpes_staging/sU4thdYRvgJKFKP" && ssh eazkjpes@hotstocks.com.ar'
 
 #OTROS SSH KUDOS
 #ssh pigmento

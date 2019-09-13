@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Language="en-US" Id="vetur" Version="0.22.2" Publisher="octref"/>
+    <Identity Language="en-US" Id="vetur" Version="0.22.3" Publisher="octref"/>
     <DisplayName>Vetur</DisplayName>
     <Description xml:space="preserve">Vue tooling for VS Code</Description>
     <Tags>vetur,Vue,vue,vuejs,__ext_vue,vue-html,Vue-html,vue-postcss,Vue-PostCSS,Vue-POSTCSS</Tags>
