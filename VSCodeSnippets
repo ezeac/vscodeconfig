@@ -167,9 +167,9 @@
 		"description": "",
 		"scope": ""
 	},
-	"magento2_fullsite_backup": {
-		"prefix": "magento2_fullsite_backup",
-		"body": "\nmysqldump --quick --single-transaction --lock-tables=false -u magento -p${1:BBDD_password} ${2:BBDD_name} | gzip -9 > bbdd_backup_$(date -I).sql.gz && zip --exclude \"*cache/*\" --exclude \"*.git/*\" --exclude \"*var/log/*\" --exclude \"*import/*\" --exclude \"*generated/*\" --exclude \"*pub/static/*\" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup_$(date -I).sql.gz\n",
+	"fullsite_backup": {
+		"prefix": "fullsite_backup",
+		"body": "\nmysqldump --quick --single-transaction --lock-tables=false -u magento -p${1:BBDD_password} ${2:BBDD_name} | gzip -9 > bbdd_backup.sql.gz && zip --exclude \"*cache/*\" --exclude \"*.git/*\" --exclude \"*var/log/*\" --exclude \"*import/*\" --exclude \"*generated/*\" --exclude \"*pub/static/*\" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz\n",
 		"description": "",
 		"scope": ""
 	},
@@ -218,6 +218,12 @@
 	"vue_axios": {
 		"prefix": "vue_axios",
 		"body": "\r\n        let url = this.$store.state.config.mage_endpoint.base_magento_url + '/chart/index'\r\n        axios({\r\n        method: 'GET',\r\n        'url': url,\r\n        'params': {\r\n          'prodId': this.product.parent_id\r\n        }\r\n        }).then(\r\n        result => {\r\n          result.data.result[0].image = this.$store.state.config.mage_endpoint.base_magento_url + '/media/chart/image' + result.data.result[0].image\r\n          this.size = result.data.result['0']\r\n          console.log(result.data.result)\r\n        },\r\n        error => {\r\n          console.log(error)\r\n        }\r\n        )\r\n",
+		"description": "",
+		"scope": ""
+	},
+	"wordpress_table_migration": {
+		"prefix": "wordpress_table_migration",
+		"body": "UPDATE wp_options SET option_value = replace(option_value, 'Existing URL', 'New URL') WHERE option_name = 'home' OR option_name = 'siteurl';\r\n\r\nUPDATE wp_posts SET post_content = replace(post_content, 'Existing URL', 'New URL');\r\n\r\nUPDATE wp_postmeta SET meta_value = replace(meta_value,'Existing URL','New URL');\r\n\r\nUPDATE wp_usermeta SET meta_value = replace(meta_value, 'Existing URL','New URL');\r\n\r\nUPDATE wp_links SET link_url = replace(link_url, 'Existing URL','New URL');\r\n\r\nUPDATE wp_comments SET comment_content = replace(comment_content , 'Existing URL','New URL');\r\n",
 		"description": "",
 		"scope": ""
 	}

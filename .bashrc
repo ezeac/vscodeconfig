@@ -168,10 +168,10 @@ alias sshjesusmaria='echo "ssh jesusmaria grupotakuara1421" && ssh root@31.220.5
 
 #SSH NUEVO SERVER KUDOS
 #ssh kudos
-alias sshkudos='echo "ssh kudos prod" && ssh kudos@74.222.3.70 -p32241'
+alias sshkudos='echo "ssh kudos prod" && ssh -p32241 kudos@74.222.3.70'
 #ssh tiendalibero
-alias sshtiendalibero='echo "ssh tiendalibero prod" && ssh kudos@74.222.3.72 -p32241'
-alias sshtiendaliberostg='echo "ssh tiendalibero stg" && ssh kudos@74.222.3.233 -p32241'
+alias sshtiendalibero='echo "ssh tiendalibero prod" && ssh -p32241 kudos@74.222.3.72'
+alias sshtiendaliberostg='echo "ssh tiendalibero stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh casavargas
 alias sshcasavargas='echo "ssh casavargas prod" && ssh kudos@74.222.3.73 -p32241'
 #ssh castagno
@@ -179,30 +179,32 @@ alias sshcastagno='echo "ssh castagno prod" && ssh kudos@74.222.3.75 -p32241'
 #ssh kimuan
 alias sshkimuan='echo "ssh kimuan prod" && ssh kudos@74.222.3.77 -p32241'
 #ssh puertosale
-alias sshpuertosale='echo "ssh puertosale prod" && ssh kudos@74.222.3.235 -p32241'
+alias sshpuertosale='echo "ssh puertosale prod" && ssh -p32241 kudos@74.222.3.235'
 #ssh blumimax
-alias sshblumimax='echo "ssh blumimax prod" && ssh kudos@74.222.3.235 -p32241'
+alias sshblumimax='echo "ssh blumimax prod" && ssh -p32241 kudos@74.222.3.235'
 #ssh temuco
-alias sshtemuco='echo "ssh temuco prod" && ssh kudos@74.222.3.235 -p32241'
+alias sshtemuco='echo "ssh temuco prod" && ssh -p32241 kudos@74.222.3.235'
 #ssh servimaq
-alias sshservimaq='echo "ssh servimaq prod" && ssh kudos@74.222.3.235 -p32241'
+alias sshservimaq='echo "ssh servimaq prod" && ssh -p32241 kudos@74.222.3.235'
 #ssh casamanrique
-alias sshcasamanrique='echo "ssh casamanrique prod" && ssh kudos@74.222.3.235 -p32241'
+alias sshcasamanrique='echo "ssh casamanrique prod" && ssh -p32241 kudos@74.222.3.235'
 #ssh labaliza
-alias sshlabaliza='echo "ssh labaliza prod" && ssh kudos@74.222.3.235 -p32241'
+alias sshlabaliza='echo "ssh labaliza prod" && ssh -p32241 kudos@74.222.3.235'
 #ssh nhautopiezas
-alias sshnhautopiezas='echo "ssh nhautopiezas prod" && ssh kudos@74.222.3.74 -p32241'
+alias sshnhautopiezas='echo "ssh nhautopiezas prod" && ssh -p32241 kudos@74.222.3.74'
 #ssh elauditor
-alias sshelauditor='echo "ssh elauditor prod" && ssh kudos@74.222.3.76 -p32241'
+alias sshelauditor='echo "ssh elauditor prod" && ssh -p32241 kudos@74.222.3.76'
 #ssh biosalud
-alias sshbiosalud='echo "ssh biosalud prod" && ssh kudos@74.222.3.78 -p32241'
+alias sshbiosalud='echo "ssh biosalud prod" && ssh -p32241 kudos@74.222.3.78'
 #ssh raceparts
-alias sshraceparts='echo "ssh raceparts prod" && ssh kudos@74.222.3.79 -p32241'
+alias sshraceparts='echo "ssh raceparts prod" && ssh -p32241 kudos@74.222.3.79'
+#ssh corpoint
+alias sshcorpointstg='echo "ssh corpoint stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh nexand
-alias sshnexandprod='echo "ssh nexand prod" && ssh kudos@74.222.3.232 -p32241'
-alias sshnexandstg='echo "ssh nexand stg" && ssh kudos@74.222.3.233 -p32241'
+alias sshnexandprod='echo "ssh nexand prod" && ssh -p32241 kudos@74.222.3.232'
+alias sshnexandstg='echo "ssh nexand stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh parallel
-alias sshparallel='echo "ssh parallel prod" && ssh kudos@74.222.3.231 -p32241'
+alias sshparallel='echo "ssh parallel prod" && ssh -p32241 kudos@74.222.3.231'
 #ssh hotstocks
 alias sshhotstocks='echo "ssh hotstocks prod pass \"DrK%M?!zgy\", bbdd eazkjpes_staging/sU4thdYRvgJKFKP" && ssh eazkjpes@hotstocks.com.ar'
 
@@ -217,7 +219,7 @@ alias sshmodaxstaging='echo "ssh modax staging" && echo "pass: M4g3nt02017" && s
 alias sshparzprod='echo "ssh parz prod" && ssh centos@ec2-18-224-117-22.us-east-2.compute.amazonaws.com -i ~/key-parz'
 alias sshparzprodpwa='echo "ssh parzpwa prod" && ssh centos@ec2-18-217-43-20.us-east-2.compute.amazonaws.com -i ~/key-parz'
 alias sshparzprodpwa2='echo "ssh parzpwa prod 2" && ssh centos@ec2-3-19-74-119.us-east-2.compute.amazonaws.com -i ~/key-parz'
-alias sshparzstg='echo "ssh parz stg" && ssh kudos@74.222.3.233 -p32241'
+alias sshparzstg='echo "ssh parz stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh fiorani
 alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
 #ssh tucamara
@@ -226,6 +228,9 @@ alias sshtucamaraprod='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamar
 alias sshtiendalosangelesprod='echo "ssh tiendalosangeles prod" && ssh -p32241 kudos@74.222.3.71'
 alias sshtiendalosangelesstg='echo "ssh tiendalosangeles stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh suviex
-alias sshsuviex='echo "ssh suviex prod" && ssh root@149.56.13.59'
+alias sshsuviex='echo "ssh suviex prod/stg, pass feL6mrRa" && ssh root@149.56.13.59'
 #ssh viditec
 alias sshviditecprod='echo "ssh viditec prod" && ssh ubuntu@18.229.76.252'
+#ssh providus
+alias sshprovidusprod='echo "ssh providus prod - Cl4v3pr3st4d4" && ssh -p2222 providus@providus.com.ar'
+
