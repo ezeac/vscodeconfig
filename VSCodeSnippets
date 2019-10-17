@@ -169,7 +169,7 @@
 	},
 	"fullsite_backup": {
 		"prefix": "fullsite_backup",
-		"body": "\nmysqldump --quick --single-transaction --lock-tables=false -u magento -p${1:BBDD_password} ${2:BBDD_name} | gzip -9 > bbdd_backup.sql.gz && zip --exclude \"*cache/*\" --exclude \"*.git/*\" --exclude \"*var/log/*\" --exclude \"*import/*\" --exclude \"*generated/*\" --exclude \"*pub/static/*\" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz\n",
+		"body": "\nmysqldump --quick --single-transaction --lock-tables=false -u magento -p${1:BBDD_password} ${2:BBDD_name} | gzip -9 > bbdd_backup.sql.gz && zip --exclude \"*/cache/*\" --exclude \"*.git/*\" --exclude \"*var/log/*\" --exclude \"*import/*\" --exclude \"*generated/*\" --exclude \"*pub/static/*\" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz\n",
 		"description": "",
 		"scope": ""
 	},
@@ -227,4 +227,4 @@
 		"description": "",
 		"scope": ""
 	}
-
+}
