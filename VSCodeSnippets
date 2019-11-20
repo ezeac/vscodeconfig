@@ -221,6 +221,12 @@
 		"description": "",
 		"scope": ""
 	},
+	"faster_import_bbdd": {
+		"prefix": "faster_import_bbdd",
+		"body": "innodb_buffer_pool_size = 4G\r\ninnodb_log_buffer_size = 256M\r\ninnodb_log_file_size = 1G\r\ninnodb_write_io_threads = 16\r\ninnodb_flush_log_at_trx_commit = 0\r\n\r\nsudo service mysql restart --innodb-doublewrite=0\r\nIMPORT SQL AQUÍ\r\nsudo service mysql restart\r\n",
+		"description": "",
+		"scope": ""
+	},
 	"wordpress_table_migration": {
 		"prefix": "wordpress_table_migration",
 		"body": "UPDATE wp_options SET option_value = replace(option_value, 'Existing URL', 'New URL') WHERE option_name = 'home' OR option_name = 'siteurl';\r\n\r\nUPDATE wp_posts SET post_content = replace(post_content, 'Existing URL', 'New URL');\r\n\r\nUPDATE wp_postmeta SET meta_value = replace(meta_value,'Existing URL','New URL');\r\n\r\nUPDATE wp_usermeta SET meta_value = replace(meta_value, 'Existing URL','New URL');\r\n\r\nUPDATE wp_links SET link_url = replace(link_url, 'Existing URL','New URL');\r\n\r\nUPDATE wp_comments SET comment_content = replace(comment_content , 'Existing URL','New URL');\r\n",
