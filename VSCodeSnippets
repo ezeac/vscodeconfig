@@ -157,7 +157,7 @@
 	},
 	"table_migration_magento": {
 		"prefix": "table_migration_magento",
-		"body": "\nupdate core_config_data set value = \"http://ezequiel.nhautopiezas.com.ar/\" where path like \"%base_url%\" or path like \"%base_link_url%\";\nupdate sales_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate customer_entity set email = replace(email, \"@\", \"@testk\");\n",
+		"body": "update core_config_data set value = "http://felix.parz.com/" where path like "%base_url%" or path like "%base_link_url%";\nupdate sales_order set customer_email = replace(customer_email , "@", "@testk") where customer_email NOT LIKE "%kudosestudio.com%";\nupdate sales_flat_order set customer_email = replace(customer_email , "@", "@testk") where customer_email NOT LIKE "%kudosestudio.com%";\nupdate customer_entity set email = replace(email, "@", "@testk") where email NOT LIKE "%kudosestudio.com%";\n",
 		"description": "",
 		"scope": ""
 	},
