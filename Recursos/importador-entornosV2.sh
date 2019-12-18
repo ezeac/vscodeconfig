@@ -189,7 +189,7 @@ EOL
         then
         echo "Corrigiendo dominio, emails de clientes y optimizando la bbdd de Magento..." &&
         sleep 2 &&
-        echo "update core_config_data set value = \"${platform_url}\" where path like \"%base_url%\" or path like \"%base_link_url%\"" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
+        echo "update core_config_data set value = \"${platform_url}/\" where path like \"%base_url%\" or path like \"%base_link_url%\"" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
         echo "update sales_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
         echo "update sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
         echo "update customer_entity set email = replace(email, \"@\", \"@testk\");" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
