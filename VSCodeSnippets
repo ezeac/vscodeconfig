@@ -232,5 +232,11 @@
 		"body": "UPDATE wp_options SET option_value = replace(option_value, 'Existing URL', 'New URL') WHERE option_name = 'home' OR option_name = 'siteurl';\r\n\r\nUPDATE wp_posts SET post_content = replace(post_content, 'Existing URL', 'New URL');\r\n\r\nUPDATE wp_postmeta SET meta_value = replace(meta_value,'Existing URL','New URL');\r\n\r\nUPDATE wp_usermeta SET meta_value = replace(meta_value, 'Existing URL','New URL');\r\n\r\nUPDATE wp_links SET link_url = replace(link_url, 'Existing URL','New URL');\r\n\r\nUPDATE wp_comments SET comment_content = replace(comment_content , 'Existing URL','New URL');\r\n",
 		"description": "",
 		"scope": ""
+	},
+	"php_get_current_directory": {
+		"prefix": "php_get_current_directory",
+		"body": "Ejemplo: require __DIR__.'/app/Mage.php';",
+		"description": "",
+		"scope": ""
 	}
 }
