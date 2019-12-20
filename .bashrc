@@ -234,5 +234,5 @@ alias sshviditecprod='echo "ssh viditec prod" && ssh ubuntu@18.229.76.252'
 alias sshprovidusprod='echo "ssh providus prod - Cl4v3pr3st4d4" && ssh -p2222 providus@providus.com.ar'
 #ssh bremen
 alias sshbremenprod='echo ssh bremen prod && ssh -i bremen.pem -p32241 ubuntu@ec2-18-216-124-134.us-east-2.compute.amazonaws.com'
-alias sshbremenstg='echo ssh bremen stg && ssh -i bremen-dev.pem -p32241 ubuntu@ec2-3-135-220-127.us-east-2.compute.amazonaws.com'
+alias sshbremenstg='echo ssh bremen stg && ssh -i bremen-dev.pem -p32241 ubuntu@18.188.23.25'
 
