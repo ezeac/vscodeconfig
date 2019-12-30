@@ -127,7 +127,7 @@
 	},
 	"magento2_customscript_php": {
 		"prefix": "magento2_customscript_php",
-		"body": "\nini_set('display_errors', 1);\nini_set('display_startup_errors', 1);\nerror_reporting(E_ALL);\n\nrequire 'app/bootstrap.php';\n$bootstrap = Magento\\Framework\\App\\Bootstrap::create(BP, $_SERVER);\n$obj = $bootstrap->getObjectManager();\n\n$test = $obj->create('Magento\\Backend\\Cron\\CleanCache')->execute();\nvar_dump($test);\n",
+		"body": "require 'app/bootstrap.php';\n$bootstrap = Magento\\Framework\\App\\Bootstrap::create(BP, $_SERVER);\n$obj = $bootstrap->getObjectManager();\n\n$obj->get('Magento\\Framework\\App\\State')->setAreaCode('frontend');\n\n$product = $obj->create('Magento\\Catalog\\Model\\Product')->load(23040);",
 		"description": "",
 		"scope": ""
 	},
