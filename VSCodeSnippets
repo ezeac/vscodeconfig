@@ -238,5 +238,11 @@
 		"body": "Ejemplo: require __DIR__.'/app/Mage.php';",
 		"description": "",
 		"scope": ""
+	},
+	"activar_log_mysql": {
+		"prefix": "activar_log_mysql",
+		"body": "SET global log_output = 'FILE';\r\nSET global general_log_file='/var/www/html/mysql_general.log';\r\nSET global general_log = 1;",
+		"description": "",
+		"scope": ""
 	}
 }
