@@ -127,7 +127,7 @@
 	},
 	"magento2_customscript_php": {
 		"prefix": "magento2_customscript_php",
-		"body": "require 'app/bootstrap.php';\n$bootstrap = Magento\\Framework\\App\\Bootstrap::create(BP, $_SERVER);\n$obj = $bootstrap->getObjectManager();\n\n$obj->get('Magento\\Framework\\App\\State')->setAreaCode('frontend');\n\n$product = $obj->create('Magento\\Catalog\\Model\\Product')->load(23040);",
+		"body": "\nini_set('display_errors', 1);\nini_set('display_startup_errors', 1);\nerror_reporting(E_ALL);\n\nrequire 'app/bootstrap.php';\n$bootstrap = Magento\\Framework\\App\\Bootstrap::create(BP, $_SERVER);\n$obj = $bootstrap->getObjectManager();\n\n$test = $obj->create('Magento\\Backend\\Cron\\CleanCache')->execute();\nvar_dump($test);\n",
 		"description": "",
 		"scope": ""
 	},
@@ -157,7 +157,7 @@
 	},
 	"table_migration_magento": {
 		"prefix": "table_migration_magento",
-		"body": "\nupdate core_config_data set value = \"http://ezequiel.nhautopiezas.com.ar/\" where path like \"%base_url%\" or path like \"%base_link_url%\";\nupdate sales_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\");\nupdate customer_entity set email = replace(email, \"@\", \"@testk\");\n",
+		"body": "update core_config_data set value = \"http://felix.parz.com/\" where path like \"%base_url%\" or path like \"%base_link_url%\";\nupdate sales_order set customer_email = replace(customer_email , \"@\", \"@testk\") where customer_email NOT LIKE \"%kudosestudio.com%\";\nupdate sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\") where customer_email NOT LIKE \"%kudosestudio.com%\";\nupdate customer_entity set email = replace(email, \"@\", \"@testk\") where email NOT LIKE \"%kudosestudio.com%\";\nupdate core_config_data set value = 'TEST-39066130-048f-42f7-974b-8d9aac078316' where path like '%payment_mercadopago_custom_checkout_public_key%'; update core_config_data set value = 'TEST-1305636485428365-091111-040b48749d53d22e60f8aa87ad2e591b-344615524' where path like '%payment_mercadopago_custom_checkout_access_token%';",
 		"description": "",
 		"scope": ""
 	},
@@ -233,9 +233,9 @@
 		"description": "",
 		"scope": ""
 	},
-	"jquery_deferred": {
-		"prefix": "jquery_deferred",
-		"body": "var deferred = \$.Deferred();\r\ndeferred.resolve(data);\r\nreturn deferred.promise();\r\n",
+	"php_get_current_directory": {
+		"prefix": "php_get_current_directory",
+		"body": "Ejemplo: require __DIR__.'/app/Mage.php';",
 		"description": "",
 		"scope": ""
 	},
