@@ -1,5 +1,78 @@
+2020-01-15 08:30: .
+2020-01-15 10:00: BREM-4
+2020-01-15 11:00: KE-26
+2020-01-15 11:30: SUV-25
+2020-01-15 11:58: SUV-25
+2020-01-15 12:18: Deploy SUV-20 26 25
+2020-01-15 13:10: Corpoint local facundo error al generar email archivo html
+2020-01-15 14:10: Almuerzo
+2020-01-15 14:18: Deploy SUV-20 26 25
+2020-01-15 14:40: Corpoint local facundo error al generar email archivo html
+2020-01-15 14:57: Deploy y testing staging PARZ-425
+2020-01-15 15:04: Deploy y testing COR-20
+2020-01-15 15:26: Buscando assets css de estrellas para facu NA-290
+2020-01-15 15:36: Deploy y testing staging PARZ-425
+2020-01-15 16:01: Revisando repo local felix PARZ
+2020-01-15 17:06: Revisando bbdd corpoint para emails facu COR-19
+
+2020-01-16 08:30: . ***
+2020-01-16 09:07: PARZ-1: (Tareas para productos guardados)
+2020-01-16 09:18: PARZ-433: Cambiar heros home enero
+2020-01-16 09:30: PARZ-433: Deploy producción
+2020-01-16 09:37: KE-51: con facu viendo corpoint
+2020-01-16 10:08: KE-26: Deploy stg de providus, parz y nh
+2020-01-16 10:23: PARZ-136: deploy stg
+2020-01-16 10:40: KE-51: félix viendo modal de geoloc
+2020-01-16 10:50: PARZ-1: (organizando trello y tarea de ícono de whatsapp para desktop)
+2020-01-16 11:12: PARZ-1: Testing en staging PARZ-425
+2020-01-16 11:13: BREM-1: Actualizando repo bremen
+2020-01-16 11:37: KE-51: con javier explicando funcionamiento del importadorEntornos.sh
+2020-01-16 11:50: PARZ-1: Testing en staging, actualización Trello
+2020-01-16 12:10: KE-51: Mauro, explicando tarea de "guardados" PWA
+2020-01-16 13:03: COR-1: Testing Corpoint, deploy staging
+2020-01-16 13:11: COR-1: Deploy, merge stg COR-19 CMS. Corrección de carpeta CMS repo
+2020-01-16 14:00: Almuerzo **
+2020-01-16 14:35: COR-1: Deploy, merge stg COR-19 CMS. Corrección de carpeta CMS repo
+2020-01-16 14:54: Docs gtimelog **
+2020-01-16 15:09: TLA-76: Maquetación header faltante
+2020-01-16 17:31: TLA-76: Maquetación versión móvil
+
+2020-01-17 11:20: . ***
+2020-01-17 11:25: KE-51: con facu viendo blognh
+2020-01-17 11:50: KE-51: con mauro viendo error de carga de modelo en magento
+2020-01-17 12:16: NA-291:  Publicación de productos - Ticket#1455
+2020-01-17 12:25: PARZ-1: Revisando tareas
+2020-01-17 12:43: KE-51: con félix viendo parz shippingMethod, con javi viendo si se crea entorno de bremensap
+2020-01-17 13:37: PARZ-1: Revisando tareas
+2020-01-17 13:44: Email Santander Río ***
+2020-01-17 14:46: Almuerzo **
+2020-01-17 15:12: SUV-1: Error en producción se ven "Notice" de php
+2020-01-17 15:58: PARZ-1: Gestión de tareas
+2020-01-17 16:13: KE-51: con facu viendo configuración del megamenú
+2020-01-17 16:23: TLA-73: Maquetación de Home
+2020-01-17 16:46: TLA-73: Deploy STG
+2020-01-17 18:02: TLA-73: Supermenu
+2020-01-17 18:22: KE-51 con mati viendo problemas de stg de providus. Se soluciona usando nuestro servidor 233
+2020-01-17 19:00: TLA-73: Slider Principal
+
+2020-01-20 08:07: .***
+2020-01-20 08:55: KE-26: Organizando tareas de la semana
+2020-01-20 09:04: PARZ-1: Deploy STG PARZ-412
+2020-01-20 10:10: PARZ-1: Testing en staging PARZ-412
+2020-01-20 10:20: PARZ-1: Organizando tareas
+2020-01-20 10:40: KE-17: con mati organizando prioridad entre tla y parz para la semana
+2020-01-20 13:00: PARZ-441: Entorno local funcionando
+2020-01-20 13:46: Almuerzo
+2020-01-20 13:58: PARZ-441: Entorno local funcionando
+2020-01-20 14:21: KE-51: viendo error en entorno pwa de félix
+2020-01-20 16:00: PARZ-441: Feedback home
+2020-01-20 16:24: KE-51: Explicando funcionamiento de layouts xml
+2020-01-20 16:44: PARZ-441: Feedback home
+2020-01-20 16:49: NA-1: Deploy NA-294
+2020-01-20 17:05: PARZ-136: Deploy stg de PARZ-441 y PARZ-436
+
 2020-01-21 08:10: . ***
-2020-01-21 08:25: Configurando gTimeLog
+2020-01-21 08:25: KE-99: Configurando gTimeLog
 2020-01-21 08:37: Sumando compras del super de mi vieja **
 2020-01-21 08:55: PARZ-1: Organizando tareas
 2020-01-21 09:02: PARZ-1: Organizando tareas
@@ -7,3 +80,17 @@
 2020-01-21 09:35: Desayuno **
 2020-01-21 10:13: PARZ-1: Deploy PARZ STG
 2020-01-21 10:27: PARZ-1: Preparando Deploy PARZ PROD
+2020-01-21 10:46: PARZ-1: Deploy STG PARZ-412
+2020-01-21 11:06: KE-99: Acomodando gtimelog
+2020-01-21 12:17: PARZ-1: Deploy STG y testing PARZ-412. Se tienen que realizar correcciones sobre stg por un error al enviar el address order sin depto
+2020-01-21 12:32: PARZ-1: Deploy STG y testing PARZ-412. Se tienen que realizar correcciones sobre stg por un error al enviar el address order sin depto
+2020-01-21 15:10: Contancia de convivencia **
+2020-01-21 15:30: PARZ-1: Deploy de magento a prod. salió mal. Corrección de borrado de caché
+2020-01-21 16:18: PARZ-1: Deploy STG y testing PARZ-442. Error en los sition permitidos del token de google
+2020-01-21 16:44: KE-99: Cargando Tiempos
+2020-01-21 17:23: PARZ-1: Deploy y testing PROD PARZ-412, PARZ-423, PARZ-424, PARZ-425, PARZ-426, PARZ-427, PARZ-434, PARZ-436, PARZ-440, PARZ-441.
+2020-01-21 17:34: PARZ-1: Ayudando a felix con testing de PARZ-442, en stg no devuelve datos.
+2020-01-21 17:40: PARZ-1: Deploy y testing PROD Solucionando errores en producción y replicando en stg
+2020-01-21 18:09: PARZ-1: Deploy y testing PROD Actualizando Trello
+2020-01-21 18:12: PARZ-1: Deploy y testing PROD Corrección de alineación de los reviews en producción
+2020-01-21 18:30: PARZ-1: Deploy y testing PROD Actualizando staging con correcciones realizadas directamente sobre prod.

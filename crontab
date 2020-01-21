@@ -1,0 +1,3 @@
+@reboot cd /home/ezequiel/.vscode-oss && git pull origin master
+*/15 * * * * bash -c 'cd /home/ezequiel/.vscode-oss && git add . && git commit -m "update-$(date +%D-%T)" && git push origin master'
+
