@@ -104,3 +104,4 @@
 2020-01-22 12:00: PARZ-1: Deploy y testing PROD Corrección agregado al carrito sin talle pantalla negra, pasando a stg también
 2020-01-22 12:20: KE-51: con facu viendo cómo agregar buscador
 2020-01-22 12:45: KE-51: con félix viendo cómo hacer consulta a elasticsearch
+2020-01-22 13:16: KE-51: con facu viendo cómo agregar buscador
