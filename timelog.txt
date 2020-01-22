@@ -106,3 +106,4 @@
 2020-01-22 12:45: KE-51: con félix viendo cómo hacer consulta a elasticsearch
 2020-01-22 13:16: KE-51: con facu viendo cómo agregar buscador
 2020-01-22 14:23: Almuerzo **
+2020-01-22 14:59: PARZ-1: Buscando componente para que el slider sea infinito
