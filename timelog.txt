@@ -102,3 +102,5 @@
 2020-01-22 11:50: PARZ-1: reunión con mati viendo problemas con prioridad
 2020-01-22 11:30: KE-51: con mati y félix, consultas a google reviews está consumiendo crédito
 2020-01-22 12:00: PARZ-1: Deploy y testing PROD Corrección agregado al carrito sin talle pantalla negra, pasando a stg también
+2020-01-22 12:20: KE-51: con facu viendo cómo agregar buscador
+2020-01-22 12:45: KE-51: con félix viendo cómo hacer consulta a elasticsearch
