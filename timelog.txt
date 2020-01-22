@@ -101,3 +101,4 @@
 2020-01-22 11:10: KE-51: con felix viendo error de reindex
 2020-01-22 11:50: PARZ-1: reunión con mati viendo problemas con prioridad
 2020-01-22 11:30: KE-51: con mati y félix, consultas a google reviews está consumiendo crédito
+2020-01-22 12:00: PARZ-1: Deploy y testing PROD Corrección agregado al carrito sin talle pantalla negra, pasando a stg también
