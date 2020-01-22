@@ -108,3 +108,4 @@
 2020-01-22 14:23: Almuerzo **
 2020-01-22 14:59: PARZ-1: Buscando componente para que el slider sea infinito
 2020-01-22 17:10: PARZ-1: Gestión de tareas
+2020-01-22 17:49: KE-51: con mauro viendo qué datos son necesarios para productos guardados
