@@ -96,6 +96,8 @@
 2020-01-21 18:30: PARZ-1: Deploy y testing PROD Actualizando staging con correcciones realizadas directamente sobre prod.
 2020-01-21 19:39: Comprando para la cena **
 
-2020-01-22 09:11: . ***
-2020-01-22 10:49: KE-51: Con Mauro viendo problemas de maquetación
-2020-01-22 11:07: KE-51: con felix viendo error de reindex
+2020-01-22 09:10: . ***
+2020-01-22 10:50: KE-51: Con Mauro viendo problemas de maquetación
+2020-01-22 11:10: KE-51: con felix viendo error de reindex
+2020-01-22 11:50: PARZ-1: reunión con mati viendo problemas con prioridad
+2020-01-22 11:30: KE-51: con mati y félix, consultas a google reviews está consumiendo crédito
