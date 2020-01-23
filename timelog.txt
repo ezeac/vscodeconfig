@@ -121,3 +121,5 @@
 2020-01-23 14:00: Almuerzo
 2020-01-23 14:10: TL-97: Análisis de la tarea. Se deja comentario
 2020-01-23 14:30: KE-26: Organizando tareas Jira
+2020-01-23 15:30: COR-30: Migrando bbdd de entorno facu a staging 233. Deploy en stg.
+2020-01-23 16:00: NA-296: Deploy y actualización en vtex
