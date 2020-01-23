@@ -115,3 +115,4 @@
 2020-01-23 09:15: KE-51: con félix y mti viendo modal del carrito para la tarea PARZ-443
 2020-01-23 10:01: KE-26: Creando tareas NA
 2020-01-23 11:42: PARZ-1: Ayudando a carlos con PARZ-429. Testing compra en local con iMacro. Creación y actualización de tareas Jira/Trello
+2020-01-23 12:29: PARZ-1: Testing parz
