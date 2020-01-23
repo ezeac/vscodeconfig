@@ -31,7 +31,7 @@
 2020-01-16 12:10: KE-51: Mauro, explicando tarea de "guardados" PWA
 2020-01-16 13:03: COR-1: Testing Corpoint, deploy staging
 2020-01-16 13:11: COR-1: Deploy, merge stg COR-19 CMS. Corrección de carpeta CMS repo
-2020-01-16 14:00: Almuerzo **
+2020-01-16 14:00: Almuerzo
 2020-01-16 14:35: COR-1: Deploy, merge stg COR-19 CMS. Corrección de carpeta CMS repo
 2020-01-16 14:54: Docs gtimelog **
 2020-01-16 15:09: TLA-76: Maquetación header faltante
@@ -45,7 +45,7 @@
 2020-01-17 12:43: KE-51: con félix viendo parz shippingMethod, con javi viendo si se crea entorno de bremensap
 2020-01-17 13:37: PARZ-1: Revisando tareas
 2020-01-17 13:44: Email Santander Río ***
-2020-01-17 14:46: Almuerzo **
+2020-01-17 14:46: Almuerzo
 2020-01-17 15:12: SUV-1: Error en producción se ven "Notice" de php
 2020-01-17 15:58: PARZ-1: Gestión de tareas
 2020-01-17 16:13: KE-51: con facu viendo configuración del megamenú
@@ -105,7 +105,7 @@
 2020-01-22 12:20: KE-51: con facu viendo cómo agregar buscador
 2020-01-22 12:45: KE-51: con félix viendo cómo hacer consulta a elasticsearch
 2020-01-22 13:16: KE-51: con facu viendo cómo agregar buscador
-2020-01-22 14:23: Almuerzo **
+2020-01-22 14:23: Almuerzo
 2020-01-22 14:59: PARZ-1: Buscando componente para que el slider sea infinito
 2020-01-22 17:10: PARZ-1: Gestión de tareas
 2020-01-22 17:49: KE-51: con mauro viendo qué datos son necesarios para productos guardados
@@ -113,10 +113,11 @@
 
 2020-01-23 09:00: . ***
 2020-01-23 09:15: KE-51: con félix y mti viendo modal del carrito para la tarea PARZ-443
-2020-01-23 10:01: KE-26: Creando tareas NA
-2020-01-23 11:42: PARZ-1: Ayudando a carlos con PARZ-429. Testing compra en local con iMacro. Creación y actualización de tareas Jira/Trello
+2020-01-23 10:00: KE-26: Creando tareas NA
+2020-01-23 11:40: PARZ-1: Ayudando a carlos con PARZ-429. Testing compra en local con iMacro. Creación y actualización de tareas Jira/Trello
 2020-01-23 12:30: PARZ-1: Testing parz
-2020-01-23 12:56: Impresora y Boludeando **
-2020-01-23 13:13: PARZ-1: Actualizando tareas, merge y deploy stg de PARZ-483 y PARZ-493. Actualizando stg con ultimo commit del deploy de prod
-2020-01-23 13:56: Almuerzo **
-2020-01-23 14:05: TL-97: Análisis de la tarea. Se deja comentario
+2020-01-23 13:00: Impresora y Boludeando **
+2020-01-23 13:15: PARZ-1: Actualizando tareas, merge y deploy stg de PARZ-483 y PARZ-493. Actualizando stg con ultimo commit del deploy de prod
+2020-01-23 14:00: Almuerzo
+2020-01-23 14:10: TL-97: Análisis de la tarea. Se deja comentario
+2020-01-23 14:30: KE-26: Organizando tareas Jira
