@@ -110,3 +110,6 @@
 2020-01-22 17:10: PARZ-1: Gestión de tareas
 2020-01-22 17:49: KE-51: con mauro viendo qué datos son necesarios para productos guardados
 2020-01-22 18:38: KE-51: con mauro viendo PARZ-435 
+
+2020-01-23 09:00: . ***
+2020-01-23 09:15: KE-51: con félix y mti viendo modal del carrito para la tarea PARZ-443
