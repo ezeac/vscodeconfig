@@ -124,3 +124,4 @@
 2020-01-23 15:30: COR-30: Migrando bbdd de entorno facu a staging 233. Deploy en stg.
 2020-01-23 16:00: NA-296: Deploy y actualización en vtex
 2020-01-23 16:16: KE-51: con félix y mati viendo si se puede colocar  consulta al google reviews en el zeusvtex
+2020-01-23 16:37: KE-51: con mauro viendo cómo pasar parámetro a un componente hijo en vez de usar el state
