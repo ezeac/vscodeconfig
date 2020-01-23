@@ -117,3 +117,4 @@
 2020-01-23 11:42: PARZ-1: Ayudando a carlos con PARZ-429. Testing compra en local con iMacro. Creación y actualización de tareas Jira/Trello
 2020-01-23 12:30: PARZ-1: Testing parz
 2020-01-23 12:56: Impresora y Boludeando **
+2020-01-23 13:13: PARZ-1: Actualizando tareas, merge y deploy stg de PARZ-483 y PARZ-493. Actualizando stg con ultimo commit del deploy de prod
