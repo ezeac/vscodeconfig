@@ -137,3 +137,4 @@
 2020-01-24 13:27: PARZ-1: Tareas Trello a Jira
 2020-01-24 14:32: Almuerzo
 2020-01-24 15:09: PARZ-1: Tarea front Trello a Jira
+2020-01-24 15:26: PARZ-1: Testing en staging PARZ-443, 439
