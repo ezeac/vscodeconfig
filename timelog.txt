@@ -128,7 +128,7 @@
 2020-01-23 18:01: KE-51: con mauro viendo error de pwa al recargar variables de un componente
 
 2020-01-24 08:30: . ***
-2020-01-24 09:30: BREM-18:
+2020-01-24 09:30: BREM-18: -
 2020-01-24 10:00: KE-51: javi viendo estructura de archivo para importación
 2020-01-24 10:30: KE-51: con mauro y con javi
 2020-01-24 11:00: BREM-18: ult. corrección. Deploy stg y testing
@@ -142,3 +142,4 @@
 2020-01-24 16:40: PARZ-1: Testing en staging PARZ-443, 439. Reindex stg
 2020-01-24 16:45: KE-51: facu explicando permisos de los archivos
 2020-01-24 16:50: PARZ-1: Merge, y desploy stg PARZ-429
+2020-01-24 17:05: KE-106: Cargando tiempos
