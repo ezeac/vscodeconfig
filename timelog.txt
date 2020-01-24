@@ -136,3 +136,4 @@
 2020-01-24 13:15: PARZ-1: Stging testing para corrección de mercadopago PARZ-449
 2020-01-24 13:27: PARZ-1: Tareas Trello a Jira
 2020-01-24 14:32: Almuerzo
+2020-01-24 15:09: PARZ-1: Tarea front Trello a Jira
