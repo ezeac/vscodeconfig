@@ -127,7 +127,8 @@
 2020-01-23 16:37: KE-51: con mauro viendo cómo pasar parámetro a un componente hijo en vez de usar el state
 2020-01-23 18:01: KE-51: con mauro viendo error de pwa al recargar variables de un componente
 
-2020-01-24 08:40: . ***
+2020-01-24 08:30: . ***
 2020-01-24 09:30: BREM-18:
-2020-01-24 09:50: KE-51: javi viendo estructura de archivo para importación
-2020-01-24 10:26: KE-51: con mauro y con javi
+2020-01-24 10:00: KE-51: javi viendo estructura de archivo para importación
+2020-01-24 10:30: KE-51: con mauro y con javi
+2020-01-24 11:00: BREM-18: ult. corrección. Deploy stg y testing
