@@ -141,3 +141,4 @@
 2020-01-24 15:35: PARZ-1: Tarea front Trello a Jira
 2020-01-24 16:40: PARZ-1: Testing en staging PARZ-443, 439. Reindex stg
 2020-01-24 16:45: KE-51: facu explicando permisos de los archivos
+2020-01-24 16:50: PARZ-1: Merge, y desploy stg PARZ-429
