@@ -149,5 +149,7 @@
 2020-01-27 09:00: KE-51: facu corpoint
 2020-01-27 09:15: PARZ-1: Parz stg para félix
 
-2020-01-27 10:27: PARZ-1: Corrección sobre stg checkout
-2020-01-27 11:41: PARZ-1: Merge, desploy y testing STG
+2020-01-27 10:20: PARZ-1: Corrección sobre stg checkout
+2020-01-27 11:40: PARZ-1: Merge, desploy y testing STG
+2020-01-27 13:10: PARZ-449: Error mercadopago
+2020-01-27 13:54: Almuerzo: -
