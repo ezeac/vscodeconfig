@@ -143,3 +143,9 @@
 2020-01-24 16:45: KE-51: facu explicando permisos de los archivos
 2020-01-24 16:50: PARZ-1: Merge, y desploy stg PARZ-429
 2020-01-24 17:05: KE-106: Cargando tiempos
+
+2020-01-27 08:30: . ***
+2020-01-27 08:45: KE-51: javi bremen
+2020-01-27 09:00: KE-51: facu corpoint
+2020-01-27 09:15: PARZ-1: Parz stg para félix
+
