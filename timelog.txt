@@ -157,5 +157,6 @@
 2020-01-27 17:18: PARZ-1: Merge, desploy y testing STG
 2020-01-27 17:20: KE-106: Tiempos
 
-2020-01-28 09:51: . ***
-2020-01-28 09:51: KE-51: mati organzando reunión PARZ
+2020-01-28 08:00: . ***
+2020-01-28 09:00: KE-51: mati organzando reunión PARZ
+2020-01-28 10:00: PARZ-1: Testing STG
