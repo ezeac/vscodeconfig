@@ -164,3 +164,5 @@
 2020-01-28 14:00: Almuerzo: -
 2020-01-28 14:13: LH-54: Merge
 2020-01-28 14:15: NA-297: Merge
+2020-01-28 16:55: PARZ-1: Merge, y desploy stg. Creación de tareas
+2020-01-28 16:55: KE-51: con facu viendo micheli cms page insertar bloques
