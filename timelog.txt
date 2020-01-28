@@ -166,3 +166,4 @@
 2020-01-28 14:15: NA-297: Merge
 2020-01-28 16:55: PARZ-1: Merge, y desploy stg. Creación de tareas
 2020-01-28 16:55: KE-51: con facu viendo micheli cms page insertar bloques
+2020-01-28 17:30: BREM-1: Backup producción
