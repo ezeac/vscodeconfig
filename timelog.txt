@@ -156,3 +156,6 @@
 2020-01-27 16:42: PARZ-449: Error mercadopago
 2020-01-27 17:18: PARZ-1: Merge, desploy y testing STG
 2020-01-27 17:20: KE-106: Tiempos
+
+2020-01-28 09:51: . ***
+2020-01-28 09:51: KE-51: mati organzando reunión PARZ
