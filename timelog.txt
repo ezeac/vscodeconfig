@@ -160,3 +160,5 @@
 2020-01-28 08:00: . ***
 2020-01-28 09:00: KE-51: mati organzando reunión PARZ
 2020-01-28 10:00: PARZ-1: Testing STG
+2020-01-28 13:00: KE-51: con octavio y mati
+2020-01-28 14:00: Almuerzo: -
