@@ -170,3 +170,4 @@
 
 2020-01-29 08:21: . ***
 2020-01-29 09:00: KE-51: ayudando a félix con PARZ-445
+2020-01-29 10:55: PARZ-448: Testing y correcciones
