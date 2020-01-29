@@ -170,5 +170,7 @@
 
 2020-01-29 08:21: . ***
 2020-01-29 09:00: KE-51: ayudando a félix con PARZ-445
-2020-01-29 10:55: PARZ-448: Testing y correcciones
-2020-01-29 11:14: KE-51: con ine viendo grilla den mobile
+2020-01-29 11:00: PARZ-448: Testing y correcciones
+2020-01-29 11:15: KE-51: con ine viendo grilla den mobile
+2020-01-29 13:00: PARZ-450: Correcciones
+2020-01-29 14:00: Almuerzo: -
