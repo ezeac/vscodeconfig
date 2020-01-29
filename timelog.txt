@@ -169,3 +169,4 @@
 2020-01-28 17:30: BREM-1: Backup producción
 
 2020-01-29 08:21: . ***
+2020-01-29 09:03: PARZ-1: Deploy STG, testing
