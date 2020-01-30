@@ -185,3 +185,5 @@
 2020-01-30 11:37: KE-51: revisando afip
 2020-01-30 12:27: PARZ-1: Gestión de tareas
 2020-01-30 12:43: KE-51: facu tla home css
+2020-01-30 15:18: PARZ-1: Gestión de tareas
+2020-01-30 15:18: PARZ-449: Error mercadopago test compra mati
