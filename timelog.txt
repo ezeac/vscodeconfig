@@ -189,4 +189,6 @@
 2020-01-30 14:00: Almuerzo: -
 2020-01-30 15:00: PARZ-1: Gestión de tareas
 2020-01-30 15:20: PARZ-449: Error mercadopago test compra mati
-2020-01-30 15:25: KE-51: con facu viendo css para tla
+2020-01-30 15:30: KE-51: con facu viendo css para tla
+2020-01-30 16:00: TL-1: Creación de entornos locales
+2020-01-30 17:10: PARZ-429: testing y correcciones, deploy stg
