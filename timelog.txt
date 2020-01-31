@@ -193,11 +193,13 @@
 2020-01-30 16:00: TL-1: Creación de entornos locales
 2020-01-30 17:10: PARZ-429: testing y correcciones, deploy stg
 
-2020-01-31 08:46: . ***
-2020-01-31 11:11: PARZ-448: Revisión y corrección
+2020-01-31 08:30: . ***
+2020-01-31 11:10: PARZ-448: Revisión y corrección
 2020-01-31 12:10: PARZ-445: Testing
 2020-01-31 12:10: PARZ-458: Testing
 2020-01-31 12:50: PARZ-1: Gestión
-2020-01-31 14:13: Almuerzo: -
-2020-01-31 15:06: BREM-1: Deploy stg de BREM-21 22 y 23
-2020-01-31 15:24: LMS-14: Merge staging
+2020-01-31 14:15: Almuerzo: -
+2020-01-31 15:10: BREM-1: Deploy stg de BREM-21 22 y 23
+2020-01-31 15:30: LMS-14: Merge staging
+2020-01-31 16:00: PARZ-1: Minutas de la reunión
+2020-01-31 16:22: PARZ-1: Charla con mati definiendo detalles sobre la metodología luego de la reunión de PARZ
