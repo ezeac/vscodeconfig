@@ -204,3 +204,5 @@
 2020-01-31 16:00: PARZ-1: Minutas de la reunión
 2020-01-31 16:22: PARZ-1: Charla con mati definiendo detalles sobre la metodología luego de la reunión de PARZ
 2020-01-31 16:41: KE-106: Cargando tiempos
+
+2020-02-03 08:57: . ***
