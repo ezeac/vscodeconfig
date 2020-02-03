@@ -205,9 +205,12 @@
 2020-01-31 16:22: PARZ-1: Charla con mati definiendo detalles sobre la metodología luego de la reunión de PARZ
 2020-01-31 16:41: KE-106: Cargando tiempos
 
-2020-02-03 08:57: . ***
-2020-02-03 09:17: KE-26: Organizando tareas de la semana
-2020-02-03 09:29: TL-1: Entorno local
-2020-02-03 11:24: PARZ-1: Gestión y testing
-2020-02-03 12:09: PARZ-1: revisando por qué demora en entrar al admin
-2020-02-03 13:24: PARZ-1: Gestión. corrección PARZ-459 mapping
+2020-02-03 09:00: . ***
+2020-02-03 09:10: KE-26: Organizando tareas de la semana
+2020-02-03 09:30: TL-1: Entorno local
+2020-02-03 11:30: PARZ-1: Gestión y testing
+2020-02-03 12:10: PARZ-1: revisando por qué demora en entrar al admin
+2020-02-03 13:00: PARZ-1: Gestión. corrección PARZ-459 mapping
+2020-02-03 13:30: KE-51: con facu viendo tla listado template
+2020-02-03 14:30: Almuerzo: -
+2020-02-03 14:54: KE-51: con mauro viendo tarea PARZ-459
