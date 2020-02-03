@@ -217,3 +217,4 @@
 2020-02-03 15:51: KE-51: con facu viendo tla listado template
 2020-02-03 17:02: PARZ-1: Gestión. testing PARZ-459
 2020-02-03 17:24: PARZ-1: Deploy correcciones de PARZ-459 y PARZ-460
+2020-02-03 18:07: KE-51: con ine viendo diseño estandar de m2
