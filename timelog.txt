@@ -207,3 +207,4 @@
 
 2020-02-03 08:57: . ***
 2020-02-03 09:17: KE-26: Organizando tareas de la semana
+2020-02-03 09:29: TL-1: Entorno local
