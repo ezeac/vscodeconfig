@@ -231,3 +231,4 @@
 2020-02-04 15:30: PARZ-1: Backup y deploy PROD. Restauración del Deploy
 2020-02-04 15:46: COR-1: con javi viendo deploy stg corpoint
 2020-02-04 17:09: PARZ-1: Testing en entorno local para encontrar el origen del problema del carrito
+2020-02-04 17:38: PARZ-1: 233 sin espacio
