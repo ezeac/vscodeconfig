@@ -220,10 +220,11 @@
 2020-02-03 18:07: KE-51: con ine viendo diseño estandar de m2
 
 2020-02-04 08:50: . ***
-2020-02-04 09:32: PARZ-1: Gestión de tareas3
-2020-02-04 10:11: PARZ-1: Carrito se rompió cuando fallé una compra y hice click en comprar ahora otro producto. Se crea tarea PARZ-466
+2020-02-04 09:30: PARZ-1: Gestión de tareas3
+2020-02-04 10:10: PARZ-1: Carrito se rompió cuando fallé una compra y hice click en comprar ahora otro producto. Se crea tarea PARZ-466
 2020-02-04 10:35: PARZ-1: ayudando a mauro con la tarea PARZ-465
-2020-02-04 11:07: PARZ-1: Viendo plataforma de odoo
-2020-02-04 11:32: AFIP
-2020-02-04 12:02: PARZ-1: con mati viendo proyección de parz
-2020-02-04 12:14: PARZ-1: con mauro viendo PARZ-465
+2020-02-04 11:10: PARZ-1: Viendo plataforma de odoo
+2020-02-04 11:30: AFIP
+2020-02-04 12:00: PARZ-1: con mati viendo proyección de parz
+2020-02-04 12:15: PARZ-1: con mauro viendo PARZ-465
+2020-02-04 13:30: Almuerzo: -
