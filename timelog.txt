@@ -226,3 +226,4 @@
 2020-02-04 11:07: PARZ-1: Viendo plataforma de odoo
 2020-02-04 11:32: AFIP
 2020-02-04 12:02: PARZ-1: con mati viendo proyección de parz
+2020-02-04 12:14: PARZ-1: con mauro viendo PARZ-465
