@@ -220,3 +220,4 @@
 2020-02-03 18:07: KE-51: con ine viendo diseño estandar de m2
 
 2020-02-04 08:50: . ***
+2020-02-04 09:32: PARZ-1: Gestión de tareas3
