@@ -71,7 +71,7 @@ while [ "$project_route" != "exit" ]
         git checkout staging
     fi
 
-    echo "Extrayendo archivos..." &&
+    echo "Extrayendo archivos del zip..." &&
     sleep 2 &&
     unzip -qqo $project_zip
     if [ "$sync_repo" = "si" ]
