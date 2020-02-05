@@ -73,7 +73,7 @@ while [ "$project_route" != "exit" ]
 
     echo "Extrayendo archivos..." &&
     sleep 2 &&
-    unzip -qo $project_zip
+    unzip -qqo $project_zip
     if [ "$sync_repo" = "si" ]
     then
         git config core.filemode false &&
