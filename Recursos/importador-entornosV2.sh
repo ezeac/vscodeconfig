@@ -200,7 +200,6 @@ EOL
         if [ "$magento_version" = "1" ]
             then
             cat > .${project_subfolder}/app/etc/local.xml <<EOL
-            <?xml version="1.0"?>
             <config>
                 <global>
                     <install>
