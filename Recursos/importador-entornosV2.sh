@@ -73,7 +73,7 @@ while [ "$project_route" != "exit" ]
 
     echo "Extrayendo archivos..." &&
     sleep 2 &&
-    unzip -o $project_zip
+    unzip -qo $project_zip
     if [ "$sync_repo" = "si" ]
     then
         git config core.filemode false &&
@@ -515,6 +515,8 @@ EOL
             echo "Actualizando composer..."
             cd .${project_subfolder}
             composer install
+            echo "Realizando Deploy..."
+            sh ./deploy-sample.sh
             echo "Actualizando permisos de los archivos..."
             chown -R $project_owner:www-data . && chmod -R 777 var/ generated/ pub/
         fi
