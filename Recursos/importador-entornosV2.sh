@@ -73,14 +73,14 @@ while [ "$project_route" != "exit" ]
 
     echo "Extrayendo archivos del zip..." &&
     sleep 2 &&
-    unzip -qqo $project_zip
+    unzip -qo $project_zip
     if [ "$sync_repo" = "si" ]
     then
         git config core.filemode false &&
         git status
     fi
 
-    echo "Creando e importando base de datos ${platform_domain}..." &&
+    echo "Creando e importando base de datos ${project_bbdd}..." &&
     sleep 2 &&
     echo "drop database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass 2> /dev/null
     echo "create database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass 2> /dev/null
