@@ -233,6 +233,8 @@
 2020-02-04 17:09: PARZ-1: Testing en entorno local para encontrar el origen del problema del carrito
 2020-02-04 17:38: PARZ-1: 233 sin espacio
 
-2020-02-05 08:37: . ***
-2020-02-05 09:58: PARZ-1: Reunión odoo
+2020-02-05 08:30: . ***
+2020-02-05 10:00: PARZ-1: Reunión odoo
 2020-02-05 10:45: PARZ-1: Revisando imágenes de stg y entornos locales
+2020-02-05 11:00: PARZ-1: Actualización Trello
+2020-02-05 11:20: KE-51: con mauro cargando matrixrates para tarea PARZ-466
