@@ -137,7 +137,7 @@ EOL
 
             server_name ${platform_domain};
             access_log /var/log/nginx/${platform_domain}_access.log;
-            access_log /var/log/nginx/${platform_domain}_error.log;
+            error_log /var/log/nginx/${platform_domain}_error.log;
 
             location ^~ /app/                { deny all; }
             location ^~ /includes/           { deny all; }
@@ -249,7 +249,7 @@ EOL
 
                 server_name ${platform_domain};
                 access_log /var/log/nginx/${platform_domain}_access.log;
-                access_log /var/log/nginx/${platform_domain}_error.log;
+                error_log /var/log/nginx/${platform_domain}_error.log;
 
                 location ^~ /app/                { deny all; }
                 location ^~ /includes/           { deny all; }
@@ -374,6 +374,9 @@ EOL
                 index index.php;
                 autoindex off;
                 charset off;
+
+                access_log /var/log/nginx/${platform_domain}_access.log;
+                error_log /var/log/nginx/${platform_domain}_error.log;
 
                 add_header 'X-Content-Type-Options' 'nosniff';
                 add_header 'X-XSS-Protection' '1; mode=block';
