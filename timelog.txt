@@ -245,3 +245,4 @@
 2020-02-05 12:52: Pidiendo almuerzo **
 2020-02-05 13:15: TL-1: Creación de entornos locales
 2020-02-05 14:15: Almuerzo: -
+2020-02-05 15:15: TL-1: Entorno local
