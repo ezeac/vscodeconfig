@@ -242,3 +242,4 @@
 2020-02-05 12:14: TL-1: Creación de entornos locales
 2020-02-05 12:24: KE-51: con felix viendo PARZ-467
 2020-02-05 12:25: TL-1: Creación de entornos localesls
+2020-02-05 12:52: Pidiendo almuerzo **
