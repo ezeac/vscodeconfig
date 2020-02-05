@@ -239,3 +239,6 @@
 2020-02-05 11:00: PARZ-1: Actualización Trello
 2020-02-05 11:20: KE-51: con mauro cargando matrixrates para tarea PARZ-466
 2020-02-05 12:01: PARZ-1: Tareas tablero odoo
+2020-02-05 12:14: TL-1: Creación de entornos locales
+2020-02-05 12:24: KE-51: con felix viendo PARZ-467
+2020-02-05 12:25: TL-1: Creación de entornos localesls
