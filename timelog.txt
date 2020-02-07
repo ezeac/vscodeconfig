@@ -257,3 +257,4 @@
 2020-02-07 14:45: KE-51: con javi ayudando a corregir error de git para corpoint stg
 2020-02-07 15:05: KE-51: con facundob explicando comandos para correr la pwa en local
 2020-02-07 16:27: TLA-76: Corrección buscador header
+2020-02-07 18:28: COR-1: Deploy de stg a prod
