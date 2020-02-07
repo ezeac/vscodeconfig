@@ -256,3 +256,4 @@
 2020-02-07 14:44: PARZ-1: tarea back desde trello
 2020-02-07 14:45: KE-51: con javi ayudando a corregir error de git para corpoint stg
 2020-02-07 15:05: KE-51: con facundob explicando comandos para correr la pwa en local
+2020-02-07 16:27: TLA-76: Corrección buscador header
