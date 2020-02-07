@@ -252,3 +252,5 @@
 2020-02-07 12:58: TLA-1: Ayudando a facu
 2020-02-07 13:39: PARZ-1: tarea para facundob
 2020-02-07 14:05: Almuerzo: -
+2020-02-07 14:31: PARZ-1: tarea para facundob
+2020-02-07 14:44: PARZ-1: tarea back desde trello
