@@ -516,7 +516,7 @@ EOL
 EOL
             echo "Actualizando composer..."
             cd .${project_subfolder}
-            composer install
+            composer install --ignore-platform-reqs
             echo "Realizando Deploy..."
             sh ./deploy-sample.sh
             echo "Actualizando permisos de los archivos..."
