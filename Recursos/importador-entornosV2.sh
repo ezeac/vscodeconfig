@@ -519,6 +519,7 @@ EOL
             composer install --ignore-platform-reqs
             echo "Realizando Deploy..."
             sh ./deploy-sample.sh
+            sh ./deploy_sample.sh
             echo "Actualizando permisos de los archivos..."
             chown -R $project_owner:www-data . && chmod -R 777 var/ generated/ pub/
         fi
