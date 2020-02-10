@@ -267,3 +267,4 @@
 2020-02-10 12:51: KE-51: con facu viendo tareas semana
 2020-02-10 13:00: KE-26: tareas facu
 2020-02-10 14:00: Almuerzo: -
+2020-02-10 16:30: KE-99: Entornos para nexand y bremen
