@@ -193,6 +193,7 @@ EOL
         echo "update sales_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
         echo "update sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
         echo "update customer_entity set email = replace(email, \"@\", \"@testk\");" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
+        echo "update core_config_data set value = 0 where path like \"dev/static/sign\";" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
 
         echo "Corrigiendo acceso a la base de datos..." &&
         mkdir -p /etc/nginx/sites-available/${project_owner}
