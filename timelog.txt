@@ -263,3 +263,5 @@
 2020-02-10 08:28: . ***
 2020-02-10 09:05: KE-17: con javi viendo objetivos de la semana
 2020-02-10 11:49: PARZ-1: Tareas PARZ
+2020-02-10 12:21: KE-51: con ine viendo grilla desktop
+2020-02-10 12:51: KE-51: con facu viendo tareas semana
