@@ -277,3 +277,5 @@
 2020-02-11 11:57: CA-98: error nexand al mover módulo andreani
 2020-02-11 12:19: PARZ-1: Merge PRs staging
 2020-02-11 12:41: KE-26: Merge y deploy de distintas tareas
+2020-02-11 12:51: TL-98: Deploy y testing stg
+2020-02-11 13:51: Almuerzo: -
