@@ -273,3 +273,5 @@
 2020-02-11 10:00: KE-51: ayudando a facu, facub, félix, mauro con distintas tareas
 2020-02-11 10:30: PARZ-1: creando tareas para facub
 2020-02-11 10:51: CA-1: con félix viendo nexand
+2020-02-11 11:32: KE-26: Merge de distintas tareas
+2020-02-11 11:57: CA-98: error nexand al mover módulo andreani
