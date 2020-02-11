@@ -275,3 +275,4 @@
 2020-02-11 10:51: CA-1: con félix viendo nexand
 2020-02-11 11:32: KE-26: Merge de distintas tareas
 2020-02-11 11:57: CA-98: error nexand al mover módulo andreani
+2020-02-11 12:19: PARZ-1: Merge PRs staging
