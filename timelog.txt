@@ -270,3 +270,6 @@
 2020-02-10 16:30: KE-99: Entornos para nexand y bremen
 
 2020-02-11 08:30: . ***
+2020-02-11 10:00: KE-51: ayudando a facu, facub, félix, mauro con distintas tareas
+2020-02-11 10:30: PARZ-1: creando tareas para facub
+2020-02-11 10:51: CA-1: con félix viendo nexand
