@@ -288,5 +288,6 @@
 2020-02-12 08:51: COR-1: Corpoint deploy
 2020-02-12 09:00: KE-51: diseño auditor con ine
 2020-02-12 09:34: KE-99: Entorno suviex
-2020-02-12 09:52: .
+2020-02-12 09:52: KE-51: ine revisión diseño
 2020-02-12 10:28: PARZ-1: merge, deploy stg
+2020-02-12 10:52: KE-51: ine revisión diseño
