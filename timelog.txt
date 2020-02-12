@@ -296,3 +296,5 @@
 2020-02-12 12:36: PARZ-1: Testing
 2020-02-12 13:06: KE-51: mauro
 2020-02-12 13:51: Almuerzo: -
+2020-02-12 14:51: PARZ-1: deploy stg, testing
+2020-02-12 15:31: PARZ-1: organizando tareas
