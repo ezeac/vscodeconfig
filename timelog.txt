@@ -283,3 +283,5 @@
 2020-02-11 15:47: PARZ-468: Ayudando a mauro con análisis del código
 2020-02-11 15:57: KE-51: con facu viendo enxand
 2020-02-11 17:23: TLA-1: Backup, buscador, merge, deploy
+
+2020-02-12 08:26: . ***
