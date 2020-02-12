@@ -199,6 +199,7 @@ alias sshbiosalud='echo "ssh biosalud prod" && ssh -p32241 kudos@74.222.3.78'
 #ssh raceparts
 alias sshraceparts='echo "ssh raceparts prod" && ssh -p32241 kudos@74.222.3.79'
 #ssh corpoint
+alias sshcorpointprod='echo "ssh corpoint prod" && ssh -p32241 kudos@74.222.3.230'
 alias sshcorpointstg='echo "ssh corpoint stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh nexand
 alias sshnexandprod='echo "ssh nexand prod" && ssh -p32241 kudos@74.222.3.232'
