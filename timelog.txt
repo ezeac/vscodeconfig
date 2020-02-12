@@ -291,3 +291,4 @@
 2020-02-12 09:52: KE-51: ine revisión diseño
 2020-02-12 10:28: PARZ-1: merge, deploy stg
 2020-02-12 10:52: KE-51: ine revisión diseño
+2020-02-12 11:34: TLA-1: entorno local facundo
