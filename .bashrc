@@ -220,6 +220,7 @@ alias sshmodaxstaging='echo "ssh modax staging" && echo "pass: M4g3nt02017" && s
 alias sshparzprod='echo "ssh parz prod" && ssh -i ~/key-parz centos@18.224.117.22'
 alias sshparzprodpwa='echo "ssh parzpwa prod 2" && ssh -i ~/key-parz centos@3.133.11.251'
 alias sshparzstg='echo "ssh parz stg" && ssh -p32241 kudos@74.222.3.233'
+alias sshparzodoostg='echo "ssh parz odoo stg. Pass mSkUw24W" && ssh root@144.217.160.80'
 #ssh fiorani
 alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
 #ssh tucamara
