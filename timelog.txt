@@ -300,3 +300,4 @@
 2020-02-12 15:31: PARZ-1: organizando tareas
 
 2020-02-13 08:28: . ***
+2020-02-13 09:59: KE-51: mauro (nuevas tareas) y javi (sokogo testing)
