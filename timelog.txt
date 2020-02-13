@@ -303,3 +303,5 @@
 2020-02-13 10:00: KE-51: mauro (nuevas tareas) y javi (sokogo testing)
 2020-02-13 12:50: PARZ-1: Deploy y testing. Preparando flujo de tareas para javi
 2020-02-13 13:10: KE-51: imagen para facu
+2020-02-13 14:10: Almuerzo: -
+2020-02-13 15:10: KE-51: con mauyro, felix y facub, mauro
