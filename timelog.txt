@@ -301,3 +301,4 @@
 
 2020-02-13 08:28: . ***
 2020-02-13 09:59: KE-51: mauro (nuevas tareas) y javi (sokogo testing)
+2020-02-13 12:39: PARZ-1: Deploy y testing. Preparando flujo de tareas para javi
