@@ -299,6 +299,7 @@
 2020-02-12 14:51: PARZ-1: deploy stg, testing
 2020-02-12 15:31: PARZ-1: organizando tareas
 
-2020-02-13 08:28: . ***
-2020-02-13 09:59: KE-51: mauro (nuevas tareas) y javi (sokogo testing)
-2020-02-13 12:39: PARZ-1: Deploy y testing. Preparando flujo de tareas para javi
+2020-02-13 08:30: . ***
+2020-02-13 10:00: KE-51: mauro (nuevas tareas) y javi (sokogo testing)
+2020-02-13 12:50: PARZ-1: Deploy y testing. Preparando flujo de tareas para javi
+2020-02-13 13:10: KE-51: imagen para facu
