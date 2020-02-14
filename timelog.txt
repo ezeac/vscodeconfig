@@ -312,3 +312,5 @@
 2020-02-14 10:54: CA-1: deploy stg
 2020-02-14 11:08: PARZ-1: Tareas
 2020-02-14 11:23: KE-51: con mauro y facu
+2020-02-14 13:00: KE-51: ayudando a felix a encontrar template y cómo se había agregado "observaciones" en nexand
+2020-02-14 14:22: Almuerzo: -
