@@ -316,3 +316,4 @@
 2020-02-14 14:22: Almuerzo: -
 2020-02-14 14:46: COR-1: Problemas con servidor staging, se reinicia servidor. Probando en entorno local
 2020-02-14 15:16: PARZ-1: Merge
+2020-02-14 16:24: COR-1: Merge 
