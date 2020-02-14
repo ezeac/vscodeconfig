@@ -310,3 +310,5 @@
 2020-02-14 08:54: KE-51: con felix, javi y manu viendo qué tarea de back hay
 2020-02-14 09:15: KE-26: Organizando flujo de tareas
 2020-02-14 10:54: CA-1: deploy stg
+2020-02-14 11:08: PARZ-1: Tareas
+2020-02-14 11:23: KE-51: con mauro y facu
