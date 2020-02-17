@@ -321,3 +321,4 @@
 2020-02-17 08:10: . ***
 2020-02-17 09:40: KE-26: Organizando tareas de la semana
 2020-02-17 11:10: PARZ-1: Merge, deploy
+2020-02-17 12:35: PARZ-1: gestionando cambios y devoluciones
