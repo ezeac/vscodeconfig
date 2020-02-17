@@ -244,5 +244,11 @@
 		"body": "SET global log_output = 'FILE';\r\nSET global general_log_file='/var/www/html/mysql_general.log';\r\nSET global general_log = 1;",
 		"description": "",
 		"scope": ""
+	},
+	"forzar_emails_en_pantalla_magento": {
+		"prefix": "forzar_emails_en_pantalla_magento",
+		"body": "Cómo previsualizar los emails en magento 2:\r\nModificar la función "prepareMessage" del archivo "vendor/magento/framework/Mail/Template/TransportBuilder.php". Agregar antes del return:\r\n\$myfile = fopen("../var/log/email" . time() . ".html", "w+") or die("Unable to open file!");\r\nfwrite(\$myfile, \$body); fclose(\$myfile);\r\necho \$body; exit;\r\n",
+		"description": "",
+		"scope": ""
 	}
 }
