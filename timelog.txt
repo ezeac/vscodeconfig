@@ -321,6 +321,8 @@
 2020-02-17 08:10: . ***
 2020-02-17 09:40: KE-26: Organizando tareas de la semana
 2020-02-17 11:10: PARZ-1: Merge, deploy
-2020-02-17 12:35: PARZ-1: gestionando cambios y devoluciones
-2020-02-17 12:57: KE-51: facu, manu, javi org corpoint
-2020-02-17 13:53: COR-42: selector regiones checkout
+2020-02-17 12:30: PARZ-1: gestionando cambios y devoluciones
+2020-02-17 13:00: KE-51: facu, manu, javi org corpoint
+2020-02-17 14:00: COR-42: selector regiones checkout
+2020-02-17 15:00: Almuerzo: -
+2020-02-17 17:07: PARZ-1: Tarea urgente categoría homer-accesorios
