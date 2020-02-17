@@ -318,5 +318,6 @@
 2020-02-14 15:16: PARZ-1: Merge
 2020-02-14 16:24: COR-1: Merge 
 
-2020-02-17 08:06: . ***
-2020-02-17 09:37: KE-26: Organizando tareas de la semana
+2020-02-17 08:10: . ***
+2020-02-17 09:40: KE-26: Organizando tareas de la semana
+2020-02-17 11:10: PARZ-1: Merge, deploy
