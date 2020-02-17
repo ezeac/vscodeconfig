@@ -323,3 +323,4 @@
 2020-02-17 11:10: PARZ-1: Merge, deploy
 2020-02-17 12:35: PARZ-1: gestionando cambios y devoluciones
 2020-02-17 12:57: KE-51: facu, manu, javi org corpoint
+2020-02-17 13:53: COR-42: selector regiones checkout
