@@ -328,3 +328,4 @@
 2020-02-17 17:07: PARZ-1: Tarea urgente categoría homer-accesorios
 
 2020-02-18 08:30: . ***
+2020-02-18 10:46: COR-44: Deploy prod
