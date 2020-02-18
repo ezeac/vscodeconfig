@@ -332,3 +332,5 @@
 2020-02-18 11:10: COR-44: Problema con espacios en categorías
 2020-02-18 11:30: KE-51: carlos ayudando a maq micheli
 2020-02-18 12:40: COR-44: Problema con thumbnail productos
+2020-02-18 13:40: COR-1: Entornos locales actualizados
+2020-02-18 14:15: Almuerzo: -
