@@ -329,3 +329,5 @@
 
 2020-02-18 08:30: . ***
 2020-02-18 10:46: COR-44: Deploy prod
+2020-02-18 11:10: COR-44: Problema con espacios en categorías
+2020-02-18 11:30: KE-51: carlos ayudando a maq micheli
