@@ -334,3 +334,5 @@
 2020-02-18 12:40: COR-44: Problema con thumbnail productos
 2020-02-18 13:40: COR-1: Entornos locales actualizados
 2020-02-18 14:15: Almuerzo: -
+2020-02-18 15:10: COR-1: Entornos locales actualizados
+2020-02-18 16:29: PARZ-1: reunión con vicky y irma de odoo
