@@ -338,3 +338,7 @@
 2020-02-18 16:29: PARZ-1: reunión con vicky y irma de odoo
 
 2020-02-19 09:30: . ***
+2020-02-19 13:00: KE-51: con sokogo
+2020-02-19 15:00: KE-51: con manu y mati
+2020-02-19 16:00: Almuerzo: -
+2020-02-19 16:40: KE-51: con facu, facub y mauro
