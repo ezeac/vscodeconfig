@@ -342,3 +342,5 @@
 2020-02-19 15:00: KE-51: con manu y mati
 2020-02-19 16:00: Almuerzo: -
 2020-02-19 16:40: KE-51: con facu, facub y mauro
+2020-02-19 17:20: SOK-1: Revisando transportadoras y plazos de envío
+2020-02-19 17:35: KE-106: corrigiendo tiempos enero
