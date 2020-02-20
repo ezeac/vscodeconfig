@@ -349,3 +349,4 @@
 2020-02-20 09:58: LMS-1: Entorno staging
 2020-02-20 10:17: SOK-1: Repo fix
 2020-02-20 10:19: LMS-1: Entornos locales facu y felix
+2020-02-20 10:30: LMS-1: Revisando producto agotado
