@@ -368,3 +368,4 @@
 2020-02-26 12:17: KE-51: mauro ayudando con parz
 2020-02-26 13:28: Almuerzo: -
 2020-02-26 13:35: KE-51: consultas de carlos
+2020-02-26 14:00: PARZ-1: acomodando tareas
