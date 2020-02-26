@@ -371,3 +371,4 @@
 2020-02-26 14:00: PARZ-1: acomodando tareas
 2020-02-26 14:51: TL-1: merge stg y deploy
 2020-02-26 15:11: PARZ-1: análisis tarea tel}
+2020-02-26 16:26: KE-1: realizando instructivo para flujo de estados jira
