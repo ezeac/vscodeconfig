@@ -364,3 +364,5 @@
 2020-02-26 10:35: PARZ-1: actualizacion tareas
 2020-02-26 11:03: PARZ-1: resumen tareas de últ. semanas
 2020-02-26 11:13: KE-51: ayudando a facu
+2020-02-26 12:00: PARZ-1: tareas
+2020-02-26 12:17: KE-51: mauro ayudando con parz
