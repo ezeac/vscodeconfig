@@ -362,3 +362,5 @@
 2020-02-26 10:13: TLA-1: entorno local facundo
 2020-02-26 10:13: KE-51: facu entorno lcoal error
 2020-02-26 10:35: PARZ-1: actualizacion tareas
+2020-02-26 11:03: PARZ-1: resumen tareas de últ. semanas
+2020-02-26 11:13: KE-51: ayudando a facu
