@@ -357,3 +357,5 @@
 2020-02-20 14:29: PARZ-1: Testing error en preguntas
 
 2020-02-26 08:28: . ***
+2020-02-26 09:13: KE-17: con mati
+2020-02-26 09:13: KE-51: error en localserver
