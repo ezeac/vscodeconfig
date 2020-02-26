@@ -359,3 +359,5 @@
 2020-02-26 08:28: . ***
 2020-02-26 09:13: KE-17: con mati
 2020-02-26 09:13: KE-51: error en localserver
+2020-02-26 10:13: TLA-1: entorno local facundo
+2020-02-26 10:13: KE-51: facu entorno lcoal error
