@@ -386,3 +386,5 @@
 2020-02-27 13:39: LMS-1: ayudando a carlos
 2020-02-27 15:06: Almuerzo: -
 2020-02-27 15:14: PARZ-1: testing emails
+2020-02-27 15:35: KE-51: con mauro
+2020-02-27 15:36: PARZ-1: con mati viendo parz
