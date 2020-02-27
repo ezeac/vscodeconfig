@@ -379,3 +379,4 @@
 2020-02-27 10:35: KE-26: tareas varias jira
 2020-02-27 10:58: LMS-1: ayudando a carlos
 2020-02-27 11:25: KE-26: tareas varias jira
+2020-02-27 11:55: PARZ-1: Deploy stg
