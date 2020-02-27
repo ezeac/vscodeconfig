@@ -381,3 +381,5 @@
 2020-02-27 11:25: KE-26: tareas varias jira
 2020-02-27 11:55: PARZ-1: Deploy stg
 2020-02-27 12:29: KE-26: tareas varias jira
+2020-02-27 13:01: LMS-1: merge deploy stg
+2020-02-27 13:21: PARZ-1: ayudando a facundob con PARZ
