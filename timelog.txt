@@ -374,3 +374,4 @@
 2020-02-26 16:26: KE-1: realizando instructivo para flujo de estados jira
 
 2020-02-27 09:05: . ***
+2020-02-27 09:20: KE-51: faltan cambios de tla para facu
