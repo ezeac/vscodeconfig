@@ -390,3 +390,4 @@
 2020-02-27 15:36: PARZ-1: con mati viendo parz
 2020-02-27 15:51: COR-1: archivo de actualización automática
 2020-02-27 16:06: KE-26: ayudando a mauro y facu con el testing
+2020-02-27 16:28: COR-1: backup y revisión del archivo para importar.
