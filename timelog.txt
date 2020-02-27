@@ -388,3 +388,5 @@
 2020-02-27 15:14: PARZ-1: testing emails
 2020-02-27 15:35: KE-51: con mauro
 2020-02-27 15:36: PARZ-1: con mati viendo parz
+2020-02-27 15:51: COR-1: archivo de actualización automática
+2020-02-27 16:06: KE-26: ayudando a mauro y facu con el testing
