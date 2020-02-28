@@ -396,3 +396,4 @@
 2020-02-28 09:00: PARZ-1: deploy y merge stg
 2020-02-28 13:00: PARZ-503: preparando deploy, corrección checkout y pickit
 2020-02-28 13:51: Almuerzo: -
+2020-02-28 16:17: PARZ-503: preparando deploy, corrección checkout y pickit
