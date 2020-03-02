@@ -410,3 +410,4 @@
 2020-03-02 11:55: COR-1: importacion default value
 2020-03-02 12:04: TLA-1: facu css
 2020-03-02 12:25: PARZ-506: Error precio con descuento
+2020-03-02 12:34: TLA-1: Gestión
