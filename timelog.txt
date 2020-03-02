@@ -405,3 +405,4 @@
 2020-03-02 10:40: KE-26: Tareas semana
 2020-03-02 10:53: COR-1: Upload archivo error 413
 2020-03-02 10:56: KE-51: facu y mauro
+2020-03-02 11:16: COR-1: Upload archivo error 413, corrección de permisos ftp
