@@ -408,3 +408,4 @@
 2020-03-02 11:16: COR-1: Upload archivo error 413, corrección de permisos ftp
 2020-03-02 11:38: LMS-1: Merge, deploy y correccion stgC
 2020-03-02 11:55: COR-1: importacion default value
+2020-03-02 12:04: TLA-1: facu css
