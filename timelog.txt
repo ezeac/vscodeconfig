@@ -425,3 +425,4 @@
 2020-03-03 16:16: PARZ-1: Gestión. Reunión con mati
 2020-03-03 16:25: SUV-35: Deploy
 2020-03-03 16:47: KE-51: con mauro, facu y mati
+2020-03-03 17:57: SUV-35: Deploy
