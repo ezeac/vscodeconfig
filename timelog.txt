@@ -421,3 +421,4 @@
 2020-03-03 13:33: PARZ-1: Pedido envio manual
 2020-03-03 14:15: SOK-1: Gestión
 2020-03-03 14:39: AFIP carga de datos del alquiler
+2020-03-03 15:02: NA-301: Deploy PROD
