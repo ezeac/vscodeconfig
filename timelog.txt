@@ -422,3 +422,4 @@
 2020-03-03 14:15: SOK-1: Gestión
 2020-03-03 14:39: AFIP carga de datos del alquiler
 2020-03-03 15:02: NA-301: Deploy PROD
+2020-03-03 16:16: PARZ-1: Gestión. Reunión con mati
