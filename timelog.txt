@@ -430,3 +430,5 @@
 2020-03-03 19:00: PARZ-1: Gestión
 
 2020-03-04 09:00: . ***
+2020-03-04 09:31: PARZ-1: Reunión con Daniel Odoo
+2020-03-04 12:01: KE-51: con javi organizando flujo de tareas
