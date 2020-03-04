@@ -435,3 +435,4 @@
 2020-03-04 13:08: NA-302: Gestión
 2020-03-04 14:08: Almuerzo: -
 2020-03-04 16:38: NA-302: Gestión
+2020-03-04 17:05: PARZ-1: Revisión urgente. Se corrige el tax_class_id de productos viejos
