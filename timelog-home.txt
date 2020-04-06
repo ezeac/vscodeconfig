@@ -305,3 +305,11 @@
 2020-04-02 18:00: PARZ-1: deploy merge
 
 2020-04-03 08:23: . ***
+2020-04-03 10:30: AUD-1: instlación entorno local para félix
+2020-04-03 12:15: PARZ-1: revisando errores junto con mauro
+2020-04-03 12:30: BREM-1: revisando por qué no se pueden modificar los posts en bremen, revisando admin staging roto
+2020-04-03 13:30: PARZ-1: llamada con mati y mauro para ver error
+2020-04-03 14:10: Almuerzo: -
+2020-04-03 14:40: AUD-1: revisando entorno local de félix
+2020-04-03 14:50: KE-17: con mauro
+2020-04-03 17:00: PARZ-1: deploy stg, organizando tareas y trello
