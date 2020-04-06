@@ -313,3 +313,9 @@
 2020-04-03 14:40: AUD-1: revisando entorno local de félix
 2020-04-03 14:50: KE-17: con mauro
 2020-04-03 17:00: PARZ-1: deploy stg, organizando tareas y trello
+
+2020-04-06 08:27: . ***
+2020-04-06 09:20: KE-106: Cargando tiempos
+2020-04-06 10:02: LMS-1: Gestión, revisando deploy y merge pendientes. Reunión con
+2020-04-06 10:49: PARZ-1: Reunión con mati
+2020-04-06 11:28: LMS-1: reunión con mati, backup micheli, error sonido PC
