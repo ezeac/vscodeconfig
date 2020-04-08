@@ -334,3 +334,9 @@
 2020-04-08 10:00: KE-51: reunión diaria kudos
 2020-04-08 11:30: PARZ-1: Gestión, organizando proyeccción del mes
 2020-04-08 12:06: KE-106: Cargando tiempos
+2020-04-08 12:30: Descanso **
+2020-04-08 13:00: PARZ-572: nuevo entorno pre-producción
+2020-04-08 14:20: PARZ-1: reunión con mati
+2020-04-08 16:00: Descanso **
+2020-04-08 16:50: Descanso **
+2020-04-08 19:00: PARZ-1: pre producción
