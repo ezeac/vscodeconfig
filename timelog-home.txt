@@ -340,3 +340,6 @@
 2020-04-08 16:00: Descanso **
 2020-04-08 16:50: Descanso **
 2020-04-08 22:00: PARZ-1: pre producción
+
+2020-04-09 08:30: . ***
+2020-04-09 ?: PARZ-1: No se ven los sellers
