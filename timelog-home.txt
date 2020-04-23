@@ -343,3 +343,61 @@
 
 2020-04-09 08:30: . ***
 2020-04-09 ?: PARZ-1: No se ven los sellers
+
+2020-04-13 10:29: . ***
+2020-04-13 10:29: KE-17: reunión diaria
+2020-04-13 10:29: TL-1: corrigiendo entorno local felix
+
+2020-04-14 08:37: . ***
+2020-04-14 10:06: KE-17: reunión diaria
+2020-04-14 11:37: KE-51: reunión para ver la gestión de tareas
+2020-04-14 11:42: KE-51: corrección del instructivo en base a la reunión.
+2020-04-14 19:05: KE-51: corrección repositorios permisos
+
+2020-04-15 10:51: . ***
+2020-04-15 10:51: KE-17: reunión diaria
+2020-04-15 10:52: KE-17: con mati y facub para ver unas correcciones y organizar deploy
+2020-04-15 10:52: PARZ-567: testing
+2020-04-15 13:36: PARZ-567: testing error
+2020-04-15 13:37: PARZ-534: testing
+2020-04-15 14:09: PARZ-533 testing
+2020-04-15 15:29: Descanso **
+
+2020-04-16 09:31: . ***
+2020-04-16 09:31: AUD-1: corrección entorno carlos
+2020-04-16 10:12: KE-17: reunión diaria
+2020-04-16 10:48: AUD-1: corrección entorno carlos
+2020-04-16 13:53: Supermercado **
+2020-04-17 00:31: PARZ-1: error no aparecen met de pago en pwa (1hs), el resto trabajando en PARZ-583
+
+2020-04-17 09:02: . ***
+2020-04-17 13:30: PARZ-585: correcciones durante el deploy, implementación nuevo loader
+2020-04-17 13:56: Descanso **
+2020-04-17 16:26: PARZ-585: más correcciones de textos, subida del nuevo loader
+
+2020-04-20 08:42: . ***
+2020-04-20 09:30: AJ-1: con facu viendo repo antuan
+2020-04-20 10:00: KE-17: reunión diaria
+2020-04-20 16:40: PARZ-583: reemplazando slider filtro precios
+2020-04-20 20:30: PARZ-583: correcciones del deploy
+
+2020-04-21 09:12: . ***
+2020-04-21 11:28: PARZ-1: recuperando entorno magento viejo para mati
+2020-04-21 14:27: PARZ-583: correcciones filtro precios en listado sellers
+2020-04-21 15:15: PARZ-1: Testing, deploy a test
+
+2020-04-22 08:21: . ***
+2020-04-22 09:30: KE-106: Cargando tiempos
+2020-04-22 10:30: KE-17: reunión diaria
+2020-04-22 11:07: Descanso ***
+2020-04-22 11:25: PARZ-1: testing
+2020-04-22 11:25: PARZ-1: con mauro viendo entorno
+2020-04-22 12:10: KE-51: con mati
+2020-04-22 12:27: PARZ-1: viendo css con facu
+
+2020-04-23 09:05: . ***
+2020-04-23 10:07: PARZ.541: testing
+2020-04-23 10:08: KE-17: reunión diaria
+2020-04-23 10:44: TL-1: entorno local actualizando
+2020-04-23 12:05: TL-1: .
+2020-04-23 12:49: KE-51: con ine viendo nueva propuesta de parz
