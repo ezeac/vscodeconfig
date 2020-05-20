@@ -58,6 +58,14 @@
 ## ejecutar este archivo con: 
 ## sudo bash importador-entornosV2.sh 'source1.sh'
 
+    if [ "$EUID" -ne 0 ]
+        then
+        echo ""
+        echo "Ejecutar este script con sudo."
+        exit
+    fi
+
+
     source $1
     if [ "$project_zip" = "" ]
         then
