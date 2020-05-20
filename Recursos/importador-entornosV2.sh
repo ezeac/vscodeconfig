@@ -90,7 +90,6 @@
     if [ "$sync_repo" = "si" ]
     then
         git config core.filemode false &&
-        git status &&
         git checkout . &&
         git status
     fi
@@ -211,17 +210,11 @@ EOL
         echo ""
         echo "Corrigiendo dominio, emails de clientes y optimizando la bbdd de Magento..." &&
         sleep 2 &&
-        echo ""
         echo "update core_config_data set value = \"${platform_url}/\" where path like \"%base_url%\" or path like \"%base_link_url%\"" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
-        echo ""
         echo "update sales_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
-        echo ""
         echo "update sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
-        echo ""
         echo "update customer_entity set email = replace(email, \"@\", \"@testk\");" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
-        echo ""
         echo "update core_config_data set value = 0 where path like \"dev/static/sign\";" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
-        echo ""
         echo "update core_config_data set value = \"${platform_domain}\" where path like \"%cookie_domain%\";" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
 
         echo ""
@@ -275,7 +268,7 @@ EOL
             server {
                 listen 80;
                 root ${project_route}${project_subfolder};
-                index.php index.html index.htm;
+                index index.php index.html index.htm;
 
                 server_name ${platform_domain};
                 access_log /var/log/nginx/${platform_domain}_access.log;
@@ -302,8 +295,8 @@ EOL
                     access_log off;
                 }
 
-                if ($request_uri ~* "^(/media/catalog/|/media/tmp/)") {
-                    return 301 ${platform_old_url}$request_uri;
+                if (\$request_uri ~* "^(/media/catalog/|/media/tmp/)") {
+                    return 301 ${platform_old_url}\$request_uri;
                 }
 
                 location ~ .php/ { ## Forward paths like /js/index.php/x.js to relevant handler
@@ -456,8 +449,8 @@ EOL
                     }
                 }
 
-                if ($request_uri ~* "^(/pub/media/catalog/|/pub/media/tmp/)") {
-                    return 301 ${platform_old_url}$request_uri;
+                if (\$request_uri ~* "^(/pub/media/catalog/|/pub/media/tmp/)") {
+                    return 301 ${platform_old_url}\$request_uri;
                 }
 
                 location / {
