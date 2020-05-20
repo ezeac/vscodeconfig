@@ -563,6 +563,7 @@ EOL
 
     echo ""
     echo "Guardando coniguración nginx..." &&
+    rm /etc/nginx/sites-enabled/${platform_domain}.conf
     ln -s /etc/nginx/sites-available/${project_owner}/${platform_domain} /etc/nginx/sites-enabled/${platform_domain}.conf
     nginx -t && systemctl restart nginx
 
