@@ -2,6 +2,7 @@
 
 # if [ "$EUID" -ne 0 ]
 #     then
+#     echo ""
 #     echo "Ejecutar este script con sudo."
 #     exit
 # fi
@@ -54,12 +55,19 @@
 #     do
 
 ## Completar las variables en el archivo source1.sh y
-## ejecutar este archivo con: 'sudo bash importador-entornosV2.sh source1.sh'
+## ejecutar este archivo con: 
+## sudo bash importador-entornosV2.sh 'source1.sh'
 
     source $1
+    if [ "$project_zip" = "" ]
+        then
+        exit
+    fi
 
     # repeating process
+    echo ""
     echo "Comienza importación." &&
+    echo ""
     echo "Creando ruta e inicializando proyecto..." &&
     sleep 2 &&
     rm -rf $project_route
@@ -67,6 +75,7 @@
     cd $project_route
     if [ "$sync_repo" = "si" ]
         then
+        echo ""
         echo "Inicializando GIT..." &&
         git init &&
         git remote add origin $project_git &&
@@ -74,18 +83,24 @@
         git checkout staging
     fi
 
+    echo ""
     echo "Extrayendo archivos del zip..." &&
     sleep 2 &&
     unzip -qo $project_zip
     if [ "$sync_repo" = "si" ]
     then
         git config core.filemode false &&
+        git status &&
+        git checkout . &&
         git status
     fi
 
+    echo ""
     echo "Creando e importando base de datos ${project_bbdd}..." &&
     sleep 2 &&
+    echo ""
     echo "drop database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass 2> /dev/null
+    echo ""
     echo "create database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass 2> /dev/null
     if [ "$platform_wordpress" = "si" ]
         then
@@ -98,6 +113,7 @@
 
     if [ "$platform_wordpress" = "si" ]
         then
+        echo ""
         echo "Corrigiendo acceso a la base de datos..." &&
         mkdir -p /etc/nginx/sites-available/${project_owner}
         sleep 2 &&
@@ -183,6 +199,7 @@ EOL
             }
         }
 EOL
+        echo ""
         echo "Actualizando permisos de los archivos..."
         cd .${project_subfolder}
         chown -R ${project_owner}:www-data .
@@ -191,15 +208,23 @@ EOL
 
     if [ "$platform_magento" = "si" ]
         then
+        echo ""
         echo "Corrigiendo dominio, emails de clientes y optimizando la bbdd de Magento..." &&
         sleep 2 &&
+        echo ""
         echo "update core_config_data set value = \"${platform_url}/\" where path like \"%base_url%\" or path like \"%base_link_url%\"" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
+        echo ""
         echo "update sales_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
+        echo ""
         echo "update sales_flat_order set customer_email = replace(customer_email , \"@\", \"@testk\")" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
+        echo ""
         echo "update customer_entity set email = replace(email, \"@\", \"@testk\");" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
+        echo ""
         echo "update core_config_data set value = 0 where path like \"dev/static/sign\";" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
+        echo ""
         echo "update core_config_data set value = \"${platform_domain}\" where path like \"%cookie_domain%\";" | mysql -u $bbdd_user -p$bbdd_pass $project_bbdd 2> /dev/null
 
+        echo ""
         echo "Corrigiendo acceso a la base de datos..." &&
         mkdir -p /etc/nginx/sites-available/${project_owner}
         sleep 2 &&
@@ -301,6 +326,7 @@ EOL
                 }
             }
 EOL
+            echo ""
             echo "Actualizando permisos de los archivos..."
             cd .${project_subfolder}
             chown -R www-data:$project_owner . && chmod -R 777 var/
@@ -529,38 +555,50 @@ EOL
             }
 EOL
             cd .${project_subfolder}
+            #echo ""
             #echo "Actualizando composer..."
             # composer install --ignore-platform-reqs
+            echo ""
             echo "Realizando Deploy..."
             sh ./deploy-sample.sh
             sh ./deploy_sample.sh
+            echo ""
             echo "Actualizando permisos de los archivos..."
             chown -R $project_owner:www-data . && chmod -R 777 var/ generated/ pub/
         fi
     fi
 
+    echo ""
     echo "Guardando coniguración nginx..." &&
     ln -s /etc/nginx/sites-available/${project_owner}/${platform_domain} /etc/nginx/sites-enabled/${platform_domain}.conf
     nginx -t && systemctl restart nginx
 
+    echo ""
     echo "¡LISTO!"
+    echo ""
     echo "Se debe agregar el host \"192.168.0.37 ${platform_domain}\" a la pc local."
     # end repeating process
 
+    # echo ""
     # echo "Ingrese ruta a otro directorio para replicar la instalación o 'exit' para terminar (Anterior: \"$project_route\"):"
     # read project_route
     # if [ "$project_route" != "exit" ]
     # then
+    #     echo ""
     #     echo "Escribe el nombre de la base de datos (si existe se pisará, anterior: \"$project_bbdd\"):"
     #     read project_bbdd
+    #     echo ""
     #     echo "Escribe el nombre del nuevo usuario dueño del proyecto (Anterior: \"$project_owner\"):"
     #     read project_owner
+    #     echo ""
     #     echo "Escribe la NUEVA url completa del proyecto: (Anterior: \"$platform_url\"):"
     #     read platform_url
+    #     echo ""
     #     echo "Escribe dominio del proyecto: (Anterior: \"$platform_domain\":"
     #     read platform_domain
     # fi
 # done
 
+echo ""
 echo "Importador de proyectos por ezequiel para kudosestudio."
 exit
