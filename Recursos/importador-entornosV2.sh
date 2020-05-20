@@ -1,57 +1,62 @@
 # mysqldump --quick --single-transaction --lock-tables=false -u magento -pBBDD_password BBDD_name | gzip -9 > bbdd_backup.sql.gz && zip --exclude "*cache/*" --exclude "*.git/*" --exclude "*var/log/*" --exclude "*import/*" --exclude "*generated/*" --exclude "*pub/static/*" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup_$(date -I).sql.gz
 
-if [ "$EUID" -ne 0 ]
-    then
-    echo "Ejecutar este script con sudo."
-    exit
-fi
-echo 'Escribe la ruta absoluta en donde estarán los archivos del proyecto (el contenido de la carpeta se pisará):'
-read project_route
-echo 'Escribe la ruta absoluta al comprimido zip del proyecto:'
-read project_zip
-echo 'Escribe la subcarpeta donde se encuentra el proyecto (en caso que la plataforma se haya instalado en una subcarpeta dentro del repo). Ejemplo: ("/tiendalibero"):'
-read project_subfolder
-echo 'Escribe el nombre del nuevo usuario dueño del proyecto:'
-read project_owner
-echo '¿Realizar vinculación con repositorio? (si/no):'
-read sync_repo
-if [ "$sync_repo" = "si" ]
-    then
-    echo 'Escribe la url https del repositorio GIT (Ejemplo: "https://github.com/kudosestudio/nhautopiezas.git"):'
-    read project_git
-fi
-echo 'Escribe el nombre de la base de datos (si existe se pisará):'
-read project_bbdd
-echo 'Usuario de base de datos:'
-read bbdd_user
-echo 'Password de base de datos:'
-read bbdd_pass
-echo '¿El proyecto a importar es MAGENTO? (si/no):'
-read platform_magento
-if [ "$platform_magento" = "si" ]
-    then
-    echo 'Versión de magento (1/2):'
-    read magento_version
-fi
-if [ "$platform_magento" != "si" ]
-    then
-    echo '¿El proyecto a importar es WORDPRESS? (si/no):'
-    read platform_wordpress
-fi
-echo 'Escribe la url ORIGINAL completa del proyecto: (Ejemplo: "https://www.nhautopiezas.com.ar"):'
-read platform_old_url
+# if [ "$EUID" -ne 0 ]
+#     then
+#     echo "Ejecutar este script con sudo."
+#     exit
+# fi
+# echo 'Escribe la ruta absoluta en donde estarán los archivos del proyecto (el contenido de la carpeta se pisará):'
+# read project_route
+# echo 'Escribe la ruta absoluta al comprimido zip del proyecto:'
+# read project_zip
+# echo 'Escribe la subcarpeta donde se encuentra el proyecto (en caso que la plataforma se haya instalado en una subcarpeta dentro del repo). Ejemplo: ("/tiendalibero"):'
+# read project_subfolder
+# echo 'Escribe el nombre del nuevo usuario dueño del proyecto:'
+# read project_owner
+# echo '¿Realizar vinculación con repositorio? (si/no):'
+# read sync_repo
+# if [ "$sync_repo" = "si" ]
+#     then
+#     echo 'Escribe la url https del repositorio GIT (Ejemplo: "https://github.com/kudosestudio/nhautopiezas.git"):'
+#     read project_git
+# fi
+# echo 'Escribe el nombre de la base de datos (si existe se pisará):'
+# read project_bbdd
+# echo 'Usuario de base de datos:'
+# read bbdd_user
+# echo 'Password de base de datos:'
+# read bbdd_pass
+# echo '¿El proyecto a importar es MAGENTO? (si/no):'
+# read platform_magento
+# if [ "$platform_magento" = "si" ]
+#     then
+#     echo 'Versión de magento (1/2):'
+#     read magento_version
+# fi
+# if [ "$platform_magento" != "si" ]
+#     then
+#     echo '¿El proyecto a importar es WORDPRESS? (si/no):'
+#     read platform_wordpress
+# fi
+# echo 'Escribe la url ORIGINAL completa del proyecto: (Ejemplo: "https://www.nhautopiezas.com.ar"):'
+# read platform_old_url
 
-echo 'Escribe la NUEVA url completa del proyecto: (Ejemplo: "http://ezequiel.nhautopiezas.com.ar"):'
-read platform_url
-echo 'Escribe dominio del proyecto: (Ejemplo: "ezequiel.nhautopiezas.com.ar"):'
-read platform_domain
-echo 'Versión PHP del proyecto: (5.6/7.0/7.1/7.2):'
-read platform_php
-echo 'Ingrese el prefijo de las tablas (dejar vacío en caso que no corresponda):'
-read table_prefix
+# echo 'Escribe la NUEVA url completa del proyecto: (Ejemplo: "http://ezequiel.nhautopiezas.com.ar"):'
+# read platform_url
+# echo 'Escribe dominio del proyecto: (Ejemplo: "ezequiel.nhautopiezas.com.ar"):'
+# read platform_domain
+# echo 'Versión PHP del proyecto: (5.6/7.0/7.1/7.2):'
+# read platform_php
+# echo 'Ingrese el prefijo de las tablas (dejar vacío en caso que no corresponda):'
+# read table_prefix
 
-while [ "$project_route" != "exit" ]
-    do
+# while [ "$project_route" != "exit" ]
+#     do
+
+## Completar las variables en el archivo source1.sh y
+## ejecutar este archivo con: 'sudo bash importador-entornosV2.sh source1.sh'
+
+    source $1
 
     # repeating process
     echo "Comienza importación." &&
@@ -542,20 +547,20 @@ EOL
     echo "Se debe agregar el host \"192.168.0.37 ${platform_domain}\" a la pc local."
     # end repeating process
 
-    echo "Ingrese ruta a otro directorio para replicar la instalación o 'exit' para terminar (Anterior: \"$project_route\"):"
-    read project_route
-    if [ "$project_route" != "exit" ]
-    then
-        echo "Escribe el nombre de la base de datos (si existe se pisará, anterior: \"$project_bbdd\"):"
-        read project_bbdd
-        echo "Escribe el nombre del nuevo usuario dueño del proyecto (Anterior: \"$project_owner\"):"
-        read project_owner
-        echo "Escribe la NUEVA url completa del proyecto: (Anterior: \"$platform_url\"):"
-        read platform_url
-        echo "Escribe dominio del proyecto: (Anterior: \"$platform_domain\":"
-        read platform_domain
-    fi
-done
+    # echo "Ingrese ruta a otro directorio para replicar la instalación o 'exit' para terminar (Anterior: \"$project_route\"):"
+    # read project_route
+    # if [ "$project_route" != "exit" ]
+    # then
+    #     echo "Escribe el nombre de la base de datos (si existe se pisará, anterior: \"$project_bbdd\"):"
+    #     read project_bbdd
+    #     echo "Escribe el nombre del nuevo usuario dueño del proyecto (Anterior: \"$project_owner\"):"
+    #     read project_owner
+    #     echo "Escribe la NUEVA url completa del proyecto: (Anterior: \"$platform_url\"):"
+    #     read platform_url
+    #     echo "Escribe dominio del proyecto: (Anterior: \"$platform_domain\":"
+    #     read platform_domain
+    # fi
+# done
 
 echo "Importador de proyectos por ezequiel para kudosestudio."
 exit
