@@ -37,12 +37,10 @@ if [ "$platform_magento" != "si" ]
     then
     echo '¿El proyecto a importar es WORDPRESS? (si/no):'
     read platform_wordpress
-    if [ "$platform_wordpress" = "si" ]
-        then
-        echo 'Escribe la url ORIGINAL completa del proyecto: (Ejemplo: "https://www.nhautopiezas.com.ar"):'
-        read platform_old_url
-    fi
 fi
+echo 'Escribe la url ORIGINAL completa del proyecto: (Ejemplo: "https://www.nhautopiezas.com.ar"):'
+read platform_old_url
+
 echo 'Escribe la NUEVA url completa del proyecto: (Ejemplo: "http://ezequiel.nhautopiezas.com.ar"):'
 read platform_url
 echo 'Escribe dominio del proyecto: (Ejemplo: "ezequiel.nhautopiezas.com.ar"):'
@@ -182,7 +180,8 @@ EOL
 EOL
         echo "Actualizando permisos de los archivos..."
         cd .${project_subfolder}
-        chown -R $project_owner:www-data . && chmod -R 775 .
+        chown -R ${project_owner}:www-data .
+        chmod -R 775 .
     fi
 
     if [ "$platform_magento" = "si" ]
@@ -246,7 +245,7 @@ EOL
             server {
                 listen 80;
                 root ${project_route}${project_subfolder};
-                index index.php index.html index.htm;
+                index.php index.html index.htm;
 
                 server_name ${platform_domain};
                 access_log /var/log/nginx/${platform_domain}_access.log;
@@ -271,6 +270,10 @@ EOL
                     expires 365d;
                     log_not_found off;
                     access_log off;
+                }
+
+                if ($request_uri ~* "^(/media/catalog/|/media/tmp/)") {
+                    return 301 ${platform_old_url}$request_uri;
                 }
 
                 location ~ .php/ { ## Forward paths like /js/index.php/x.js to relevant handler
@@ -420,6 +423,10 @@ EOL
                     location ~ ^/update/pub/ {
                         add_header X-Frame-Options "SAMEORIGIN";
                     }
+                }
+
+                if ($request_uri ~* "^(/pub/media/catalog/|/pub/media/tmp/)") {
+                    return 301 ${platform_old_url}$request_uri;
                 }
 
                 location / {
