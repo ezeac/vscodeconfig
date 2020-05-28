@@ -578,7 +578,8 @@ EOL
     echo ""
     echo "¡LISTO!"
     echo ""
-    echo "Se debe agregar el host \"192.168.0.37 ${platform_domain}\" a la pc local."
+    IP=$(curl -s ipinfo.io/ip)
+    echo "Se debe agregar el host \"${IP} ${platform_domain}\" a la pc local."
     # end repeating process
 
     # echo ""
