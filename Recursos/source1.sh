@@ -18,7 +18,7 @@ platform_domain="ezequiel.casavargascordoba.com.ar"
 
 ## DATOS GENERALES DEL PROYECTO 
 
-# 'Escribe la ruta absoluta al comprimido zip del proyecto:'
+# 'Escribe la ruta absoluta al comprimido zip del proyecto:' (ejemplo de exportación: mysqldump --quick --single-transaction --lock-tables=false -u magento -pBBDD_password BBDD_name | gzip -9 > bbdd_backup.sql.gz && zip --exclude "*/cache/*" --exclude "*.git/*" --exclude "*var/log/*" --exclude "*import/*" --exclude "*generated/*" --exclude "*pub/static/*" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz)
 project_zip="/home/ezequiel/fullsite_backup_2020-05-19.zip"
 
 # 'Escribe la subcarpeta donde se encuentra el proyecto (en caso que la plataforma se haya instalado en una subcarpeta dentro del repo). Ejemplo: ("/tiendalibero"):'

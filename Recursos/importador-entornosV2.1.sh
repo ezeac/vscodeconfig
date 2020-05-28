@@ -1,4 +1,4 @@
-# mysqldump --quick --single-transaction --lock-tables=false -u magento -pBBDD_password BBDD_name | gzip -9 > bbdd_backup.sql.gz && zip --exclude "*cache/*" --exclude "*.git/*" --exclude "*var/log/*" --exclude "*import/*" --exclude "*generated/*" --exclude "*pub/static/*" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup_$(date -I).sql.gz
+# mysqldump --quick --single-transaction --lock-tables=false -u magento -pBBDD_password BBDD_name | gzip -9 > bbdd_backup.sql.gz && zip --exclude "*/cache/*" --exclude "*.git/*" --exclude "*var/log/*" --exclude "*import/*" --exclude "*generated/*" --exclude "*pub/static/*" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz
 
 # if [ "$EUID" -ne 0 ]
 #     then
