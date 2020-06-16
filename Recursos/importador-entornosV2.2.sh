@@ -330,7 +330,7 @@ EOL
             echo ""
             echo "Actualizando permisos de los archivos..."
             cd .${project_subfolder}
-            chown -R www-data:$project_owner . && chmod -R 777 var/
+            chown -R www-data:$project_owner . && chmod -R 775 . && chmod -R 777 var/
         fi
         if [ "$magento_version" = "2" ]
             then
