@@ -1,0 +1,19 @@
+sshparzprod
+cd /var/www/html/parz.com/http/
+mysqldump --quick --single-transaction --lock-tables=false -u parz_prod -p'}X12G^&Fe' -h parzdev.cj0eeto88czd.us-east-2.rds.amazonaws.com parz_prod | gzip -9 > bbdd_backup_$(date -I).sql.gz && zip --exclude "*cache/*" --exclude "*.git/*" --exclude "*var/log/*" --exclude "*import/*" --exclude "*generated/*" --exclude "*pub/static/*" -ru ../fullsite_parzprod_$(date -I).zip .
+exit
+sshparzstg
+cd /var/www/html/parz
+scp -i ~/key-parz centos@18.224.117.22:/var/www/html/parz.com/fullsite_parzprod_$(date -I).zip .
+unzip -p fullsite_parzprod_$(date -I).zip bbdd_backup_$(date -I).sql.gz > bbdd_backup_$(date -I).sql.gz
+
+echo "drop database parz; create database parz;" | mysql -uroot -pDevelopers2017 parz
+pv bbdd_backup_$(date -I).sql.gz | zcat | mysql -u root -pDevelopers2017 parz
+echo 'update core_config_data set value = "https://devm.parz.com/" where path like "%base_url%" or path like "%base_link_url%";' | mysql -u root -pDevelopers2017 parz
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@testk") where customer_email NOT LIKE "%kudosestudio.com%";' | mysql -u root -pDevelopers2017 parz
+echo 'update sales_flat_order set customer_email = replace(customer_email , "@", "@testk") where customer_email NOT LIKE "%kudosestudio.com%";' | mysql -u root -pDevelopers2017 parz
+echo 'update customer_entity set email = replace(email, "@", "@testk") where email NOT LIKE "%kudosestudio.com%";' | mysql -u root -pDevelopers2017 parz
+echo 'update core_config_data set value = "TEST-a1274c4a-c228-4809-bb34-317a9cd38d21" where path like "%payment_mercadopago_custom_checkout_public_key%"; update core_config_data set value = "TEST-1305636485428365-050718-901be2be3d7e2abbe2317d790b7b82e6-344615524" where path like "%payment_mercadopago_custom_checkout_access_token%";' | mysql -u root -pDevelopers2017 parz
+echo 'update core_config_data set value = "https://devm.parz.com/" where config_id in (143,144,145);' | mysql -u root -pDevelopers2017 parz
+cd /var/www/html/parz/parz_magento/ && rm -rf var/cache/*
+cd /var/www/html/parz/parz_pwa/magento1-vsbridge/node-app/src && bash reindex-sample.sh
