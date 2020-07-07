@@ -5,7 +5,7 @@ exit
 sshparzstg
 cd /var/www/html/parz
 scp -i ~/key-parz centos@18.224.117.22:/var/www/html/parz.com/fullsite_parzprod_$(date -I).zip .
-unzip -p fullsite_parzprod_$(date -I).zip bbdd_backup_$(date -I).sql.gz > bbdd_backup_$(date -I).sql.gz
+cd parz_magento && unzip ../fullsite_parzprod_$(date -I).zip
 
 echo "drop database parz; create database parz;" | mysql -uroot -pDevelopers2017 parz
 pv bbdd_backup_$(date -I).sql.gz | zcat | mysql -u root -pDevelopers2017 parz
