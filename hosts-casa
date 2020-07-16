@@ -1,0 +1,55 @@
+127.0.0.1	localhost
+127.0.0.1	localhost:8080
+127.0.1.1	ezequiel-HP-Pavilion-Notebook
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+181.31.149.18 localserver
+181.31.149.18 ezequiel.parz.com
+181.31.149.18 ezequiel.parzpwa.com
+181.31.149.18 ezequiel.suviex.com
+181.31.149.18 joaquinc.suviex.com
+181.31.149.18 facundo.suviex.com
+181.31.149.18 facundob.suviex.com
+181.31.149.18 carlos.suviex.com
+181.31.149.18 ezequiel.brementools.com
+181.31.149.18 ezequiel.nexand.com
+181.31.149.18 facundo.nexand.com.ar
+181.31.149.18 ezequiel.tiendalibero.com.ar
+181.31.149.18 joaquinc.tiendalibero.com.ar
+181.31.149.18 facundo.corpoint.com.ar
+181.31.149.18 felix.parz.com
+181.31.149.18 felix.parzpwa.com
+181.31.149.18 felix.elauditor.com.ar
+181.31.149.18 felix.empresas.elauditor.com.ar
+181.31.149.18 felix.tiendalibero.com.ar
+181.31.149.18 facundob.parz.com
+181.31.149.18 facundob.parzpwa.com
+181.31.149.18 facundo.providus.com.ar
+181.31.149.18 carlos.elauditor.com.ar
+181.31.149.18 mauro.parzpwa.com
+181.31.149.18 mauro.parz.com
+181.31.149.18 mauro.nexand.com.ar
+181.31.149.18 german.micheli.com.ar
+74.222.3.233 test.parz.com
+74.222.3.233 testm.parz.com
+74.222.3.233 dev.corpoint.com.ar
+
+74.222.3.230 www.corpoint.com.ar
+74.222.3.230 corpoint.com.ar
+74.222.3.250 dev.luismicheli.com
+74.222.3.250 dev.luismicheli2.com
+74.222.3.73 espaciocasavargas.com.ar
+74.222.3.73 dev.espaciocasavargas.com.ar
+181.31.149.18 facundo.espaciocasavargas.com.ar
+181.31.149.18 joaquinc.tiendalosangeles.com.ar
+181.31.149.18 facundo.casavargascordoba.com.ar
+181.31.149.18 facundob.casavargascordoba.com.ar
+181.31.149.18 ezequiel.casavargascordoba.com.ar
+74.222.3.233 ecosistemasm.parz.com
+74.222.3.233 ecosistemas.parz.com
