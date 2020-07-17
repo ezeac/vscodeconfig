@@ -1,0 +1,114 @@
+127.0.0.1	localhost
+127.0.1.1	ezequiel-Inspiron-5570
+
+# The following lines are desirable for IPv6 capable hosts
+::1     ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+
+#Servidorlocal
+192.168.0.37    localserver
+192.168.0.37	localserver.kudos-server.com
+192.168.0.37    localserver.vue.com
+192.168.0.37    localserver.tiendalibero.com.ar
+192.168.0.37    localserver.magento2.com
+192.168.0.37    localserver.perfumeriaspigmento.com.ar
+192.168.0.37    localserver.casavargascordoba.com.ar
+192.168.0.37 facundo.espaciocasavargas.com.ar
+192.168.0.37 facundob.espaciocasavargas.com.ar
+192.168.0.37    localserver.nexand.com
+192.168.0.37    localserver.nhautopiezas.com.ar
+192.168.0.37    localserver.raceparts.com.ar
+192.168.0.37    localserver.kraftec.raceparts.com.ar
+192.168.0.37    localserver.dirt.raceparts.com.ar
+192.168.0.37    localserver.modax.com.ar
+192.168.0.37    localserver.tiendalosangeles.com.ar
+192.168.0.37    localserver.fiorani.com.ar
+192.168.0.37    localserver.tiendalosangeles_update2.com.ar
+192.168.0.37    localserver.update-tiendalosangeles.com.ar
+192.168.0.37    localserver.parz1.9.4.com
+192.168.0.37    localserver.suviex.com
+192.168.0.37    localserver.providus.com.ar
+192.168.0.37    doc.kudos-server.com.ar
+192.168.0.37	localserver.corpoint.com.ar
+192.168.0.37 develop.micheli.com.ar
+3.128.210.181 dev.luismicheli.com
+
+74.222.3.233 ecosistemasm.parz.com
+74.222.3.233 ecosistemas.parz.com
+
+
+#Servidor local ezequiel
+192.168.0.37    ezequiel.modax.com.ar
+192.168.0.37    ezequiel.perfumeriaspigmento.com.ar
+192.168.0.37    ezequiel.tiendalibero.com.ar
+192.168.0.37    ezequiel.nhautopiezas.com.ar
+192.168.0.37    ezequiel.tiendalosangeles.com.ar
+192.168.0.37    ezequiel.parz.com
+192.168.0.37    ezequiel.nexand.com
+192.168.0.37    ezequiel.parzpwa.com
+192.168.0.37    ezequiel.hotstocks.com.ar
+192.168.0.37 ezequiel.suviex.com
+192.168.0.37	ezequiel.providus.com.ar
+#181.31.152.88   ezequiel.parzpwa.com
+192.168.0.37	ezequiel.corpoint.com.ar
+192.168.0.37 	ezequiel.brementools.com
+192.168.0.37 	ezequiel.micheli.com.ar
+
+#felix
+192.168.0.37    felix.nexand.com.ar
+192.168.0.37    felix.parz.com
+192.168.0.37    felix.parzpwa.com
+192.168.0.37    felix_parzpwa
+192.168.0.37 felix.tiendalosangeles.com.ar
+192.168.0.37	felix.tiendalibero.com.ar
+192.168.0.37	felix.suviex.com
+192.168.0.37	felix.nhautopiezas.com.ar
+192.168.0.37	felix.zeusvtex.com
+192.168.0.37 felix.brementools.com
+192.168.0.37 felix.suviex.com
+192.168.0.37 felix.corpoint.com.ar
+
+
+#carlos
+192.168.0.37    carlos.parz.com
+192.168.0.37    carlos.parzpwa.com
+192.168.0.37    carlos.providus.com.ar
+192.168.0.37 carlos.micheli.com.ar
+192.168.0.37 carlos.suviex.com
+192.168.0.37 carlos.tiendalosangeles.com.ar
+
+#facundo
+192.168.0.37    facundo.casavargascordoba.com.ar
+192.168.0.37 facundo.suviex.com
+192.168.0.37 facundo.tiendalosangeles.com.ar
+192.168.0.37    facundo.tiendalibero.com.ar
+192.168.0.37    facundo.viditec.com
+192.168.0.37	facundo.providus.com.ar
+192.168.0.37 facundo.corpoint.com.ar
+192.168.0.37	facundo.brementools.com
+192.168.0.37	facundo.micheli.com.ar
+192.168.0.37 	facundo.brementools.com
+192.168.0.37 	facundo.nexand.com.ar
+
+#mauro
+192.168.0.37	mauro.parz.com
+192.168.0.37	mauro.parzpwa.com
+
+#javier
+192.168.0.37    javier.suviex.com
+192.168.0.37    javier.tiendalosangeles.com.ar
+192.168.0.37    jrios.nexand.com.ar
+192.168.0.37    javier.biosalud.com.ar
+
+#facundob
+192.168.0.37	facundob.parz.com
+192.168.0.37	facundob.parzpwa.com
+192.168.0.37    facundob.micheli.com.ar
+
+18.229.76.252	viditec.com
+#18.188.23.25  	dev.brementools.com
+
+3.14.70.133 .local
