@@ -228,7 +228,7 @@ alias sshtucamaraprod='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamar
 #ssh tiendalosangeles
 alias sshtiendalosangelesprod='echo "ssh tiendalosangeles prod" && ssh -p32241 kudos@74.222.3.71'
 alias sshtiendalosangelesstg='echo "ssh tiendalosangeles stg" && ssh -p32241 kudos@74.222.3.233'
-alias sshtiendalosangeleprodamazon='echo "ssh tiendalosangeles prod amazon" && ssh -p32241 -i ~/kudos-template-basic.pem ubuntu@ec2-3-22-28-65.us-east-2.compute.amazonaws.com'
+alias sshtiendalosangelesprodamazon='echo "ssh tiendalosangeles prod amazon" && ssh -p32241 -i ~/kudos-template-basic.pem ubuntu@ec2-3-22-28-65.us-east-2.compute.amazonaws.com'
 #ssh suviex
 alias sshsuviex='echo "ssh suviex prod/stg, pass feL6mrRa" && ssh root@149.56.13.59'
 #ssh viditec
