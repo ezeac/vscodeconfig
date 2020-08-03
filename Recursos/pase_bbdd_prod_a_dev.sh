@@ -32,10 +32,10 @@ ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value =
 ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value = "https://devm.parz.com/skin/" where path like "web_secure_base_skin_url" or path like "web_unsecure_base_skin_url";'"'"' | mysql -u root -pDevelopers2017 parz'
 ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value = "https://devm.parz.com/media/" where path like "web_secure_base_media_url" or path like "web_unsecure_base_media_url";'"'"' | mysql -u root -pDevelopers2017 parz'
 ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value = "https://devm.parz.com/js/" where path like "web_secure_base_js_url" or path like "web_unsecure_base_js_url";'"'"' | mysql -u root -pDevelopers2017 parz'
-ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value = "https://devm.parz.com/" where path like "web_cookie_cookie_domain" or path like "web_cookie_cookie_path";'"'"' | mysql -u root -pDevelopers2017 parz'
+ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value = NULL where path like "web_cookie_cookie_domain" or path like "web_cookie_cookie_path";'"'"' | mysql -u root -pDevelopers2017 parz'
 ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value = "https://dev.parz.com/" where path like "kudos_pwassets_general_base_url";'"'"' | mysql -u root -pDevelopers2017 parz'
 ssh -t -p32241 kudos@74.222.3.233 'echo '"'"'update core_config_data set value = "AIzaSyBAWKJDrFcLBDn9HqYs35fbXDHLB4fKeQ4" where path like "kudos_pwassets_general_gapi_geoloc_key" or path like "kudos_pwassets_general_gapi_geocod_key";'"'"' | mysql -u root -pDevelopers2017 parz'
 
 
-ssh -t -p32241 kudos@74.222.3.233 'cd /var/www/html/parz/parz_magento/ && rm -rf var/cache/*'
+ssh -t -p32241 kudos@74.222.3.233 'cd /var/www/html/parz/parz_magento/ && rm -rf var/cache/* && rm -rf var/session/*'
 ssh -t -p32241 kudos@74.222.3.233 'cd /var/www/html/parz/parz_pwa/magento1-vsbridge/node-app/src && bash reindex-sample.sh'
