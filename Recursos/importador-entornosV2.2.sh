@@ -1,4 +1,4 @@
-# mysqldump --quick --single-transaction --lock-tables=false -u magento -pBBDD_password BBDD_name | gzip -9 > bbdd_backup.sql.gz && zip --exclude "*/cache/*" --exclude "*.git/*" --exclude "*var/log/*" --exclude "*import/*" --exclude "*generated/*" --exclude "*pub/static/*" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz
+# mysqldump --quick --single-transaction --lock-tables=false -u develop -pDevelopers2017 carlos_elauditor | gzip -9 > bbdd_backup.sql.gz && zip --exclude "*/cache/*" --exclude "*.git/*" --exclude "*var/log/*" --exclude "*import/*" --exclude "*generated/*" --exclude "*pub/static/*" -ru ../elauditorm2_backup_$(date -I).zip . && rm bbdd_backup.sql.gz
 
 # if [ "$EUID" -ne 0 ]
 #     then
@@ -106,9 +106,9 @@
     echo "Creando e importando base de datos ${project_bbdd}..." &&
     sleep 2 &&
     echo ""
-    echo "drop database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass 2> /dev/null
+    echo "drop database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass
     echo ""
-    echo "create database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass 2> /dev/null
+    echo "create database $project_bbdd" | mysql -u $bbdd_user -p$bbdd_pass
     if [ "$platform_wordpress" = "si" ]
         then
         gunzip bbdd_backup.sql.gz &&
