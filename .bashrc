@@ -194,6 +194,7 @@ alias sshlabaliza='echo "ssh labaliza prod" && ssh -p32241 kudos@74.222.3.235'
 alias sshnhautopiezas='echo "ssh nhautopiezas prod" && ssh -p32241 kudos@74.222.3.74'
 #ssh elauditor
 alias sshelauditor='echo "ssh elauditor prod" && ssh -p32241 kudos@74.222.3.76'
+alias sshelauditorstg='echo "ssh elauditor stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh biosalud
 alias sshbiosalud='echo "ssh biosalud prod" && ssh -p32241 kudos@74.222.3.78'
 #ssh raceparts
