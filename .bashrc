@@ -218,8 +218,8 @@ alias sshpigmentostaging='echo "ssh pigmento staging" && ssh -i ~/pigmento_key_s
 alias sshmodaxprod='echo "ssh modax prod" && echo "pass: M4g3nt02017" && ssh root@modax.com.ar'
 alias sshmodaxstaging='echo "ssh modax staging" && echo "pass: M4g3nt02017" && ssh root@magtest.modax.com.ar'
 #ssh parz
-alias sshparzprod='echo "ssh parz prod" && ssh -i ~/key-parz centos@18.224.117.22'
-alias sshparzprodpwa='echo "ssh parzpwa prod 2" && ssh -i ~/key-parz centos@3.133.11.251'
+alias sshparzprod='echo "ssh parz prod" && ssh -i ~/parz-new.pem centos@18.224.117.22'
+alias sshparzprodpwa='echo "ssh parzpwa prod 2" && ssh -i ~/parz-new.pem centos@3.133.11.251'
 alias sshparzstg='echo "ssh parz stg" && ssh -p32241 kudos@74.222.3.233'
 alias sshparzodoostg='echo "ssh parz odoo stg. Pass mSkUw24W" && ssh root@144.217.160.80'
 #ssh fiorani
