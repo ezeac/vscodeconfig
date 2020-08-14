@@ -239,7 +239,7 @@ alias sshprovidusprod='echo "ssh providus prod - Cl4v3pr3st4d4" && ssh -p2222 pr
 #ssh bremen
 alias sshbremenprod='echo ssh bremen prod && ssh -i bremen.pem -p32241 ubuntu@ec2-18-216-124-134.us-east-2.compute.amazonaws.com'
 alias sshbremenstg='echo ssh bremen stg && ssh -i bremen-dev.pem -p32241 ubuntu@3.136.150.25'
-alias sshbremensapprod='echo ssh bremen sap prod && ssh -i bremen-dev.pem ubuntu@ec2-3-18-125-225.us-east-2.compute.amazonaws.com -p32241'
-alias sshbremensapstg='echo ssh bremen sap stg && ssh -i bremen-dev.pem ubuntu@ec2-3-134-181-215.us-east-2.compute.amazonaws.com -p32241'
+alias sshbremensapprod='echo ssh bremen sap prod && ssh -i bremen-sap-prod.pem ubuntu@ec2-3-18-125-225.us-east-2.compute.amazonaws.com -p32241'
+alias sshbremensapstg='echo ssh bremen sap stg && ssh -i  bremen-sap-dev.pem ubuntu@ec2-3-134-181-215.us-east-2.compute.amazonaws.com -p32241'
 #ssh bremen
 alias sshmicheliprod='echo "ssh micheli prod" && ssh -p32241 kudos@74.222.3.250'
