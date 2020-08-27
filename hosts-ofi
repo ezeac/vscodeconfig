@@ -58,6 +58,7 @@ ff02::2 ip6-allrouters
 192.168.0.37 	ezequiel.brementools.com
 192.168.0.37 	ezequiel.micheli.com.ar
 74.222.3.233 dev.elauditor.com.ar
+192.168.0.37 carlos.elauditor.com.ar
 
 #felix
 192.168.0.37    felix.nexand.com.ar
