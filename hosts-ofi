@@ -18,7 +18,7 @@ ff02::2 ip6-allrouters
 192.168.0.37    localserver.casavargascordoba.com.ar
 192.168.0.37 facundo.espaciocasavargas.com.ar
 192.168.0.37 facundob.espaciocasavargas.com.ar
-172.67.215.245 dev.espaciocasavargas.com.ar
+74.222.3.73 dev.espaciocasavargas.com.ar
 192.168.0.37    localserver.nexand.com
 192.168.0.37    localserver.nhautopiezas.com.ar
 192.168.0.37    localserver.raceparts.com.ar
