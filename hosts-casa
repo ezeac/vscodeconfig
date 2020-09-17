@@ -32,13 +32,17 @@ ff02::2 ip6-allrouters
 181.31.149.18 facundob.parzpwa.com
 181.31.149.18 facundo.providus.com.ar
 181.31.149.18 carlos.elauditor.com.ar
+74.222.3.233 dev.elauditor.com.ar
 181.31.149.18 mauro.parzpwa.com
 181.31.149.18 mauro.parz.com
 181.31.149.18 mauro.nexand.com.ar
 181.31.149.18 german.micheli.com.ar
+3.128.210.181 dev.luismicheli.com
 74.222.3.233 test.parz.com
 74.222.3.233 testm.parz.com
 74.222.3.233 dev.corpoint.com.ar
+
+181.31.149.18 docs.kudosestudio.com.ar
 
 74.222.3.230 www.corpoint.com.ar
 74.222.3.230 corpoint.com.ar

@@ -203,7 +203,7 @@ alias sshraceparts='echo "ssh raceparts prod" && ssh -p32241 kudos@74.222.3.79'
 alias sshcorpointprod='echo "ssh corpoint prod" && ssh -p32241 kudos@74.222.3.230'
 alias sshcorpointstg='echo "ssh corpoint stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh nexand
-alias sshnexandprod='echo "ssh nexand prod" && ssh -p32241 kudos@74.222.3.232'
+alias sshnexandprod='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-23-189-123.us-east-2.compute.amazonaws.com -p32241'
 alias sshnexandstg='echo "ssh nexand stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh parallel
 alias sshparallel='echo "ssh parallel prod" && ssh -p32241 kudos@74.222.3.231'
@@ -241,5 +241,5 @@ alias sshbremenprod='echo ssh bremen prod && ssh -i bremen.pem -p32241 ubuntu@ec
 alias sshbremenstg='echo ssh bremen stg && ssh -i bremen-dev.pem -p32241 ubuntu@3.136.150.25'
 alias sshbremensapprod='echo ssh bremen sap prod && ssh -i bremen-sap-prod.pem ubuntu@ec2-3-18-125-225.us-east-2.compute.amazonaws.com -p32241'
 alias sshbremensapstg='echo ssh bremen sap stg && ssh -i  bremen-sap-dev.pem ubuntu@ec2-3-134-181-215.us-east-2.compute.amazonaws.com -p32241'
-#ssh bremen
-alias sshmicheliprod='echo "ssh micheli prod" && ssh -p32241 kudos@74.222.3.250'
+#alias sshmicheliprod='echo "ssh micheli prod" && ssh -p32241 kudos@74.222.3.250'
+alias sshmicheliprod='ssh -i ~/micheli.pem ubuntu@ec2-3-128-210-181.us-east-2.compute.amazonaws.com'
