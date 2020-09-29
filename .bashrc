@@ -170,7 +170,7 @@ alias sshjesusmaria='echo "ssh jesusmaria grupotakuara1421" && ssh root@31.220.5
 #ssh kudos
 alias sshkudos='echo "ssh kudos prod amazon" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-134-112-41.us-east-2.compute.amazonaws.com -p32241'
 #ssh tiendalibero
-alias sshtiendalibero='echo "ssh tiendalibero prod" && ssh -p32241 kudos@74.222.3.72'
+alias sshtiendaliberoprod='echo "ssh tiendalibero prod" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-52-15-58-213.us-east-2.compute.amazonaws.com -p32241'
 alias sshtiendaliberostg='echo "ssh tiendalibero stg" && ssh -p32241 kudos@74.222.3.233'
 #ssh casavargas
 alias sshcasavargas='echo "ssh casavargas prod" && ssh kudos@74.222.3.73 -p32241'
