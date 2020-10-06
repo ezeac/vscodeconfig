@@ -1,0 +1,45 @@
+Puntos a revisar en una API para integración
+
+¿Existe consulta de artículos?
+
+¿La consulta de artículos permite filtrar por fecha de modificación?
+
+¿Existe distinción en la respuesta para artículos activos/inactivos?
+
+¿Existen datos de dimensiones y peso para la logística?
+
+¿Existen descripciones y categorías x artículo?
+
+¿Existe consulta para obtener marcas x artículo?
+
+¿Existe consulta para obtener listado de las variantes y sus posibles valores?
+
+¿Existe consulta de stock?
+
+¿La consulta de stock permite filtrar por fecha de modificación?
+
+¿Existe consulta para categorías y sub-categorías?
+
+¿Es necesario un mapeo de categorías?
+
+Si manejan distintos depósitos. ¿Existe consulta de depósitos?
+
+¿Se puede consultar stock x depósito x producto o remanente filtrando por fecha de modificación?
+
+¿Existe consulta de precios?
+
+¿Existe información sobre precio de oferta o manejo de posibles descuentos?
+
+¿Manejan precios o descuento por cliente/grupo de clientes?
+
+¿Existe consulta para obtener imágenes x artículo?
+
+¿Existe consulta para obtener información sobre puntos de retiro?
+
+¿Existe información de lat/long para ubicación y horarios de los puntos de retiro?
+
+¿Existe un campo que indique si un punto de retiro está activo o no?
+
+¿Existe consulta para enviar pedidos?
+
+¿Existe url de notificación o consulta de actualización de pedidos?
