@@ -15,6 +15,12 @@ No
 ¿Existen descripciones y categorías x artículo?
 Existe descripción. No se encuentra categorías
 
+¿Existe consulta para categorías y sub-categorías?
+Existe consulta de listado de "carpetas" y de "total de artículos en x carpeta" pero no incluye datos de la carpeta en consulta de artículos.
+
+¿Es necesario un mapeo de categorías?
+No hay datos de categoría en el artículo. No se pudieron realizar pruebas para revisar el árbol de categorías.
+
 ¿Existen marcas x artículo?
 No
 
@@ -26,12 +32,6 @@ Sí. https://tiendas.axoft.com/api/Aperture/Stock?pageSize=500&pageNumber=1&last
 
 Si manejan distintos depósitos. ¿Existe consulta de depósitos? ¿Se puede consultar stock x depósito x producto o remanente filtrando por fecha de modificación?
 No aplica.
-
-¿Existe consulta para categorías y sub-categorías?
-Existe consulta de listado de "carpetas" y de "total de artículos en x carpeta" pero no incluye datos de la carpeta en consulta de artículos.
-
-¿Es necesario un mapeo de categorías?
-No hay datos de categoría en el artículo. No se pudieron realizar pruebas para revisar el árbol de categorías.
 
 ¿Existe consulta de precios? ¿Permite filtrar por fecha de modificación?
 Sí https://tiendas.axoft.com/api/Aperture/Price?pageSize=500&pageNumber=1&lastUpdate=2020-01-01T00:00:00
