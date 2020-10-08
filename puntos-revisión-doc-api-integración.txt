@@ -1,45 +1,62 @@
 Puntos a revisar en una API para integración
 
 ¿Existe consulta de artículos?
+Sí
 
 ¿La consulta de artículos permite filtrar por fecha de modificación?
+No especifica. Se podría probar usando '&lastUpdate=2020-01-01T00:00:00'
 
 ¿Existe distinción en la respuesta para artículos activos/inactivos?
+Sí
 
 ¿Existen datos de dimensiones y peso para la logística?
+No
 
 ¿Existen descripciones y categorías x artículo?
+Existe descripción. No se encuentra categorías
 
-¿Existe consulta para obtener marcas x artículo?
+¿Existen marcas x artículo?
+No
 
-¿Existe consulta para obtener listado de las variantes y sus posibles valores?
+¿Existen listado de las variantes y sus posibles valores?
+Sí. Sólo trae ¿qty? y código para las variantes ('composition'). Es necesario realizar pruebas.
 
-¿Existe consulta de stock?
+¿Existe consulta de stock? ¿Permite filtrar por fecha de modificación?
+Sí. https://tiendas.axoft.com/api/Aperture/Stock?pageSize=500&pageNumber=1&lastUpdate=2020-01-01T00:00:00&groupByProduct=true
 
-¿La consulta de stock permite filtrar por fecha de modificación?
+Si manejan distintos depósitos. ¿Existe consulta de depósitos? ¿Se puede consultar stock x depósito x producto o remanente filtrando por fecha de modificación?
+No aplica.
 
 ¿Existe consulta para categorías y sub-categorías?
+Existe consulta de listado de "carpetas" y de "total de artículos en x carpeta" pero no incluye datos de la carpeta en consulta de artículos.
 
 ¿Es necesario un mapeo de categorías?
+No hay datos de categoría en el artículo. No se pudieron realizar pruebas para revisar el árbol de categorías.
 
-Si manejan distintos depósitos. ¿Existe consulta de depósitos?
-
-¿Se puede consultar stock x depósito x producto o remanente filtrando por fecha de modificación?
-
-¿Existe consulta de precios?
+¿Existe consulta de precios? ¿Permite filtrar por fecha de modificación?
+Sí https://tiendas.axoft.com/api/Aperture/Price?pageSize=500&pageNumber=1&lastUpdate=2020-01-01T00:00:00
 
 ¿Existe información sobre precio de oferta o manejo de posibles descuentos?
+No. Sólo por clientes
 
 ¿Manejan precios o descuento por cliente/grupo de clientes?
+Sí, por cliente https://tiendas.axoft.com/api/Aperture/DiscountByCustomer?pageSize=500&pageNumber=1&filter=CL00028&SKUCode=01
+No se incluye en la consulta de precio ni tiene filtro por fecha de modificación.
 
 ¿Existe consulta para obtener imágenes x artículo?
+No.
 
 ¿Existe consulta para obtener información sobre puntos de retiro?
+No aplica.
 
 ¿Existe información de lat/long para ubicación y horarios de los puntos de retiro?
+No aplica.
 
 ¿Existe un campo que indique si un punto de retiro está activo o no?
+No aplica.
 
 ¿Existe consulta para enviar pedidos?
+Sí
 
 ¿Existe url de notificación o consulta de actualización de pedidos?
+Sí. Falta documentación sobre esto.
