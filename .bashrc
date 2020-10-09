@@ -243,3 +243,5 @@ alias sshbremensapprod='echo ssh bremen sap prod && ssh -i bremen-sap-prod.pem u
 alias sshbremensapstg='echo ssh bremen sap stg && ssh -i  bremen-sap-dev.pem ubuntu@ec2-3-134-181-215.us-east-2.compute.amazonaws.com -p32241'
 #alias sshmicheliprod='echo "ssh micheli prod" && ssh -p32241 kudos@74.222.3.250'
 alias sshmicheliprod='ssh -i ~/micheli.pem ubuntu@ec2-3-128-210-181.us-east-2.compute.amazonaws.com'
+alias sshintegrations='echo "ssh servidor integraciones (ex74)" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-191-82-48.us-east-2.compute.amazonaws.com -p32241'
+alias sshbelgranoprod='echo "ssh belgrano prod" && ssh -i belgrano.pem hrattis@35.245.229.235'
