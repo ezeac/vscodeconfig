@@ -247,7 +247,13 @@
 	},
 	"forzar_emails_en_pantalla_magento": {
 		"prefix": "forzar_emails_en_pantalla_magento",
-		"body": "Cómo previsualizar los emails en magento 2:\r\nModificar la función 'prepareMessage' del archivo 'vendor/magento/framework/Mail/Template/TransportBuilder.php'. Agregar antes del return:\r\n\$myfile = fopen('../var/log/email' . time() . '.html', 'w+') or die('Unable to open file!');\r\nfwrite(\$myfile, \$body); fclose(\$myfile);\r\necho \$body; exit;\r\n",
+		"body": "Cómo previsualizar los emails en magento 2:\nModificar la función 'prepareMessage' del archivo 'vendor//magento//framework//Mail//Template//TransportBuilder.php'. Agregar antes del return:\n\\$myfile = fopen('..//var//log//email' . time() . '.html', 'w+') or die('Unable to open file!');\nfwrite(\\$myfile, \\$body); fclose(\\$myfile);\necho \\$body; exit;\n",
+		"description": "",
+		"scope": ""
+	},
+	"http_laravel_guzzle_curl_php": {
+		"prefix": "http_laravel_guzzle_curl_php",
+		"body": "use Illuminate\\Support\\Facades\\Http;\n\nHttp::timeout(config('app.http_timeout'))\n    ->withHeaders([\n        'X-VTEX-API-AppKey'   => config('app.vtex_user'),\n        'X-VTEX-API-AppToken' => config('app.vtex_token'),\n        'Accept' => \\$version == 1\n            ? 'application/vnd.vtex.ds.v10+json'\n            : 'application/vnd.vtex.pricing.v3+json'\n        ,\n    ])\n    ->retry(\n        config('app.retry_times'),\n        config('app.retry_sleep')\n    )\n    ->\\$method(\n        VTex::createURL(\\$version) . \\$endpoint,\n        \\$data === null ? [] : json_decode(\\$data, true)\n    )\n    ->throw()\n    ->json()\n",
 		"description": "",
 		"scope": ""
 	}
