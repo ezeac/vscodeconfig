@@ -162,86 +162,21 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 export PATH="$PATH:/opt/mssql-tools/bin"
 
-#SSH PERSONAL
-#jesusmaria
-alias sshjesusmaria='echo "ssh jesusmaria grupotakuara1421" && ssh root@31.220.52.248'
-
 #SSH NUEVO SERVER KUDOS
-#ssh kudos
-alias sshkudos='echo "ssh kudos prod amazon" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-134-112-41.us-east-2.compute.amazonaws.com -p32241'
 #ssh tiendalibero
-alias sshtiendaliberoprod='echo "ssh tiendalibero prod" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-52-15-58-213.us-east-2.compute.amazonaws.com -p32241'
-alias sshtiendaliberostg='echo "ssh tiendalibero stg" && ssh -p32241 kudos@74.222.3.233'
-#ssh casavargas
-alias sshcasavargas='echo "ssh casavargas prod" && ssh kudos@74.222.3.73 -p32241'
-#ssh castagno
-alias sshcastagno='echo "ssh castagno prod" && ssh kudos@74.222.3.75 -p32241'
-#ssh kimuan
-alias sshkimuan='echo "ssh kimuan prod" && ssh kudos@74.222.3.77 -p32241'
-#ssh puertosale
-alias sshpuertosale='echo "ssh puertosale prod" && ssh -p32241 kudos@74.222.3.235'
-#ssh blumimax
-alias sshblumimax='echo "ssh blumimax prod" && ssh -p32241 kudos@74.222.3.235'
-#ssh temuco
-alias sshtemuco='echo "ssh temuco prod" && ssh -p32241 kudos@74.222.3.235'
-#ssh servimaq
-alias sshservimaq='echo "ssh servimaq prod" && ssh -p32241 kudos@74.222.3.235'
-#ssh casamanrique
-alias sshcasamanrique='echo "ssh casamanrique prod" && ssh -p32241 kudos@74.222.3.235'
-#ssh labaliza
-alias sshlabaliza='echo "ssh labaliza prod" && ssh -p32241 kudos@74.222.3.235'
-#ssh nhautopiezas
-alias sshnhautopiezas='echo "ssh nhautopiezas prod" && ssh -p32241 kudos@74.222.3.74'
-#ssh elauditor
-alias sshelauditor='echo "ssh elauditor prod" && ssh -p32241 kudos@74.222.3.76'
-alias sshelauditorstg='echo "ssh elauditor stg" && ssh -p32241 kudos@74.222.3.233'
-#ssh biosalud
-alias sshbiosalud='echo "ssh biosalud prod" && ssh -p32241 kudos@74.222.3.78'
-#ssh raceparts
-alias sshraceparts='echo "ssh raceparts prod" && ssh -p32241 kudos@74.222.3.79'
-#ssh corpoint
-alias sshcorpointprod='echo "ssh corpoint prod" && ssh -p32241 kudos@74.222.3.230'
-alias sshcorpointstg='echo "ssh corpoint stg" && ssh -p32241 kudos@74.222.3.233'
-#ssh nexand
-alias sshnexandprod='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-23-189-123.us-east-2.compute.amazonaws.com -p32241'
-alias sshnexandstg='echo "ssh nexand stg" && ssh -p32241 kudos@74.222.3.233'
-#ssh parallel
-alias sshparallel='echo "ssh parallel prod" && ssh -p32241 kudos@74.222.3.231'
-#ssh hotstocks
-alias sshhotstocks='echo "ssh hotstocks prod pass \"DrK%M?!zgy\", bbdd eazkjpes_staging/sU4thdYRvgJKFKP" && ssh eazkjpes@hotstocks.com.ar'
-
-#OTROS SSH KUDOS
-#ssh pigmento
-alias sshpigmentoprod='echo "ssh pigmento prod" && ssh -i ~/pigmento_key_prod.pem ubuntu@34.195.204.232'
-alias sshpigmentostaging='echo "ssh pigmento staging" && ssh -i ~/pigmento_key_staging.pem ubuntu@52.202.123.212'
-#ssh modax
-alias sshmodaxprod='echo "ssh modax prod" && echo "pass: M4g3nt02017" && ssh root@modax.com.ar'
-alias sshmodaxstaging='echo "ssh modax staging" && echo "pass: M4g3nt02017" && ssh root@magtest.modax.com.ar'
-#ssh parz
-alias sshparzprod='echo "ssh parz prod" && ssh -i ~/parz-new.pem centos@18.224.117.22'
-alias sshparzprodpwa='echo "ssh parzpwa prod 2" && ssh -i ~/parz-new.pem centos@3.133.11.251'
-alias sshparzstg='echo "ssh parz stg" && ssh -p32241 kudos@74.222.3.233'
-alias sshparzodoostg='echo "ssh parz odoo stg. Pass mSkUw24W" && ssh root@144.217.160.80'
-#ssh fiorani
+alias sshtiendalibero='echo "ssh tiendalibero prod" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-52-15-58-213.us-east-2.compute.amazonaws.com -p32241'
+alias sshnexand='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-23-189-123.us-east-2.compute.amazonaws.com -p32241'
 alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
-#ssh tucamara
-alias sshtucamaraprod='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamara@m76.siteground.biz -p18765'
-#ssh tiendalosangeles
-alias sshtiendalosangelesprod='echo "ssh tiendalosangeles prod" && ssh -p32241 kudos@74.222.3.71'
-alias sshtiendalosangelesstg='echo "ssh tiendalosangeles stg" && ssh -p32241 kudos@74.222.3.233'
-alias sshtiendalosangelesprodamazon='echo "ssh tiendalosangeles prod amazon" && ssh -p32241 -i ~/kudos-template-basic.pem ubuntu@ec2-3-22-28-65.us-east-2.compute.amazonaws.com'
-#ssh suviex
+alias sshtucamara='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamara@m76.siteground.biz -p18765'
+alias sshtiendalosangeles='echo "ssh tiendalosangeles prod amazon" && ssh -p32241 -i ~/kudos-template-basic.pem ubuntu@ec2-3-22-28-65.us-east-2.compute.amazonaws.com'
 alias sshsuviex='echo "ssh suviex prod/stg, pass feL6mrRa" && ssh root@149.56.13.59'
-#ssh viditec
 alias sshviditecprod='echo "ssh viditec prod" && ssh ubuntu@18.229.76.252'
-#ssh providus
 alias sshprovidusprod='echo "ssh providus prod - Cl4v3pr3st4d4" && ssh -p2222 providus@providus.com.ar'
-#ssh bremen
 alias sshbremenprod='echo ssh bremen prod && ssh -i bremen.pem -p32241 ubuntu@ec2-18-216-124-134.us-east-2.compute.amazonaws.com'
 alias sshbremenstg='echo ssh bremen stg && ssh -i bremen-dev.pem -p32241 ubuntu@3.136.150.25'
 alias sshbremensapprod='echo ssh bremen sap prod && ssh -i bremen-sap-prod.pem ubuntu@ec2-3-18-125-225.us-east-2.compute.amazonaws.com -p32241'
 alias sshbremensapstg='echo ssh bremen sap stg && ssh -i  bremen-sap-dev.pem ubuntu@ec2-3-134-181-215.us-east-2.compute.amazonaws.com -p32241'
-#alias sshmicheliprod='echo "ssh micheli prod" && ssh -p32241 kudos@74.222.3.250'
-alias sshmicheliprod='ssh -i ~/micheli.pem ubuntu@ec2-3-128-210-181.us-east-2.compute.amazonaws.com'
+alias sshmicheli='ssh -i ~/micheli.pem ubuntu@ec2-3-128-210-181.us-east-2.compute.amazonaws.com'
 alias sshintegrations='echo "ssh servidor integraciones (ex74)" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-191-82-48.us-east-2.compute.amazonaws.com -p32241'
-alias sshbelgranoprod='echo "ssh belgrano prod" && ssh -i belgrano.pem hrattis@35.245.229.235'
+alias sshbelgrano='echo "ssh belgrano prod" && ssh -i belgrano.pem hrattis@35.245.229.235'
+alias sshtagingsdonweb'echo "ssh entornos donweb. Pass: cWPiHGxrrqu4" && ssh -t -p5128 root@66.97.37.118'
