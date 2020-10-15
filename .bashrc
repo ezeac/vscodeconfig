@@ -163,7 +163,6 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$PATH:/opt/mssql-tools/bin"
 
 #SSH NUEVO SERVER KUDOS
-#ssh tiendalibero
 alias sshtiendalibero='echo "ssh tiendalibero prod" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-52-15-58-213.us-east-2.compute.amazonaws.com -p32241'
 alias sshnexand='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-23-189-123.us-east-2.compute.amazonaws.com -p32241'
 alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
