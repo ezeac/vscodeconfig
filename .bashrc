@@ -179,4 +179,4 @@ alias sshbremensapstg='echo ssh bremen sap stg && ssh -i  bremen-sap-dev.pem ubu
 alias sshmicheli='ssh -i ~/micheli.pem ubuntu@ec2-3-128-210-181.us-east-2.compute.amazonaws.com'
 alias sshintegrations='echo "ssh servidor integraciones (ex74)" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-191-82-48.us-east-2.compute.amazonaws.com -p32241'
 alias sshbelgrano='echo "ssh belgrano prod" && ssh -i belgrano.pem hrattis@35.245.229.235'
-alias sshtagingsdonweb'echo "ssh entornos donweb. Pass: cWPiHGxrrqu4" && ssh -t -p5128 root@66.97.37.118'
+alias sshstagingsdonweb='echo "ssh entornos donweb. Pass: EkTd7r7qgUTsNed" && ssh -t -p5128 develop@66.97.37.118'
