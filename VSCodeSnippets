@@ -256,5 +256,11 @@
 		"body": "use Illuminate\\Support\\Facades\\Http;\n\nHttp::timeout(config('app.http_timeout'))\n    ->withHeaders([\n        'X-VTEX-API-AppKey'   => config('app.vtex_user'),\n        'X-VTEX-API-AppToken' => config('app.vtex_token'),\n        'Accept' => \\$version == 1\n            ? 'application/vnd.vtex.ds.v10+json'\n            : 'application/vnd.vtex.pricing.v3+json'\n        ,\n    ])\n    ->retry(\n        config('app.retry_times'),\n        config('app.retry_sleep')\n    )\n    ->\\$method(\n        VTex::createURL(\\$version) . \\$endpoint,\n        \\$data === null ? [] : json_decode(\\$data, true)\n    )\n    ->throw()\n    ->json()\n",
 		"description": "",
 		"scope": ""
+	},
+	"levantahombros": {
+		"prefix": "levantahombros",
+		"body": "¯\\_(ツ)_/¯",
+		"description": "",
+		"scope": ""
 	}
 }
