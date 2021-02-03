@@ -184,3 +184,5 @@ alias sshmicheli='ssh -i ~/micheli.pem ubuntu@ec2-3-128-210-181.us-east-2.comput
 alias sshbelgrano='echo "ssh belgrano prod" && ssh -i belgrano.pem hrattis@35.245.229.235'
 alias sshricardoospital='echo "ssh ricardoospital prod" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-224-99-102.us-east-2.compute.amazonaws.com -p32241'
 alias sshstagingsdonweb='echo "ssh entornos donweb. Pass: EkTd7r7qgUTsNed" && ssh -t -p5128 develop@66.97.37.118'
+alias sshnewsportintegracion='echo "ssh newsport integracion" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-139-203-117.us-east-2.compute.amazonaws.com -p32241'
+
