@@ -127,7 +127,7 @@
 	},
 	"magento2_customscript_php": {
 		"prefix": "magento2_customscript_php",
-		"body": "\nini_set('display_errors', 1);\nini_set('display_startup_errors', 1);\nerror_reporting(E_ALL);\n\nrequire 'app/bootstrap.php';\n\$bootstrap = Magento\\Framework\\App\\Bootstrap::create(BP, \$_SERVER);\n\$obj = \$bootstrap->getObjectManager();\n\n\$test = \$obj->create('Magento\\Backend\\Cron\\CleanCache')->execute();\nvar_dump(\$test);\n\n\$obj->get('\Magento\Framework\App\State')->setAreaCode(\\Magento\\Framework\\App\\Area::AREA_ADMINHTML);\n",
+		"body": "\nini_set('display_errors', 1);\nini_set('display_startup_errors', 1);\nerror_reporting(E_ALL);\n\nrequire 'app/bootstrap.php';\n\\$bootstrap = Magento\\Framework\\App\\Bootstrap::create(BP, \\$_SERVER);\n\\$obj = \\$bootstrap->getObjectManager();\n\n\\$test = \\$obj->create('Magento\\Backend\\Cron\\CleanCache')->execute();\nvar_dump(\\$test);\n\n\\$obj->get('\\Magento\\Framework\\App\\State')->setAreaCode(\\Magento\\Framework\\App\\Area::AREA_ADMINHTML);\n",
 		"description": "",
 		"scope": ""
 	},
@@ -260,6 +260,12 @@
 	"levantahombros": {
 		"prefix": "levantahombros",
 		"body": "¯\\_(ツ)_/¯",
+		"description": "",
+		"scope": ""
+	},
+	"magento2_deploy": {
+		"prefix": "magento2_deploy",
+		"body": "rm -rf var/cache var/generation var/di var/view_preprocessed var/report var/page_cache pub/static/_cache pub/static/_requirejs pub/static/adminhtml pub/static/deployed_version.txt pub/static/frontend\n\nbin/magento setup:upgrade\nbin/magento setup:di:compile\n\nbin/magento setup:static-content:deploy es_AR es_ES en_US -f\n\nbin/magento cache:flush\nbin/magento cache:enable\nbin/magento maintenance:disable\nbin/magento indexer:reindex\nsudo chown -R \\$USER:www-data . && sudo chmod -R 664 . && sudo find . -type d -exec chmod 775 {} \\; && sudo chmod u+x,g+x bin/magento && sudo find . -path '*.sh' -exec chmod u+x,g+x {} \\;\nsudo chmod -R 775 pub/ var/ generated/\nbin/magento cache:clean\n# Restart service php\nsudo systemctl restart php7.2-fpm.service\n		",
 		"description": "",
 		"scope": ""
 	}
