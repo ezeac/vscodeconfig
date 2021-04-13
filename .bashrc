@@ -186,3 +186,7 @@ alias sshricardoospital='echo "ssh ricardoospital prod" && ssh -i "kudos-templat
 alias sshstagingsdonweb='echo "ssh entornos donweb. Pass: EkTd7r7qgUTsNed" && ssh -t -p5128 develop@66.97.37.118'
 alias sshnewsportintegracion='echo "ssh newsport integracion" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-139-203-117.us-east-2.compute.amazonaws.com -p32241'
 
+
+alias sshmauistaging=ssh 3.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud
+alias sshmauiproduction=ssh 3.ent-rs3fciq7xma4k-production-vohbr3y@ssh.us-3.magento.cloud
+
