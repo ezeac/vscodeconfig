@@ -1,0 +1,105 @@
+
+rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+
+php bin/magento setup:static-content:deploy es_AR es_ES en_US -f
+
+php bin/magento cache:flush
+php bin/magento cache:enable
+php bin/magento maintenance:disable
+php bin/magento indexer:reindex
+sudo chown -R $USER:www-data . && sudo chmod -R 664 . && sudo find . -type d -exec chmod 775 {} \; && sudo chmod u+x,g+x php bin/magento && sudo find . -path '*.sh' -exec chmod u+x,g+x {} \;
+sudo chmod -R 775 pub/ var/ generated/
+php bin/magento cache:clean
+# Restart service php
+sudo systemctl restart php7.2-fpm.service
+    
+
+update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";
+
+
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+//CONSULTA AJAX
+$.ajax({
+  url: "https://local.maui.com/checkout/transaction/commitwebpay",
+  data: 'token_ws=01abb9dd0c8e18fef74477616bdeb9ed83d80a1d96893750190a25e5544e53a0',
+  error: function(xhr){
+    console.log("Ocurrió un error: " + xhr.status + " " + xhr.statusText);
+  },
+  success: function(result){
+    console.log(result)
+  },
+  method: 'POST'
+});
+
+update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";
+update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
+update sales_flat_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
+update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";
+
+php bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin"
+
+
+cms_block
+cms_block_store
+cms_page
+cms_page_store
+
+cd src &&
+magento-cloud db:dump -f bbdd_$(date -I).sql &&
+cd ../ &&
+bin/restart &&
+echo 'drop database magento; create database magento' | bin/mysql &&
+bin/mysql -u root < src/bbdd_$(date -I).sql
+
+echo 'update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";' | bin/mysql &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | bin/mysql &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | bin/mysql &&
+bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+bin/magento s:up
+
+
+
+
+Esto es lo que vamos a realizar para el paso a prod.
+- Push prod a master ** (esto es para respandar última versión funcional)
+- Update staging con prod ** (homologar ambientes)
+- Pruebas en staging de maui y ripcurl
+- Apuntar url final a prod, fastly (cliente) Configurar cnames (dominios)
+- Push staging en prod ** (paso a proucción)
+- Actualizar todos los cambios de DDBB (home, menú, categorías, páginas coroporativas, etc.)
+- Configurar tbk prod
+- Configurar despachos
+- Importar productos (cliente)
+
+
+SET global log_output = 'FILE';
+SET global general_log_file='/var/www/html/mysql_general.log';
+SET global general_log = 1;
+
+
+Cómo poner slider owl carrousel con padding a los costados:
+// evitar en desktop:
+.contentenedor {
+    overflow: hidden;
+    box-sizing: border-box;
+
+    .owl-stage-outer {
+        overflow: visible !important;
+    }
+}
+
+//en mobile:
+.contentenedor {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw !important;
+    padding: 0 40px !important;
+    overflow: hidden !important;
+}
