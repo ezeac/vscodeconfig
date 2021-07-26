@@ -18,6 +18,8 @@ sudo systemctl restart php7.2-fpm.service
 update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";
 
 
+delete from patch_list where patch_name like "%VolcomSetup%CreateBlocks" OR patch_name like "%VolcomSetup%CreatePages";
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -45,23 +47,21 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 php bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin"
 
 
-cms_block
-cms_block_store
-cms_page
-cms_page_store
 
 cd src &&
 magento-cloud db:dump -f bbdd_$(date -I).sql &&
 cd ../ &&
 bin/restart &&
 echo 'drop database magento; create database magento' | bin/mysql &&
-bin/mysql -u root < src/bbdd_$(date -I).sql
-
-echo 'update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";' | bin/mysql &&
+bin/mysql -u root < src/bbdd_$(date -I).sql &&
+echo 'update core_config_data set value = "https://local.maui.com/" where path like "%base_url%" or path like "%base_link_url%";' | bin/mysql &&
 echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | bin/mysql &&
 echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | bin/mysql &&
-bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
-bin/magento s:up
+bin/magento admin:user:create --admin-user="ecrosa2" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+bin/magento s:up && echo "Listo."
+
+
+rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' 1.ent-rs3fciq7xma4k-production-vohbr3y@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k/pub/media/ pub/media/
 
 
 
@@ -103,3 +103,28 @@ Cómo poner slider owl carrousel con padding a los costados:
     padding: 0 40px !important;
     overflow: hidden !important;
 }
+
+
+
+  Instalar grunt en docker magento:
+copiar packaje.json.sample y Gruntfile.js.sample
+editar el themes.js
+ejecutar bin/root npm instal -g grunt-cli
+ejecutar npm install y npm update en el dir de magento
+
+
+
+Mostrar email por pantalla y en archivo magento 2:
+En función "prepareMessage" del archivo "vendor/magento/framework/Mail/Template/TransportBuilder.php":
+        $myfile = fopen('../var/log/email' . time() . '.html', 'w+') or die('Unable to open file!');
+        fwrite($myfile, $this->message->getBodyText()); fclose($myfile);
+        echo $this->message->getBodyText(); exit;
+        return $this;
+
+
+Activar xdebug con vscode:
+- Revisar phpinfo para ver puerto
+- Agregar config del php-debug con el archivo ".vscode" dentro de la carpeta src/ (corregir puerto con el visto en el paso anterior)
+- Revisar IP del extra hosts en el docker-composer.yml
+- Revisar xdebug mode con el comando "bin/xdebug status" y activar
+- Agregar un breakpoint en el "pub/index.php" para ver si funciona ok
