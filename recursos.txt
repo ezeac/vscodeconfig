@@ -1,7 +1,15 @@
 
+----------
+Deploy completo magento 2:
+----------
 rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
 php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+----------
 
+
+----------
+Comandos deploy magento 2:
+----------
 php bin/magento setup:static-content:deploy es_AR es_ES en_US -f
 
 php bin/magento cache:flush
@@ -13,19 +21,26 @@ sudo chmod -R 775 pub/ var/ generated/
 php bin/magento cache:clean
 # Restart service php
 sudo systemctl restart php7.2-fpm.service
-    
-
-update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";
+----------
 
 
+----------
 delete from patch_list where patch_name like "%VolcomSetup%CreateBlocks" OR patch_name like "%VolcomSetup%CreatePages";
+----------
 
 
+----------
+PHP Mostrar errores:
+----------
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+----------
 
 
+----------
+JQuery AJAX ejemplo:
+----------
 //CONSULTA AJAX
 $.ajax({
   url: "https://local.maui.com/checkout/transaction/commitwebpay",
@@ -38,16 +53,29 @@ $.ajax({
   },
   method: 'POST'
 });
+----------
 
+
+----------
+Fix bbdd después de clonar magento2:
+----------
 update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";
 update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
 update sales_flat_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
 update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";
-
-php bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin"
-
+----------
 
 
+----------
+Crear user magento 2 cli:
+----------
+php bin/magento admin:user:create --admin-user="cconesa" --admin-password="magento123" --admin-email="cconesa@linets.cl" --admin-firstname="Admin" --admin-lastname="Admin"
+----------
+
+
+----------
+Clonar bbdd en entorno local para rama activa de magento cloud:
+----------
 cd src &&
 magento-cloud db:dump -f bbdd_$(date -I).sql &&
 cd ../ &&
@@ -57,15 +85,22 @@ bin/mysql -u root < src/bbdd_$(date -I).sql &&
 echo 'update core_config_data set value = "https://local.maui.com/" where path like "%base_url%" or path like "%base_link_url%";' | bin/mysql &&
 echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | bin/mysql &&
 echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | bin/mysql &&
-bin/magento admin:user:create --admin-user="ecrosa2" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 bin/magento s:up && echo "Listo."
+----------
 
 
+----------
 rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' 1.ent-rs3fciq7xma4k-production-vohbr3y@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k/pub/media/ pub/media/
+----------
 
 
+----------
+repo.magento.com: 487e54978aa2587999004c639007b3b0  /  e0435dccfdeb71c2cba8a78db147a20c
+----------
 
 
+----------
 Esto es lo que vamos a realizar para el paso a prod.
 - Push prod a master ** (esto es para respandar última versión funcional)
 - Update staging con prod ** (homologar ambientes)
@@ -76,14 +111,19 @@ Esto es lo que vamos a realizar para el paso a prod.
 - Configurar tbk prod
 - Configurar despachos
 - Importar productos (cliente)
+----------
 
 
+----------
 SET global log_output = 'FILE';
 SET global general_log_file='/var/www/html/mysql_general.log';
 SET global general_log = 1;
+----------
 
 
+----------
 Cómo poner slider owl carrousel con padding a los costados:
+----------
 // evitar en desktop:
 .contentenedor {
     overflow: hidden;
@@ -93,7 +133,6 @@ Cómo poner slider owl carrousel con padding a los costados:
         overflow: visible !important;
     }
 }
-
 //en mobile:
 .contentenedor {
     width: 100vw;
@@ -103,28 +142,79 @@ Cómo poner slider owl carrousel con padding a los costados:
     padding: 0 40px !important;
     overflow: hidden !important;
 }
+----------
 
 
 
-  Instalar grunt en docker magento:
+
+----------
+Instalar grunt en docker magento:
+----------
 copiar packaje.json.sample y Gruntfile.js.sample
 editar el themes.js
 ejecutar bin/root npm instal -g grunt-cli
 ejecutar npm install y npm update en el dir de magento
+----------
 
 
 
+
+----------
 Mostrar email por pantalla y en archivo magento 2:
+----------
 En función "prepareMessage" del archivo "vendor/magento/framework/Mail/Template/TransportBuilder.php":
         $myfile = fopen('../var/log/email' . time() . '.html', 'w+') or die('Unable to open file!');
         fwrite($myfile, $this->message->getBodyText()); fclose($myfile);
         echo $this->message->getBodyText(); exit;
         return $this;
+----------
 
 
+
+
+----------
 Activar xdebug con vscode:
+----------
 - Revisar phpinfo para ver puerto
 - Agregar config del php-debug con el archivo ".vscode" dentro de la carpeta src/ (corregir puerto con el visto en el paso anterior)
 - Revisar IP del extra hosts en el docker-composer.yml
 - Revisar xdebug mode con el comando "bin/xdebug status" y activar
 - Agregar un breakpoint en el "pub/index.php" para ver si funciona ok
+----------
+
+
+
+
+----------
+Activar grunt docker:
+----------
+cp package.json.sample package.json
+cp Gruntfile.js.sample Gruntfile.js
+cp grunt-config.json.sample grunt-config.json
+npm install
+npm update
+nano dev/tools/grunt/configs/themes.js
+mv dev/tools/grunt/configs/themes.js dev/tools/grunt/configs/local-themes.js
+t=luma && bin/grunt exec:$t && bin/grunt less:$t && bin/grunt watch
+----------
+
+
+
+
+
+----------
+Magento2 custom script:
+----------
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require 'app/bootstrap.php';
+$bootstrap = Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
+$obj = $bootstrap->getObjectManager();
+
+$test = $obj->create('Magento\Backend\Cron\CleanCache')->execute();
+var_dump($test);
+
+$obj->get('\Magento\Framework\App\State')->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
+----------
