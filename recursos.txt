@@ -25,7 +25,8 @@ sudo systemctl restart php7.2-fpm.service
 
 
 ----------
-delete from patch_list where patch_name like "%VolcomSetup%CreateBlocks" OR patch_name like "%VolcomSetup%CreatePages";
+delete from patch_list where patch_name like "%RustySetup%";
+https://local.maui.com/static/frontend/Linets/Rusty/es_CL/images/Background-Team.jpg
 ----------
 
 
@@ -77,21 +78,26 @@ php bin/magento admin:user:create --admin-user="cconesa" --admin-password="magen
 Clonar bbdd en entorno local para rama activa de magento cloud:
 ----------
 cd src &&
-magento-cloud db:dump -f bbdd_$(date -I).sql &&
+echo '' && echo "Exportando BBDD" && magento-cloud db:dump -f bbdd_$(date -I).sql &&
 cd ../ &&
-bin/restart &&
-echo 'drop database magento; create database magento' | bin/mysql &&
-bin/mysql -u root < src/bbdd_$(date -I).sql &&
+echo '' && echo "Reinicia servicios docker" && bin/restart && sleep 20 &&
+echo '' && echo "Borrando bbdd anterior" && echo 'drop database magento; create database magento' | bin/mysql &&
+echo '' && echo "Importando nueva bbdd" && bin/mysql -u root < src/bbdd_$(date -I).sql &&
 echo 'update core_config_data set value = "https://local.maui.com/" where path like "%base_url%" or path like "%base_link_url%";' | bin/mysql &&
 echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | bin/mysql &&
 echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | bin/mysql &&
-bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
-bin/magento s:up && echo "Listo."
+echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
+echo '' && echo "Importando config custom para el entorno local" && bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+bin/magento config:set web/url/use_store 1 &&
+bin/magento config:set catalog/search/elasticsearch7_server_hostname 172.17.0.1 &&
+echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento indexer:reindex && echo "Listo."
 ----------
 
 
 ----------
-rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' 1.ent-rs3fciq7xma4k-production-vohbr3y@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k/pub/media/ pub/media/
+Descargar imágenes del cloud (rama Evolutivo maui), ejecutar desde src:
+----------
+rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' rs3fciq7xma4k-evolutivo-jt3jsri--mymagento@ssh.us-3.magento.cloud:/app/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
 ----------
 
 
