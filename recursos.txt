@@ -98,7 +98,7 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 ----------
 Clonar bbdd en entorno local desde magento cloud (ejecutar desde carpeta src):
 ----------
-bbdd=staging && url=https://local.fob.com/
+bbdd=production && url=https://local.maui.com/ && remote=origin &&
 echo '' && echo "BBDD $bbdd - URL $url" && echo "Exportando BBDD" &&
 magento-cloud db:dump -ze $bbdd -f bbdd_$(echo $bbdd)_$(date -I).sql.gz && cd .. &&
 echo '' && echo "Reinicia servicios docker" && bin/restart && sleep 20 &&
@@ -107,7 +107,7 @@ echo '' && echo "Importando nueva bbdd" && pv src/bbdd_$(echo $bbdd)_$(date -I).
 echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento -h 172.17.0.1 $bbdd &&
 echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 $bbdd &&
 echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 staging &&
-echo '' && echo "Cambiando a la rama $bbdd" && cd src && git checkout --track gitlab/$(echo $bbdd) && cd .. &&
+echo '' && echo "Cambiando a la rama $bbdd" && cd src && git checkout --track $(echo $remote)/$(echo $bbdd) 2> /dev/null; cd .. &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
 echo '' && echo "Importando config custom para el entorno local" && bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 bin/magento config:set web/url/use_store 1 &&
@@ -119,7 +119,13 @@ echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento in
 ----------
 Descargar imágenes del cloud (rama Evolutivo maui), ejecutar desde src:
 ----------
-rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' rs3fciq7xma4k-evolutivo-jt3jsri--mymagento@ssh.us-3.magento.cloud:/app/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
+entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #staging maui
+entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #prod maui
+rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' $(echo $entorno):/app/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
+Staging a local:
+rsync --progress -ahe ssh 1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k_stg/pub/media/wysiwyg/ .
+Local a prod:
+rsync --progress -ahe ssh . 1.ent-rs3fciq7xma4k-production-vohbr3y@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k/pub/media/wysiwyg/
 ----------
 
 
