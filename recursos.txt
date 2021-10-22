@@ -121,7 +121,7 @@ Descargar imágenes del cloud (rama Evolutivo maui), ejecutar desde src:
 ----------
 entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #staging maui
 entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #prod maui
-rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' $(echo $entorno):/app/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
+rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' $(echo $entorno):~/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
 Staging a local:
 rsync --progress -ahe ssh 1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k_stg/pub/media/wysiwyg/ .
 Local a prod:
