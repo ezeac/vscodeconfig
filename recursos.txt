@@ -84,7 +84,7 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 ----------
 Crear user magento 2 cli:
 ----------
-php bin/magento admin:user:create --admin-user="cconesa" --admin-password="magento123" --admin-email="cconesa@linets.cl" --admin-firstname="Admin" --admin-lastname="Admin"
+php bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ecrosa@linets.cl" --admin-firstname="Admin" --admin-lastname="Admin"
 ----------
 
 
@@ -98,16 +98,16 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 ----------
 Clonar bbdd en entorno local desde magento cloud (ejecutar desde carpeta src):
 ----------
-bbdd=production && url=https://local.maui.com/ && remote=origin &&
-echo '' && echo "BBDD $bbdd - URL $url" && echo "Exportando BBDD" &&
-magento-cloud db:dump -ze $bbdd -f bbdd_$(echo $bbdd)_$(date -I).sql.gz && cd .. &&
+entornoCloud=production && bbddName=production && url=https://local.maui.com/ && remote=origin &&
+echo '' && echo "------ Entorno Cloud: $entornoCloud ------ BBDD: $bbddName ------ URL: $url ------ Git Remote: $remote ------" && echo "Exportando BBDD" &&
+magento-cloud db:dump -ze $entornoCloud -f bbdd_$(echo $entornoCloud)_$(date -I).sql.gz && cd .. &&
 echo '' && echo "Reinicia servicios docker" && bin/restart && sleep 20 &&
-echo '' && echo "Borrando bbdd $bbdd anterior" && echo "drop database $bbdd; create database $bbdd" | mysql -u root -pmagento -h 172.17.0.1 $bbdd &&
-echo '' && echo "Importando nueva bbdd" && pv src/bbdd_$(echo $bbdd)_$(date -I).sql.gz | zcat | mysql -u root -pmagento -h 172.17.0.1 $bbdd &&
-echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento -h 172.17.0.1 $bbdd &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 $bbdd &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 staging &&
-echo '' && echo "Cambiando a la rama $bbdd" && cd src && git checkout --track $(echo $remote)/$(echo $bbdd) 2> /dev/null; cd .. &&
+echo '' && echo "Borrando bbdd $bbddName anterior" && echo "drop database $bbddName; create database $bbddName" | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
+echo '' && echo "Importando nueva bbdd" && pv src/bbdd_$(echo $entornoCloud)_$(date -I).sql.gz | zcat | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
+echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
+echo '' && echo "Cambiando a la rama $entornoCloud" && cd src && git checkout --track $(echo $remote)/$(echo $entornoCloud) 2> /dev/null; cd .. &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
 echo '' && echo "Importando config custom para el entorno local" && bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 bin/magento config:set web/url/use_store 1 &&
@@ -121,6 +121,7 @@ Descargar imágenes del cloud (rama Evolutivo maui), ejecutar desde src:
 ----------
 entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #staging maui
 entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #prod maui
+entorno=f33mkwqx5df5e-staging-5em2ouy--mymagento@ssh.us-5.magento.cloud #stg fob
 rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' $(echo $entorno):~/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
 Staging a local:
 rsync --progress -ahe ssh 1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k_stg/pub/media/wysiwyg/ .
@@ -184,10 +185,11 @@ Cómo poner slider owl carrousel con padding a los costados:
 ----------
 Instalar grunt en docker magento:
 ----------
-copiar packaje.json.sample y Gruntfile.js.sample
+copiar package.json.sample y Gruntfile.js.sample
 editar el themes.js
-ejecutar bin/root npm instal -g grunt-cli
+ejecutar bin/root npm install -g grunt-cli
 ejecutar npm install y npm update en el dir de magento
+usar con: bin/grunt exec && bin/grunt less && bin/grunt watch
 ----------
 
 
