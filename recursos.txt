@@ -25,7 +25,36 @@ sudo systemctl restart php7.2-fpm.service
 
 
 ----------
+Subir rama de la tarea a rama gitlab + Deploy en rama cloud
+----------
+ - Recordar realizar el commit en la rama de la tarea en gitlab antes de ejecutar el script
+ - Importante: Este script va a descartar todos los cambios que no se encuentren en el commit (git checkout .), también va a rehacer la rama local "stagingGlobe" y "EvolutivoGitlab" (git branch -D stagingGlobe)
+
+nombreRama=$(git branch --show-current);
+remoteGitlab=gitlab; remoteCloud=origin;
+ramaIntermediaGitlab=stagingGlobe; ramaDeployCloud=Evolutivo
+
+echo '' && echo "git push $remoteGitlab $nombreRama" && git push $remoteGitlab "$nombreRama" &&
+echo '' && echo "git fetch --all" && git fetch --all &&
+echo '' && echo "git checkout ." && git checkout . &&
+
+echo '' && echo "git branch -D $ramaIntermediaGitlab; git checkout --track $remoteGitlab/$ramaIntermediaGitlab -b $ramaIntermediaGitlab" && git branch -D $ramaIntermediaGitlab; git checkout --track "$remoteGitlab/$ramaIntermediaGitlab" -b $ramaIntermediaGitlab &&
+echo '' && echo "git pull" && git pull &&
+echo '' && echo "git merge $remoteGitlab/$nombreRama" && git merge "$remoteGitlab/$nombreRama" &&
+echo '' && echo "git push $remoteGitlab $ramaIntermediaGitlab" && git push $remoteGitlab $ramaIntermediaGitlab &&
+
+echo '' && echo "git branch -D $ramaDeployCloud; git checkout --track $remoteGitlab/$ramaDeployCloud -b $ramaDeployCloud" && git branch -D $ramaDeployCloud; git checkout --track "$remoteGitlab/$ramaDeployCloud" -b $ramaDeployCloud &&
+echo '' && echo "git pull" && git pull &&
+echo '' && echo "git merge $remoteGitlab/$ramaIntermediaGitlab" && git merge "$remoteGitlab/$ramaIntermediaGitlab" &&
+echo '' && echo "git push $remoteGitlab HEAD:$ramaDeployCloud" && git push $remoteGitlab HEAD:$ramaDeployCloud &&
+echo '' && echo "git push $remoteCloud HEAD:$ramaDeployCloud" && git push $remoteCloud HEAD:$ramaDeployCloud
+----------
+
+
+
+----------
 delete from patch_list where patch_name like "%RustySetup%"; exit;
+echo 'delete from patch_list where patch_name like "%GlobeSetup%";' | mgc sql -e Evolutivo
 https://local.maui.com/static/frontend/Linets/Rusty/es_CL/images/Background-Team.jpg
 ----------
 
@@ -98,7 +127,7 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 ----------
 Clonar bbdd en entorno local desde magento cloud (ejecutar desde carpeta src):
 ----------
-entornoCloud=production && bbddName=production && url=https://local.maui.com/ && remote=origin &&
+entornoCloud=Evolutivo && bbddName=staging && url=https://local.maui.com/ && remote=origin &&
 echo '' && echo "------ Entorno Cloud: $entornoCloud ------ BBDD: $bbddName ------ URL: $url ------ Git Remote: $remote ------" && echo "Exportando BBDD" &&
 magento-cloud db:dump -ze $entornoCloud -f bbdd_$(echo $entornoCloud)_$(date -I).sql.gz && cd .. &&
 echo '' && echo "Reinicia servicios docker" && bin/restart && sleep 20 &&
@@ -117,10 +146,23 @@ echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento in
 
 
 ----------
+Introducción al proceso técnico en team Flor:
+----------
+Estábamos trabajando las tareas creando una rama en gitlab con el nombre "feature/COD-RAMA_Descripción" o "fix/COD-RAMA_Descripción".
+Para el caso del proyecto "Globe", esta rama se crea saliendo desde la rama "stagingGlobe" de gitlab.
+Cuando se finaliza, se sube el commit y la rama "feature/COD-RAMA_Descripción" al gitlab y se mergea esta rama en stagingGlobe
+Si se quiere subir la tarea al entorno evolutivo
+(para globe es https://globe.evolutivo-jt3jsri-rs3fciq7xma4k.us-3.magentosite.cloud/, admin en https://evolutivo-jt3jsri-rs3fciq7xma4k.us-3.magentosite.cloud/admin_linets)
+se tiene que mergear la rama stagingGlobe a Evolutivo (del gitlab) y luego se hace el push al Evolutivo del cloud.
+----------
+
+
+----------
 Descargar imágenes del cloud (rama Evolutivo maui), ejecutar desde src:
 ----------
 entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #staging maui
 entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #prod maui
+entorno=rs3fciq7xma4k-evolutivo-jt3jsri--mymagento@ssh.us-3.magento.cloud #evo maui
 entorno=f33mkwqx5df5e-staging-5em2ouy--mymagento@ssh.us-5.magento.cloud #stg fob
 rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' $(echo $entorno):~/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
 Staging a local:
@@ -181,7 +223,6 @@ Cómo poner slider owl carrousel con padding a los costados:
 
 
 
-
 ----------
 Instalar grunt en docker magento:
 ----------
@@ -235,9 +276,6 @@ t=luma && bin/grunt exec:$t && bin/grunt less:$t && bin/grunt watch
 ----------
 
 
-
-
-
 ----------
 Magento2 custom script:
 ----------
@@ -253,4 +291,11 @@ $test = $obj->create('Magento\Backend\Cron\CleanCache')->execute();
 var_dump($test);
 
 $obj->get('\Magento\Framework\App\State')->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
+----------
+
+
+----------
+Convertir imágenes CR2 raw a jpg en carpeta (recorre la carpeta indicada y convierte las imágenes creando la nueva en la carpeta actual)
+----------
+find '/media/ezeac/Nuevo vol/21.08.28 - Bariloche/' -type f -path "*.CR2" -exec bash -c "dcraw -c \"\$0\" | convert -quality 30 -compress lzw - \$(echo \$(basename \"\$0\") | sed 's/CR2/jpg/g')" {} \; -print
 ----------
