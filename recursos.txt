@@ -28,7 +28,7 @@ sudo systemctl restart php7.2-fpm.service
 Subir rama de la tarea a rama gitlab + Deploy en rama cloud
 ----------
  - Recordar realizar el commit en la rama de la tarea en gitlab antes de ejecutar el script
- - Importante: Este script va a descartar todos los cambios que no se encuentren en el commit (git checkout .), también va a rehacer la rama local "stagingGlobe" y "EvolutivoGitlab" (git branch -D stagingGlobe)
+ - Importante: Este script va a descartar todos los cambios que no se encuentren en el commit (git checkout .), también va a rehacer la rama local "stagingGlobe" (ramaIntermediaGitlab) y "Evolutivo" (ramaDeployCloud, git branch -D stagingGlobe)
 
 nombreRama=$(git branch --show-current);
 remoteGitlab=gitlab; remoteCloud=origin;
@@ -47,7 +47,30 @@ echo '' && echo "git branch -D $ramaDeployCloud; git checkout --track $remoteGit
 echo '' && echo "git pull" && git pull &&
 echo '' && echo "git merge $remoteGitlab/$ramaIntermediaGitlab" && git merge "$remoteGitlab/$ramaIntermediaGitlab" &&
 echo '' && echo "git push $remoteGitlab HEAD:$ramaDeployCloud" && git push $remoteGitlab HEAD:$ramaDeployCloud &&
-echo '' && echo "git push $remoteCloud HEAD:$ramaDeployCloud" && git push $remoteCloud HEAD:$ramaDeployCloud
+echo '' && echo "git push $remoteCloud HEAD:$ramaDeployCloud" && git push $remoteCloud HEAD:$ramaDeployCloud &&
+echo 'bin/magento maintenance:disable' | mgc ssh -e Evolutivo
+----------
+
+
+----------
+Subir de rama Gitlab (stagingGlobe gitlab) a rama Cloud (Evolutivo cloud)
+----------
+ - Recordar realizar el commit en la rama de la tarea en gitlab antes de ejecutar el script
+ - Importante: Este script va a descartar todos los cambios que no se encuentren en el commit (git checkout .), también va a rehacer la rama "stagingGlobe" (ramaIntermediaGitlab) y "Evolutivo" (ramaDeployCloud, git branch -D stagingGlobe)
+
+remoteGitlab=gitlab; remoteCloud=origin;
+ramaIntermediaGitlab=stagingGlobe; ramaDeployCloud=Evolutivo
+
+echo '' && echo "git branch -D temp" && git branch -D temp;
+echo '' && echo "git fetch --all" && git fetch --all &&
+echo '' && echo "git checkout ." && git checkout . &&
+echo '' && echo "git checkout -b temp" && git checkout -b temp &&
+echo '' && echo "git branch -D $ramaDeployCloud; git checkout --track $remoteGitlab/$ramaDeployCloud -b $ramaDeployCloud" && git branch -D $ramaDeployCloud; git checkout --track "$remoteGitlab/$ramaDeployCloud" -b $ramaDeployCloud &&
+echo '' && echo "git pull" && git pull &&
+echo '' && echo "git merge $remoteGitlab/$ramaIntermediaGitlab" && git merge "$remoteGitlab/$ramaIntermediaGitlab" &&
+echo '' && echo "git push $remoteGitlab HEAD:$ramaDeployCloud" && git push $remoteGitlab HEAD:$ramaDeployCloud &&
+echo '' && echo "git push $remoteCloud HEAD:$ramaDeployCloud" && git push $remoteCloud HEAD:$ramaDeployCloud &&
+echo '' && echo "git branch -D temp" && git branch -D temp
 ----------
 
 
