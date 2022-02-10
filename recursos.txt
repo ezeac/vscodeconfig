@@ -1,3 +1,5 @@
+@media only screen and (max-width: @screen__m)
+
 
 ----------
 Deploy completo magento 2:
@@ -25,7 +27,7 @@ sudo systemctl restart php7.2-fpm.service
 
 
 ----------
-Subir rama de la tarea a rama gitlab + Deploy en rama cloud
+Subir rama de la tarea a rama gitlab + Merge rama intermedia gitlab + Deploy en rama cloud
 ----------
  - Recordar realizar el commit en la rama de la tarea en gitlab antes de ejecutar el script
  - Importante: Este script va a descartar todos los cambios que no se encuentren en el commit (git checkout .), también va a rehacer la rama local "stagingGlobe" (ramaIntermediaGitlab) y "Evolutivo" (ramaDeployCloud, git branch -D stagingGlobe)
@@ -45,6 +47,7 @@ echo '' && echo "git push $remoteGitlab $ramaIntermediaGitlab" && git push $remo
 
 echo '' && echo "git branch -D $ramaDeployCloud; git checkout --track $remoteGitlab/$ramaDeployCloud -b $ramaDeployCloud" && git branch -D $ramaDeployCloud; git checkout --track "$remoteGitlab/$ramaDeployCloud" -b $ramaDeployCloud &&
 echo '' && echo "git pull" && git pull &&
+echo '' && echo "git pull $remoteCloud ramaDeployCloud" && git pull $remoteCloud ramaDeployCloud &&
 echo '' && echo "git merge $remoteGitlab/$ramaIntermediaGitlab" && git merge "$remoteGitlab/$ramaIntermediaGitlab" &&
 echo '' && echo "git push $remoteGitlab HEAD:$ramaDeployCloud" && git push $remoteGitlab HEAD:$ramaDeployCloud &&
 echo '' && echo "git push $remoteCloud HEAD:$ramaDeployCloud" && git push $remoteCloud HEAD:$ramaDeployCloud &&
@@ -53,7 +56,7 @@ echo 'bin/magento maintenance:disable' | mgc ssh -e Evolutivo
 
 
 ----------
-Subir de rama Gitlab (stagingGlobe gitlab) a rama Cloud (Evolutivo cloud)
+Subir de rama Gitlab (stagingGlobe gitlab) a rama Cloud (Evolutivo cloud) y push al gitlab y cloud
 ----------
  - Recordar realizar el commit en la rama de la tarea en gitlab antes de ejecutar el script
  - Importante: Este script va a descartar todos los cambios que no se encuentren en el commit (git checkout .), también va a rehacer la rama "stagingGlobe" (ramaIntermediaGitlab) y "Evolutivo" (ramaDeployCloud, git branch -D stagingGlobe)
@@ -150,7 +153,7 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 ----------
 Clonar bbdd en entorno local desde magento cloud (ejecutar desde carpeta src):
 ----------
-entornoCloud=Evolutivo && bbddName=staging && url=https://local.maui.com/ && remote=origin &&
+entornoCloud=production && bbddName=staging && url=https://local.maui.com/ && remote=origin &&
 echo '' && echo "------ Entorno Cloud: $entornoCloud ------ BBDD: $bbddName ------ URL: $url ------ Git Remote: $remote ------" && echo "Exportando BBDD" &&
 magento-cloud db:dump -ze $entornoCloud -f bbdd_$(echo $entornoCloud)_$(date -I).sql.gz && cd .. &&
 echo '' && echo "Reinicia servicios docker" && bin/restart && sleep 20 &&
