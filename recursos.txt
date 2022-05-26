@@ -47,7 +47,7 @@ echo '' && echo "git push $remoteGitlab $ramaIntermediaGitlab" && git push $remo
 
 echo '' && echo "git branch -D $ramaDeployCloud; git checkout --track $remoteGitlab/$ramaDeployCloud -b $ramaDeployCloud" && git branch -D $ramaDeployCloud; git checkout --track "$remoteGitlab/$ramaDeployCloud" -b $ramaDeployCloud &&
 echo '' && echo "git pull" && git pull &&
-echo '' && echo "git pull $remoteCloud ramaDeployCloud" && git pull $remoteCloud ramaDeployCloud &&
+echo '' && echo "git pull $remoteCloud $ramaDeployCloud" && git pull $remoteCloud $ramaDeployCloud &&
 echo '' && echo "git merge $remoteGitlab/$ramaIntermediaGitlab" && git merge "$remoteGitlab/$ramaIntermediaGitlab" &&
 echo '' && echo "git push $remoteGitlab HEAD:$ramaDeployCloud" && git push $remoteGitlab HEAD:$ramaDeployCloud &&
 echo '' && echo "git push $remoteCloud HEAD:$ramaDeployCloud" && git push $remoteCloud HEAD:$ramaDeployCloud &&
@@ -62,7 +62,7 @@ Subir de rama Gitlab (stagingGlobe gitlab) a rama Cloud (Evolutivo cloud) y push
  - Importante: Este script va a descartar todos los cambios que no se encuentren en el commit (git checkout .), también va a rehacer la rama "stagingGlobe" (ramaIntermediaGitlab) y "Evolutivo" (ramaDeployCloud, git branch -D stagingGlobe)
 
 remoteGitlab=gitlab; remoteCloud=origin;
-ramaIntermediaGitlab=stagingGlobe; ramaDeployCloud=Evolutivo
+ramaIntermediaGitlab=stagingGlobe; ramaDeployCloud=staging
 
 echo '' && echo "git branch -D temp" && git branch -D temp;
 echo '' && echo "git fetch --all" && git fetch --all &&
@@ -129,7 +129,7 @@ $.ajax({
 ----------
 Fix bbdd después de clonar magento2:
 ----------
-update core_config_data set value = "https://local.ripcurl.com/" where path like "%base_url%" or path like "%base_link_url%";
+update core_config_data set value = "http://shop.yogaworks.com/" where path like "%base_url%" or path like "%base_link_url%";
 update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
 update sales_flat_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
 update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";
@@ -139,7 +139,7 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 ----------
 Crear user magento 2 cli:
 ----------
-php bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ecrosa@linets.cl" --admin-firstname="Admin" --admin-lastname="Admin"
+php bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel.crosa@godigitalmg.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
 ----------
 
 
@@ -151,23 +151,32 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 
 
 ----------
-Clonar bbdd en entorno local desde magento cloud (ejecutar desde carpeta src):
+Clonar bbdd en entorno local desde cloud (ejecutar desde carpeta src):
 ----------
-entornoCloud=production && bbddName=staging && url=https://local.maui.com/ && remote=origin &&
-echo '' && echo "------ Entorno Cloud: $entornoCloud ------ BBDD: $bbddName ------ URL: $url ------ Git Remote: $remote ------" && echo "Exportando BBDD" &&
-magento-cloud db:dump -ze $entornoCloud -f bbdd_$(echo $entornoCloud)_$(date -I).sql.gz && cd .. &&
-echo '' && echo "Reinicia servicios docker" && bin/restart && sleep 20 &&
-echo '' && echo "Borrando bbdd $bbddName anterior" && echo "drop database $bbddName; create database $bbddName" | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
-echo '' && echo "Importando nueva bbdd" && pv src/bbdd_$(echo $entornoCloud)_$(date -I).sql.gz | zcat | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
-echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";' | mysql -u root -pmagento -h 172.17.0.1 $bbddName &&
-echo '' && echo "Cambiando a la rama $entornoCloud" && cd src && git checkout --track $(echo $remote)/$(echo $entornoCloud) 2> /dev/null; cd .. &&
+entorno=dev; remote_bbddName=magento; local_bbddName=magento; url=https://local.yogaworks.com/
+echo '' && echo "------ Entorno: $entorno ------ Remote BBDD: $remote_bbddName ------ Local BBDD: $local_bbddName ------ URL: $url ------ " && echo "Exportando BBDD" &&
+entorno=dev; remote_bbddName=magento; local_bbddName=magento; url=https://local.yogaworks.com/
+echo '' && rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz
+echo '' && sshdev "mysqldump --quick --single-transaction --lock-tables=false -u magento -pmagento $(echo $remote_bbddName) | gzip -9 > /home/ubuntu/bbdd_dev_$(date -I).sql.gz"
+echo '' && rsync --progress -zahe "ssh -i ~/staging.pem" ubuntu@ec2-3-85-232-92.compute-1.amazonaws.com:/home/ubuntu/bbdd_dev_$(date -I).sql.gz .
+echo '' && sshdev "rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz"
+echo '' && echo "Borrando bbdd $local_bbddName anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
+echo '' && echo "Importando nueva bbdd" && pv bbdd_$(echo $entorno)_$(date -I).sql.gz | zcat | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
+echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%godigitalmg.com%";' | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%godigitalmg.com%";' | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
-echo '' && echo "Importando config custom para el entorno local" && bin/magento admin:user:create --admin-user="magento" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+echo '' && bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="admin@example.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 bin/magento config:set web/url/use_store 1 &&
 bin/magento config:set catalog/search/elasticsearch7_server_hostname 172.17.0.1 &&
 echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento indexer:reindex && echo "Listo."
+----------
+
+
+----------
+Fullsite backup
+----------
+mysqldump --quick --single-transaction --lock-tables=false -u magento -pmagento magento | gzip -9 > bbdd_backup.sql.gz && zip --exclude \"*/cache/*\" --exclude \"*.git/*\" --exclude \"*var/log/*\" --exclude \"*import/*\" --exclude \"*generated/*\" --exclude \"*pub/static/*\" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz
 ----------
 
 
@@ -186,15 +195,10 @@ se tiene que mergear la rama stagingGlobe a Evolutivo (del gitlab) y luego se ha
 ----------
 Descargar imágenes del cloud (rama Evolutivo maui), ejecutar desde src:
 ----------
-entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #staging maui
-entorno=1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud #prod maui
-entorno=rs3fciq7xma4k-evolutivo-jt3jsri--mymagento@ssh.us-3.magento.cloud #evo maui
-entorno=f33mkwqx5df5e-staging-5em2ouy--mymagento@ssh.us-5.magento.cloud #stg fob
-rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe 'ssh' $(echo $entorno):~/pub/media/ pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
-Staging a local:
-rsync --progress -ahe ssh 1.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k_stg/pub/media/wysiwyg/ .
-Local a prod:
-rsync --progress -ahe ssh . 1.ent-rs3fciq7xma4k-production-vohbr3y@ssh.us-3.magento.cloud:/app/rs3fciq7xma4k/pub/media/wysiwyg/
+entorno=ubuntu@ec2-3-85-232-92.compute-1.amazonaws.com:/var/www/magento2/pub/media #dev yogaworks
+entornossh='ssh -i "~/staging.pem"' #dev yogaworks
+
+rsync --progress --exclude "*tmp/*" --exclude "*catalog/product*" --include='*.png' --include='*.jpg' --include='*.jpeg' --include='*.svg' --include='*/' --exclude='*' -ahe "$(echo $entornossh)" $(echo $entorno) pub/media/ && cd .. && bin/copytocontainer pub/media && echo "Listo."
 ----------
 
 
