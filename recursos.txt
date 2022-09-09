@@ -2,6 +2,12 @@
 
 
 ----------
+Composer copy files command for docker container magento 2:
+----------
+alias composertocontainer='cd /home/ezeac/www/yogaworks/src/ && cp composer.lock composer.lock.bk && cp composer.json composer.json.bk && cd .. && bin/copytocontainer composer.json.bk && bin/copytocontainer composer.lock.bk && bin/cli bash -c "cp composer.lock.bk composer.lock && cp composer.json.bk composer.json"'
+alias composerfromcontainer='cd /home/ezeac/www/yogaworks && bin/cli bash -c "cp composer.lock composer.lock.bk && cp composer.json composer.json.bk" && bin/copyfromcontainer composer.json.bk && bin/copyfromcontainer composer.lock.bk && cd src && cp composer.json.bk composer.json && cp composer.lock.bk composer.lock && git status'
+
+----------
 Deploy completo magento 2:
 ----------
 rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
@@ -139,7 +145,7 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 ----------
 Crear user magento 2 cli:
 ----------
-php bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel.crosa@godigitalmg.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
+php bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel@godigitalmg.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
 ----------
 
 
@@ -157,8 +163,11 @@ entorno=dev; remote_bbddName=magento; local_bbddName=magento; url=https://local.
 echo '' && echo "Entorno: $entorno ------ Remote BBDD: $remote_bbddName ------ Local BBDD: $local_bbddName ------ URL: $url " && echo "Exportando BBDD" &&
 echo '' && rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz
 
-echo '' && sshdev "mysqldump --quick --single-transaction --lock-tables=false -u magento -pmagento $(echo $remote_bbddName) | gzip -9 > /home/ubuntu/bbdd_dev_$(date -I).sql.gz" &&
-echo '' && rsync --progress -zahe "ssh -i ~/staging.pem" ubuntu@ec2-3-85-232-92.compute-1.amazonaws.com:/home/ubuntu/bbdd_dev_$(date -I).sql.gz . &&
+Password: hkjAl6TiqqL5SulJQZ6S
+Ejecutar en dev: mysqldump --quick --single-transaction --lock-tables=false -u magento -p magento | gzip -9 > /home/ubuntu/bbdd_dev_$(date -I).sql.gz
+# echo '' && sshdev "mysqldump --quick --single-transaction --lock-tables=false -u magento -p $(echo $remote_bbddName) | gzip -9 > /home/ubuntu/bbdd_$(echo $entorno)_$(date -I).sql.gz"
+
+echo '' && rsync --progress -zahe "ssh -i ~/staging.pem" ubuntu@ec2-44-207-203-158.compute-1.amazonaws.com:/home/ubuntu/bbdd_dev_$(date -I).sql.gz . &&
 echo '' && sshdev "rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz" &&
 echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
 echo '' && echo "Importando nueva bbdd" && pv bbdd_$(echo $entorno)_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
@@ -167,15 +176,22 @@ echo 'update sales_order set customer_email = replace(customer_email , "@", "@te
 echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%godigitalmg.com%";' | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
 echo '' && cd .. && echo "Importando config en magento" && bin/magento app:config:import &&
 echo '' && bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel.crosa@godigitalmg.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+# echo '' && bin/magento config:set web/secure/offloader_header X-Scheme &&
 bin/magento config:set web/url/use_store 1 && bin/magento config:set admin/security/session_lifetime 31536000 && bin/magento config:set catalog/search/elasticsearch7_server_hostname 172.17.0.1 &&
 echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento indexer:reindex && echo "Listo."
 ----------
-
 
 ----------
 Fullsite backup
 ----------
 mysqldump --quick --single-transaction --lock-tables=false -u magento -pmagento magento | gzip -9 > bbdd_backup.sql.gz && zip --exclude \"*/cache/*\" --exclude \"*.git/*\" --exclude \"*var/log/*\" --exclude \"*import/*\" --exclude \"*generated/*\" --exclude \"*pub/static/*\" -ru ../fullsite_backup_$(date -I).zip . && rm bbdd_backup.sql.gz
+----------
+
+
+----------
+Borrar info del docker
+----------
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker volume rm $(docker volume ls -q)
 ----------
 
 
@@ -288,6 +304,14 @@ Activar xdebug con vscode:
 - Agregar un breakpoint en el "pub/index.php" para ver si funciona ok
 ----------
 
+----------
+Activar xdebug con phpstorm:
+----------
+- https://github.com/markshust/docker-magento
+y agregar host de (linux):
+- https://stackoverflow.com/questions/70267681/xdebug-for-docker-not-connecting
+----------
+
 
 
 
@@ -316,7 +340,7 @@ require 'app/bootstrap.php';
 $bootstrap = Magento\Framework\App\Bootstrap::create(BP, $_SERVER);
 $obj = $bootstrap->getObjectManager();
 
-$test = $obj->create('Magento\Backend\Cron\CleanCache')->execute();
+$test = $obj->create('Magento\Backend\Cron\CleanCache')->execute()
 var_dump($test);
 
 $obj->get('\Magento\Framework\App\State')->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
@@ -326,5 +350,7 @@ $obj->get('\Magento\Framework\App\State')->setAreaCode(\Magento\Framework\App\Ar
 ----------
 Convertir imágenes CR2 raw a jpg en carpeta (recorre la carpeta indicada y convierte las imágenes creando la nueva en la carpeta actual)
 ----------
-find '/media/ezeac/Nuevo vol/21.08.28 - Bariloche/' -type f -path "*.CR2" -exec bash -c "dcraw -c \"\$0\" | convert -quality 30 -compress lzw - \$(echo \$(basename \"\$0\") | sed 's/CR2/jpg/g')" {} \; -print
+find '/media/ezeac/0008-0000/Las Grutas/' -type f -path "*.CR2" -exec bash -c "dcraw -c \"\$0\" | convert -quality 90 -compress lzw - \$(echo \$(basename \"\$0\") | sed 's/CR2/jpg/g')" {} \; -print
+find '/home/ezeac/Fotos/New Zealand' -type f -path "*.JPG" -exec bash -c "cat \"\$0\" | convert -quality 90 -compress lzw - \$(echo \$(basename \"\$0\") | sed 's/CR2/jpg/g')" {} \; -print
+
 ----------
