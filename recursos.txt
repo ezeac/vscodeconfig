@@ -383,3 +383,11 @@ find '/media/ezeac/0008-0000/Las Grutas/' -type f -path "*.CR2" -exec bash -c "d
 find '/home/ezeac/Fotos/New Zealand' -type f -path "*.JPG" -exec bash -c "cat \"\$0\" | convert -quality 90 -compress lzw - \$(echo \$(basename \"\$0\") | sed 's/CR2/jpg/g')" {} \; -print
 
 ----------
+
+
+----------
+Windows WSL2
+----------
+export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0 && terminator
+----------
+
