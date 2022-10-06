@@ -1,5 +1,9 @@
 @media only screen and (max-width: @screen__m)
 
+alt+shift+g -> lines
+ctrl+d -> duplicate
+alt+j -> select next
+ctrl + n -> open file
 
 ----------
 Composer copy files command for docker container magento 2:
@@ -169,17 +173,37 @@ Ejecutar en dev: mysqldump --quick --single-transaction --lock-tables=false -u m
 
 echo '' && rsync --progress -zahe "ssh -i ~/staging.pem" ubuntu@ec2-44-207-203-158.compute-1.amazonaws.com:/home/ubuntu/bbdd_dev_$(date -I).sql.gz . &&
 echo '' && sshdev "rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz" &&
-echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
-echo '' && echo "Importando nueva bbdd" && pv bbdd_$(echo $entorno)_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
-echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%godigitalmg.com%";' | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%godigitalmg.com%";' | mysql -u root -pmagento -h 172.17.0.1 $local_bbddName &&
-echo '' && cd .. && echo "Importando config en magento" && bin/magento app:config:import &&
+cd .. &&
+echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | bin/mysql &&
+echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
+# echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
+echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | bin/mysql &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%godigitalmg.com%";' | bin/mysql &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%godigitalmg.com%";' | bin/mysql &&
+echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
 echo '' && bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel.crosa@godigitalmg.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 # echo '' && bin/magento config:set web/secure/offloader_header X-Scheme &&
-bin/magento config:set web/url/use_store 1 && bin/magento config:set admin/security/session_lifetime 31536000 && bin/magento config:set catalog/search/elasticsearch7_server_hostname 172.17.0.1 &&
+bin/magento config:set web/url/use_store 1 && bin/magento config:set admin/security/session_lifetime 31536000 && bin/magento config:set catalog/search/elasticsearch7_server_hostname elasticsearch && bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
 echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento indexer:reindex && echo "Listo."
 ----------
+
+
+----------
+Update staging environment:
+----------
+Export database from dev
+Transfer database to local
+Copy database to staging
+Save elasticsearch hostname and port for lates use
+Free ssh security connection on stg
+Connect from dev to stg and rsync media files
+Rollback ssh security connection on stg
+Update env file crypt key
+Delete and import new database on stg
+Update url and update elasticsearch values
+----------
+
+
 
 ----------
 Fullsite backup
@@ -271,9 +295,14 @@ Cómo poner slider owl carrousel con padding a los costados:
 ----------
 Instalar grunt en docker magento:
 ----------
+sudo apt install curl
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install nodejs
 copiar package.json.sample y Gruntfile.js.sample
-editar el themes.js
-ejecutar bin/root npm install -g grunt-cli
+setear "grunt-contrib-less": "1.4.1" en package.json
+editar el dev/tools/grunt/configs/themes.js
+cp dev/tools/grunt/configs/themes.js dev/tools/grunt/configs/local-themes.js
+ejecutar bin/root npm install grunt-cli
 ejecutar npm install y npm update en el dir de magento
 usar con: bin/grunt exec && bin/grunt less && bin/grunt watch
 ----------

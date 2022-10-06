@@ -116,77 +116,27 @@ if ! shopt -oq posix; then
   fi
 fi
 
+#export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+#export PATH="$PATH:/mnt/c/Program\ Files/Docker/Docker/resources/bin"
+#alias docker=docker.exe
+#alias docker-compose=docker-compose.exe
 
+# set DISPLAY to use X terminal in WSL
+# in WSL2 the localhost and network interfaces are not the same than windows
+if grep -q WSL2 /proc/version; then
+    # execute route.exe in the windows to determine its IP address
+    DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
 
+else
+    # In WSL1 the DISPLAY can be the localhost address
+    if grep -q icrosoft /proc/version; then
+        DISPLAY=127.0.0.1:0.0
+    fi
 
+fi
 
-function lazygit() {
-	if [ -z $2 ]
-	then
-		git add . && git commit -m "$1" && git push origin "$1"
-	else 
-		git add . && git commit -m "$1" && git push origin "$2"
-	fi
-}
-
-
-function pausarsonido() {
-	if [ -z $1 ]
-	then
-		(amixer -q -D pulse sset Master 30% && sleep 410 && amixer -q -D pulse sset Master 70%)&
-		disown
-	else 
-		(amixer -q -D pulse sset Master 30% && sleep $1 && amixer -q -D pulse sset Master 70%)&
-		disown
-	fi
-}
-
-
-alias updatenode='curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -'
-
-
-alias kudoscontroldeploy='echo "Deploy KudosControl (kcontrol)" && cd /home/ezequiel/git/kudos/kudoscontrol && ./node_modules/@angular/cli/bin/ng build --prod && rsync -ah google/. dist/kudoscontrol/google/ && rsync --progress --exclude "assets/backend/cuentas/config.php" -ahe ssh dist/kudoscontrol/. kudos@www.kudosestudio.com:/home/kudos/kcontrol/'
-alias logsreset='find . -path "*.log" -exec sh -c '\''gzip -c "$0" >> "$0_$(date -I).gz" && rm "$0"'\'' {} \;'
-
-alias vimfix='echo '\''syntax on
-colorscheme desert
-set mouse-=ah
-set nu'\'' > ~/.vimrc && 
-sudo bash -c '\''echo "syntax on
-colorscheme desert
-set mouse-=ah
-set nu" > /root/.vimrc'\'''
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH="$PATH:/opt/mssql-tools/bin"
-
-#SSH NUEVO SERVER KUDOS
-alias sshtiendalibero='echo "ssh tiendalibero prod" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-14-217-120.us-east-2.compute.amazonaws.com -p32241'
-alias sshelauditor='ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-224-133-243.us-east-2.compute.amazonaws.com -p32241'
-alias sshbiosalud='ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-222-251-148.us-east-2.compute.amazonaws.com -p32241'
-alias sshintegrations='echo "ssh servidor integraciones (ex74)" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-191-82-48.us-east-2.compute.amazonaws.com -p32241'
-alias sshbrementoolsdev='ssh -i "bremen.pem" ubuntu@ec2-3-136-150-25.us-east-2.compute.amazonaws.com -p32241'
-alias sshbrementoolsprod='ssh -i "bremen.pem" ubuntu@ec2-18-216-124-134.us-east-2.compute.amazonaws.com -p32241'
-alias sshbremensapprod='echo ssh bremen sap prod && ssh -i bremen-sap-prod.pem ubuntu@ec2-3-18-125-225.us-east-2.compute.amazonaws.com -p32241'
-alias sshbremensapstg='echo ssh bremen sap stg && ssh -i  bremen-sap-dev.pem ubuntu@ec2-3-134-181-215.us-east-2.compute.amazonaws.com -p32241'
-alias sshkudosweb='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-134-112-41.us-east-2.compute.amazonaws.com -p32241'
-alias sshespaciocasavargas='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-131-235-49.us-east-2.compute.amazonaws.com -p32241'
-alias sshkimuan='ssh -i "kudos-template-basic.pem" ubuntu@ec2-52-14-126-137.us-east-2.compute.amazonaws.com -p32241'
-alias sshnexand='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-23-189-123.us-east-2.compute.amazonaws.com -p32241'
-alias sshtiendalosangeles='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-22-28-65.us-east-2.compute.amazonaws.com -p32241'
-alias sshfiorani='echo "ssh fiorani" && ssh fiorani@fiorani.com.ar'
-alias sshtucamara='echo "ssh tucamara prod" && ssh -i ~/tucamara.ppk tucamara@m76.siteground.biz -p18765'
-alias sshsuviex='echo "ssh suviex prod/stg, pass feL6mrRa" && ssh root@149.56.13.59'
-alias sshviditec='echo "ssh viditec prod" && ssh ubuntu@18.229.76.252'
-alias sshmicheli='ssh -i ~/micheli.pem ubuntu@ec2-3-128-210-181.us-east-2.compute.amazonaws.com'
-alias sshbelgrano='echo "ssh belgrano prod" && ssh -i belgrano.pem hrattis@35.245.229.235'
-alias sshricardoospital='echo "ssh ricardoospital prod" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-18-224-99-102.us-east-2.compute.amazonaws.com -p32241'
-alias sshstagingsdonweb='echo "ssh entornos donweb. Pass: EkTd7r7qgUTsNed" && ssh -t -p5128 develop@66.97.37.118'
-alias sshnewsportintegracion='echo "ssh newsport integracion" && ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-139-203-117.us-east-2.compute.amazonaws.com -p32241'
-
-
-alias sshmauistaging=ssh 3.ent-rs3fciq7xma4k-staging-5em2ouy@ssh.us-3.magento.cloud
-alias sshmauiproduction=ssh 3.ent-rs3fciq7xma4k-production-vohbr3y@ssh.us-3.magento.cloud
-
+alias composertocontainer='cd /home/ezeac/www/yogaworks/src && cp composer.json composer.json.bk && cp composer.lock composer.lock.bk && cd /home/ezeac/www/yogaworks && bin/copytocontainer composer.json.bk && bin/copytocontainer composer.lock.bk && bin/cli cp composer.json.bk composer.json && bin/cli cp composer.lock.bk composer.lock'
+alias composerfromcontainer='cd /home/ezeac/www/yogaworks && bin/cli cp composer.lock composer.lock.bk && bin/cli cp composer.json composer.json.bk && bin/copyfromcontainer composer.json.bk && bin/copyfromcontainer composer.lock.bk && cd /home/ezeac/www/yogaworks/src && cp composer.lock.bk composer.lock && cp composer.json.bk composer.json'
+alias sshdev='ssh -i "~/staging.pem" ubuntu@ec2-44-207-203-158.compute-1.amazonaws.com'
+alias sshstg='ssh -i "~/yws-staging-ssh-key-pair.pem" ubuntu@ec2-54-221-20-91.compute-1.amazonaws.com'
+alias sshprod='ssh -i "~/yws-production-ssh-key-pair.pem" ubuntu@ec2-54-167-91-182.compute-1.amazonaws.com'
