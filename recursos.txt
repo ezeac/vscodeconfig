@@ -333,6 +333,9 @@ Activar xdebug con vscode:
 - Agregar un breakpoint en el "pub/index.php" para ver si funciona ok
 ----------
 
+
+
+
 ----------
 Activar xdebug con phpstorm:
 ----------
@@ -389,5 +392,6 @@ find '/home/ezeac/Fotos/New Zealand' -type f -path "*.JPG" -exec bash -c "cat \"
 Windows WSL2
 ----------
 export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0 && terminator
+vendor/bin/grumphp run --testsuite fix; vendor/bin/grumphp run --testsuite git_pre_commit
 ----------
 
