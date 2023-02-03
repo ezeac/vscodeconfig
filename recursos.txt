@@ -16,7 +16,19 @@ Deploy completo magento 2:
 ----------
 rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
 php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+
 ----------
+
+
+
+----------
+Update password customer database magento 2:
+----------
+update customer_entity set password_hash = CONCAT(SHA2('xxxxxxxxEe23012301', 256), ':xxxxxxxx:1') where email = "ezequiel@growecommerce.uy";
+----------
+
 
 
 ----------
@@ -160,6 +172,7 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 ----------
 
 
+url=https://local.woow.com.uy/
 ----------
 Clonar bbdd en entorno local desde cloud (ejecutar desde carpeta src):
 ----------
@@ -178,10 +191,10 @@ echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop d
 echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
 # echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
 echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | bin/mysql &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%godigitalmg.com%";' | bin/mysql &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%godigitalmg.com%";' | bin/mysql &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%growecommerce%";' | bin/mysql &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%growecommerce%";' | bin/mysql &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
-echo '' && bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel.crosa@godigitalmg.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+echo '' && bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel@growecommerce.uy" --admin-firstname="Admin" --admin-lastname="Admin" &&
 # echo '' && bin/magento config:set web/secure/offloader_header X-Scheme &&
 bin/magento config:set web/url/use_store 1 && bin/magento config:set admin/security/session_lifetime 31536000 && bin/magento config:set catalog/search/elasticsearch7_server_hostname elasticsearch && bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
 echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento indexer:reindex && echo "Listo."
@@ -296,7 +309,7 @@ Cómo poner slider owl carrousel con padding a los costados:
 Instalar grunt en docker magento:
 ----------
 sudo apt install curl
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt install nodejs
 copiar package.json.sample y Gruntfile.js.sample
 setear "grunt-contrib-less": "1.4.1" en package.json
