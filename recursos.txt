@@ -24,6 +24,29 @@ php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento
 
 
 ----------
+Coding standards magento (phpcs, phpcbf, phpstan y phpmd):
+----------
+https://github.com/magento/magento-coding-standard
+
+git clone git@github.com:magento/magento-coding-standard.git
+cd magento-coding-standard
+composer install
+
+composer require --dev bitexpert/phpstan-magento
+composer require --dev phpstan/extension-installer
+composer require --dev ainnomix/magento2-quality-phpmd
+composer config allow-plugins.phpstan/extension-installer true
+
+vendor/bin/php --standard=Magento2 ../modules/Iurco/Language/
+vendor/bin/phpstan analyze ../modules/Iurco/
+vendor/bin/phpmd ../modules/Iurco/ ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+
+vendor/bin/phpcbf --standard=Magento2 ../modules/Iurco/Language/
+----------
+
+
+
+----------
 Update password customer database magento 2:
 ----------
 update customer_entity set password_hash = CONCAT(SHA2('xxxxxxxxEe23012301', 256), ':xxxxxxxx:1') where email = "ezequiel@growecommerce.uy";
