@@ -37,11 +37,11 @@ composer require --dev phpstan/extension-installer
 composer require --dev ainnomix/magento2-quality-phpmd
 composer config allow-plugins.phpstan/extension-installer true
 
-vendor/bin/php --standard=Magento2 ../modules/Iurco/Language/
-vendor/bin/phpstan analyze ../modules/Iurco/
-vendor/bin/phpmd ../modules/Iurco/ ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+vendor/bin/phpcs --standard=Magento2 ../modules/Nestle/ErpCatalog
+vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Nestle/ErpCatalog
+vendor/bin/phpmd ../modules/Nestle/ErpCore ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
 
-vendor/bin/phpcbf --standard=Magento2 ../modules/Iurco/Language/
+vendor/bin/phpcbf --standard=Magento2 ../modules/Nestle/ErpCatalog
 ----------
 
 
