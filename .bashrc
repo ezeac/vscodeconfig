@@ -116,27 +116,5 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-#export PATH="$PATH:/mnt/c/Program\ Files/Docker/Docker/resources/bin"
-#alias docker=docker.exe
-#alias docker-compose=docker-compose.exe
-
-# set DISPLAY to use X terminal in WSL
-# in WSL2 the localhost and network interfaces are not the same than windows
-if grep -q WSL2 /proc/version; then
-    # execute route.exe in the windows to determine its IP address
-    DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0
-
-else
-    # In WSL1 the DISPLAY can be the localhost address
-    if grep -q icrosoft /proc/version; then
-        DISPLAY=127.0.0.1:0.0
-    fi
-
-fi
-
-alias composertocontainer='cd /home/ezeac/www/yogaworks/src && cp composer.json composer.json.bk && cp composer.lock composer.lock.bk && cd /home/ezeac/www/yogaworks && bin/copytocontainer composer.json.bk && bin/copytocontainer composer.lock.bk && bin/cli cp composer.json.bk composer.json && bin/cli cp composer.lock.bk composer.lock'
-alias composerfromcontainer='cd /home/ezeac/www/yogaworks && bin/cli cp composer.lock composer.lock.bk && bin/cli cp composer.json composer.json.bk && bin/copyfromcontainer composer.json.bk && bin/copyfromcontainer composer.lock.bk && cd /home/ezeac/www/yogaworks/src && cp composer.lock.bk composer.lock && cp composer.json.bk composer.json'
-alias sshdev='ssh -i "~/staging.pem" ubuntu@ec2-44-207-203-158.compute-1.amazonaws.com'
-alias sshstg='ssh -i "~/yws-staging-ssh-key-pair.pem" ubuntu@ec2-54-221-20-91.compute-1.amazonaws.com'
-alias sshprod='ssh -i "~/yws-production-ssh-key-pair.pem" ubuntu@ec2-54-167-91-182.compute-1.amazonaws.com'
+alias sshwoowprod="echo \"mysql -u 'mj7colgc77s44' -p'7YbX1UZq3eZHgUY' -h '127.0.0.1' 'mj7colgc77s44'\" && ssh 1.ent-mj7colgc77s44-production-vohbr3y@ssh.us-5.magento.cloud"
+alias sshwoowstg="ssh 1.ent-mj7colgc77s44-staging-5em2ouy@ssh.us-5.magento.cloud"

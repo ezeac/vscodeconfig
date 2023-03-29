@@ -22,6 +22,39 @@ php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento
 ----------
 
 
+bin/magento queue:consumers:start product_action_attribute.update &
+bin/magento queue:consumers:start product_action_attribute.website.update &
+bin/magento queue:consumers:start exportProcessor &
+bin/magento queue:consumers:start media.storage.catalog.image.resize &
+bin/magento queue:consumers:start matchCustomerSegmentProcessor &
+bin/magento queue:consumers:start codegeneratorProcessor &
+bin/magento queue:consumers:start sales.rule.update.coupon.usage &
+bin/magento queue:consumers:start sales.rule.quote.trigger.recollect &
+bin/magento queue:consumers:start staging.synchronize_entity_period &
+bin/magento queue:consumers:start negotiableQuotePriceUpdate &
+bin/magento queue:consumers:start product_alert &
+bin/magento queue:consumers:start sharedCatalogUpdatePrice &
+bin/magento queue:consumers:start sharedCatalogUpdateCategoryPermissions &
+bin/magento queue:consumers:start inventory.source.items.cleanup &
+bin/magento queue:consumers:start inventory.mass.update &
+bin/magento queue:consumers:start inventory.reservations.cleanup &
+bin/magento queue:consumers:start inventory.reservations.update &
+bin/magento queue:consumers:start inventory.reservations.updateSalabilityStatus &
+bin/magento queue:consumers:start inventory.indexer.sourceItem &
+bin/magento queue:consumers:start inventory.indexer.stock &
+bin/magento queue:consumers:start media.content.synchronization &
+bin/magento queue:consumers:start media.gallery.renditions.update &
+bin/magento queue:consumers:start media.gallery.synchronization &
+bin/magento queue:consumers:start placeOrderProcessor &
+bin/magento queue:consumers:start purchaseorder.toorder &
+bin/magento queue:consumers:start purchaseorder.transactional.email &
+bin/magento queue:consumers:start purchaseorder.validation &
+bin/magento queue:consumers:start quoteItemCleaner &
+bin/magento queue:consumers:start inventoryQtyCounter &
+bin/magento queue:consumers:start async.operations.all &
+bin/magento queue:consumers:start erp_customer_async.customer.register.topic &
+bin/magento queue:consumers:start erp_customer_async.customer.approval.topic &
+
 
 ----------
 Coding standards magento (phpcs, phpcbf, phpstan y phpmd):
@@ -37,11 +70,11 @@ composer require --dev phpstan/extension-installer
 composer require --dev ainnomix/magento2-quality-phpmd
 composer config allow-plugins.phpstan/extension-installer true
 
-vendor/bin/phpcs --standard=Magento2 ../modules/Nestle/ErpCatalog
-vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Nestle/ErpCatalog
-vendor/bin/phpmd ../modules/Nestle/ErpCore ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+vendor/bin/phpcs --standard=Magento2 ../modules/Iurco/SourceForCustomerGroup/
+vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Iurco/SourceForCustomerGroup/
+vendor/bin/phpmd ../modules/Iurco/SourceForCustomerGroup/ ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
 
-vendor/bin/phpcbf --standard=Magento2 ../modules/Nestle/ErpCatalog
+vendor/bin/phpcbf --standard=Magento2 ../modules/Iurco/SourceForCustomerGroup/
 ----------
 
 
@@ -186,6 +219,15 @@ Crear user magento 2 cli:
 ----------
 php bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel@godigitalmg.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
 ----------
+
+
+----------
+CURL POST DE PRUEBA
+----------
+curl -k --location --request POST 'https://pidoteca.gestionnik.com/Librarys/phpLibrary/POST_NominaProductosJson.php' --form 'TOKEN="12345EIDOS2K21IO23LASO21000101"' --form 'Payer="4899842"'
+----------
+
+
 
 
 ----------
