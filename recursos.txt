@@ -11,6 +11,8 @@ Composer copy files command for docker container magento 2:
 alias composertocontainer='cd /home/ezeac/www/yogaworks/src/ && cp composer.lock composer.lock.bk && cp composer.json composer.json.bk && cd .. && bin/copytocontainer composer.json.bk && bin/copytocontainer composer.lock.bk && bin/cli bash -c "cp composer.lock.bk composer.lock && cp composer.json.bk composer.json"'
 alias composerfromcontainer='cd /home/ezeac/www/yogaworks && bin/cli bash -c "cp composer.lock composer.lock.bk && cp composer.json composer.json.bk" && bin/copyfromcontainer composer.json.bk && bin/copyfromcontainer composer.lock.bk && cd src && cp composer.json.bk composer.json && cp composer.lock.bk composer.lock && git status'
 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfExxWpml6fw03g1Ssjy2kmFTcYIy6aA737G9xlKzMRimZX8owgEGhDKPl1af+DkVURfLOVb5b45kVGa3dV4cCdnWXEeqN5qeX1jRISJk68CP734TcjWsM8JwerPgTvuhQ3h+KUMl3TtZVg+7K6XelbTMFjgBNlPZTs+EMPruEYsb9owhUiKSPlZsMtlM7PQPqgdkJWJL3TiSVdUpuUxpgqASOzW/ANCT30kKG6YL/Jd8ZZz1Gm/5L+tv3LkZbWTvtrITGDIbZ2rZshjctznh6fB0cFzaBxH9Bq8mZt8DDPooVK7xMhHVQjnLe8hKGuKPvyoO8Li0XISYUJ3fu9u/N ezequiel@ezequiel-homepc
+
 ----------
 Deploy completo magento 2:
 ----------
@@ -21,40 +23,10 @@ php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento
 
 ----------
 
-
-bin/magento queue:consumers:start product_action_attribute.update &
-bin/magento queue:consumers:start product_action_attribute.website.update &
-bin/magento queue:consumers:start exportProcessor &
-bin/magento queue:consumers:start media.storage.catalog.image.resize &
-bin/magento queue:consumers:start matchCustomerSegmentProcessor &
-bin/magento queue:consumers:start codegeneratorProcessor &
-bin/magento queue:consumers:start sales.rule.update.coupon.usage &
-bin/magento queue:consumers:start sales.rule.quote.trigger.recollect &
-bin/magento queue:consumers:start staging.synchronize_entity_period &
-bin/magento queue:consumers:start negotiableQuotePriceUpdate &
-bin/magento queue:consumers:start product_alert &
-bin/magento queue:consumers:start sharedCatalogUpdatePrice &
-bin/magento queue:consumers:start sharedCatalogUpdateCategoryPermissions &
-bin/magento queue:consumers:start inventory.source.items.cleanup &
-bin/magento queue:consumers:start inventory.mass.update &
-bin/magento queue:consumers:start inventory.reservations.cleanup &
-bin/magento queue:consumers:start inventory.reservations.update &
-bin/magento queue:consumers:start inventory.reservations.updateSalabilityStatus &
-bin/magento queue:consumers:start inventory.indexer.sourceItem &
-bin/magento queue:consumers:start inventory.indexer.stock &
-bin/magento queue:consumers:start media.content.synchronization &
-bin/magento queue:consumers:start media.gallery.renditions.update &
-bin/magento queue:consumers:start media.gallery.synchronization &
-bin/magento queue:consumers:start placeOrderProcessor &
-bin/magento queue:consumers:start purchaseorder.toorder &
-bin/magento queue:consumers:start purchaseorder.transactional.email &
-bin/magento queue:consumers:start purchaseorder.validation &
-bin/magento queue:consumers:start quoteItemCleaner &
-bin/magento queue:consumers:start inventoryQtyCounter &
-bin/magento queue:consumers:start async.operations.all &
-bin/magento queue:consumers:start erp_customer_async.customer.register.topic &
-bin/magento queue:consumers:start erp_customer_async.customer.approval.topic &
-
+1- Revisar fecha de creación em magento para saber si es demasiado reciente.
+2- Revisar el estado de la orden y si corresponde con los estados enviados a Celigo (celigo recibe processing y complete)
+3- Revisar en la bbdd, con el id de orden, si el campo is_exported_to_io es "1", lo que significa que sí se envió a Celigo esta orden (select * from celigo_sales_order where id = '333560';).
+4- Revisar, con una consulta de prueba si Celigo obtiene los datos de esta orden de forma correcta
 
 ----------
 Coding standards magento (phpcs, phpcbf, phpstan y phpmd):
@@ -69,12 +41,11 @@ composer require --dev bitexpert/phpstan-magento
 composer require --dev phpstan/extension-installer
 composer require --dev ainnomix/magento2-quality-phpmd
 composer config allow-plugins.phpstan/extension-installer true
+vendor/bin/phpcs --standard=Magento2 ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php
+vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php
+vendor/bin/phpmd ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
 
-vendor/bin/phpcs --standard=Magento2 ../modules/Iurco/SourceForCustomerGroup/
-vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Iurco/SourceForCustomerGroup/
-vendor/bin/phpmd ../modules/Iurco/SourceForCustomerGroup/ ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
-
-vendor/bin/phpcbf --standard=Magento2 ../modules/Iurco/SourceForCustomerGroup/
+vendor/bin/phpcbf --standard=Magento2 ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php
 ----------
 
 
@@ -217,14 +188,24 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 ----------
 Crear user magento 2 cli:
 ----------
-php bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel@godigitalmg.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
+php bin/magento admin:user:create --admin-user="ezequielIURCO" --admin-password="magento123" --admin-email="ezequiel@iurco.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
+php bin/magento admin:user:create --admin-user="oguevara" --admin-password="magento123" --admin-email="o.guevara@tata.com.uy" --admin-firstname="Oscar" --admin-lastname="Guevara"
+php bin/magento admin:user:create --admin-user="johanna.gutierrez" --admin-password="Gonoca28." --admin-email="johanna.gutierrez@tata.com.uy" --admin-firstname="Johanna" --admin-lastname="Gurierrez"
 ----------
 
 
 ----------
 CURL POST DE PRUEBA
 ----------
-curl -k --location --request POST 'https://pidoteca.gestionnik.com/Librarys/phpLibrary/POST_NominaProductosJson.php' --form 'TOKEN="12345EIDOS2K21IO23LASO21000101"' --form 'Payer="4899842"'
+curl -k --location --request POST 'https://pidoteca.gestionnik.com/Librarys/phpLibrary/POST_NominaProductosJson.php' --header 'Authorization: Bearer rdj0m2cylnsgul04msiz89im0ivj1vur' --header 'Content-Type: application/json' --data-raw '{}' --form 'TOKEN="12345EIDOS2K21IO23LASO21000101"' --form 'Payer="4899842"'
+----------
+
+
+----------
+CURL POST DE PRUEBA API MAGENTO
+----------
+curl -kX POST "https://backend.localwoow.com.uy/index.php/rest/V1/integration/admin/token" -H "Content-Type:application/json" -d '{"username":"ezequiel.crosa", "password":"magento123"}'
+curl -k --location --request GET 'https://backend.localwoow.com.uy/rest/default/V1/orders/290127' --header 'Authorization: Bearer eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOjI2NSwidXR5cGlkIjoyLCJpYXQiOjE2ODA5ODE2OTAsImV4cCI6MTY4MDk4NTI5MH0.ZoCcJZyHTwos5RO_7Xg5E4ar8ILPwLhVsdiW1TY2ERc' --header 'Content-Type: application/json'
 ----------
 
 
@@ -237,7 +218,7 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 ----------
 
 
-url=https://local.woow.com.uy/
+url=https://app.nestle.test/
 ----------
 Clonar bbdd en entorno local desde cloud (ejecutar desde carpeta src):
 ----------
@@ -255,11 +236,11 @@ cd .. &&
 echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | bin/mysql &&
 echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
 # echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
-echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | bin/mysql &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%growecommerce%";' | bin/mysql &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%growecommerce%";' | bin/mysql &&
+echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento magento -h db &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%iurco%";' | mysql -u root -pmagento magento -h db &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%iurco%";' | mysql -u root -pmagento magento -h db &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
-echo '' && bin/magento admin:user:create --admin-user="ecrosa" --admin-password="magento123" --admin-email="ezequiel@growecommerce.uy" --admin-firstname="Admin" --admin-lastname="Admin" &&
+echo '' && bin/magento admin:user:create --admin-user="ezequielIURCO" --admin-password="magento123" --admin-email="ezequiel@iurco.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 # echo '' && bin/magento config:set web/secure/offloader_header X-Scheme &&
 bin/magento config:set web/url/use_store 1 && bin/magento config:set admin/security/session_lifetime 31536000 && bin/magento config:set catalog/search/elasticsearch7_server_hostname elasticsearch && bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
 echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento indexer:reindex && echo "Listo."
