@@ -117,4 +117,11 @@ if ! shopt -oq posix; then
 fi
 
 alias sshwoowprod="echo \"mysql -u 'mj7colgc77s44' -p'7YbX1UZq3eZHgUY' -h '127.0.0.1' 'mj7colgc77s44'\" && ssh 1.ent-mj7colgc77s44-production-vohbr3y@ssh.us-5.magento.cloud"
-alias sshwoowstg="ssh 1.ent-mj7colgc77s44-staging-5em2ouy@ssh.us-5.magento.cloud"
+alias sshwoowstg="echo \"mysql -u 'mj7colgc77s44_stg' -p'caNtCyjZ2wllcy4' -h '127.0.0.1' 'mj7colgc77s44_stg'\" && ssh 1.ent-mj7colgc77s44-staging-5em2ouy@ssh.us-5.magento.cloud"
+
+alias sshtepidointegration="eval $(ssh-agent -s) && ssh-add ~/.ssh/id_rsa && ssh ug7xxff66l4so-integration-5ojmyuq--mymagento@ssh.us-5.magento.cloud"
+
+# BEGIN SNIPPET: Magento Cloud CLI configuration
+HOME=${HOME:-'/home/ezeac'}
+export PATH="$HOME/"'.magento-cloud/bin':"$PATH"
+if [ -f "$HOME/"'.magento-cloud/shell-config.rc' ]; then . "$HOME/"'.magento-cloud/shell-config.rc'; fi # END SNIPPET

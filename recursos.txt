@@ -5,13 +5,45 @@ ctrl+d -> duplicate
 alt+j -> select next
 ctrl + n -> open file
 
+
+----------
+Algunas notas útiles de Woow:
+----------
+find . -type f -name "*.gz" -exec zgrep -n "alegarciafernandez2014@gmail.com" {} \; -print
+"bamboo" es "siemprepago"
+
+Correo: test_user_17805074@testuser.com
+Pass: MercadopagoTest2023
+
+Se debe cololocar APRO como nombre del titular de la tarjeta
+Mastercard 5031755734530604 - 123 - 11/25
+Visa 4509953566233704 - 123 - 11/25
+American Express 371180303257522 - 1234 - 11/25
+Para bamboo: 4110 0000 0000 0001 123 12/25
+
+update magenest_booking_reservation set invoiced = 1; update magenest_booking_reservation set invoiced = 0 where reservation_id IN (242237, 242228, 242225, 242222);
+
+----------
+
+
+----------
+Extraer logs de tepido prod:
+----------
+crear carpeta nueva y cd a la misma
+rsync --progress -ahe ssh 1.ent-ug7xxff66l4so-production-vohbr3y@ssh.us-5.magento.cloud:/app/ug7xxff66l4so/var/log .
+zip -ru logs-prod-$(date -I).zip ./*
+----------
+
+
+
 ----------
 Composer copy files command for docker container magento 2:
 ----------
 alias composertocontainer='cd /home/ezeac/www/yogaworks/src/ && cp composer.lock composer.lock.bk && cp composer.json composer.json.bk && cd .. && bin/copytocontainer composer.json.bk && bin/copytocontainer composer.lock.bk && bin/cli bash -c "cp composer.lock.bk composer.lock && cp composer.json.bk composer.json"'
 alias composerfromcontainer='cd /home/ezeac/www/yogaworks && bin/cli bash -c "cp composer.lock composer.lock.bk && cp composer.json composer.json.bk" && bin/copyfromcontainer composer.json.bk && bin/copyfromcontainer composer.lock.bk && cd src && cp composer.json.bk composer.json && cp composer.lock.bk composer.lock && git status'
+----------
 
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfExxWpml6fw03g1Ssjy2kmFTcYIy6aA737G9xlKzMRimZX8owgEGhDKPl1af+DkVURfLOVb5b45kVGa3dV4cCdnWXEeqN5qeX1jRISJk68CP734TcjWsM8JwerPgTvuhQ3h+KUMl3TtZVg+7K6XelbTMFjgBNlPZTs+EMPruEYsb9owhUiKSPlZsMtlM7PQPqgdkJWJL3TiSVdUpuUxpgqASOzW/ANCT30kKG6YL/Jd8ZZz1Gm/5L+tv3LkZbWTvtrITGDIbZ2rZshjctznh6fB0cFzaBxH9Bq8mZt8DDPooVK7xMhHVQjnLe8hKGuKPvyoO8Li0XISYUJ3fu9u/N ezequiel@ezequiel-homepc
+
 
 ----------
 Deploy completo magento 2:
@@ -41,11 +73,11 @@ composer require --dev bitexpert/phpstan-magento
 composer require --dev phpstan/extension-installer
 composer require --dev ainnomix/magento2-quality-phpmd
 composer config allow-plugins.phpstan/extension-installer true
-vendor/bin/phpcs --standard=Magento2 ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php
-vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php
-vendor/bin/phpmd ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+vendor/bin/phpcs --standard=Magento2 ../modules/Nestle/Poligonos/
+vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Nestle/Poligonos/
+vendor/bin/phpmd ../modules/Nestle/Poligonos/ ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
 
-vendor/bin/phpcbf --standard=Magento2 ../modules/Nestle/ErpCatalogGraphQl/Plugin/Graphql/Magento/QuoteGraphQl/Model/Resolver/Cart.php
+vendor/bin/phpcbf --standard=Magento2 ../modules/Nestle/Poligonos/
 ----------
 
 
