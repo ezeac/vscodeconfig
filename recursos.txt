@@ -6,24 +6,98 @@ alt+j -> select next
 ctrl + n -> open file
 
 
-----------
-Algunas notas útiles de Woow:
-----------
-find . -type f -name "*.gz" -exec zgrep -n "alegarciafernandez2014@gmail.com" {} \; -print
-"bamboo" es "siemprepago"
-
-Correo: test_user_17805074@testuser.com
-Pass: MercadopagoTest2023
-
-Se debe cololocar APRO como nombre del titular de la tarjeta
-Mastercard 5031755734530604 - 123 - 11/25
-Visa 4509953566233704 - 123 - 11/25
-American Express 371180303257522 - 1234 - 11/25
-Para bamboo: 4110 0000 0000 0001 123 12/25
-
-update magenest_booking_reservation set invoiced = 1; update magenest_booking_reservation set invoiced = 0 where reservation_id IN (242237, 242228, 242225, 242222);
 
 ----------
+Entidad o tabla en bbdd magento 2
+----------
+Objetos claves al crear entidad o tabla en bbdd magento 2:
+1- Modelo: get y set de cada atributo del modelo.
+2- Interface del modelo.
+3- Repository: métodos CRUD del modelo.
+4- Interface del repository.
+5- ResourceModel: operaciones con bbdd para el modelo.
+6- Collection: conjuntode datos para el modelo.
+----------
+
+
+----------
+Comando varnish forever21:
+----------
+https://www.getpagespeed.com/server-setup/varnish-as-full-page-cache-for-magento-2
+https://magento.stackexchange.com/questions/221404/varnish-nginx-serving-all-resources-http-instead-of-https-magento-2
+
+sudo varnishadm -T 127.0.0.1:6082 -S /etc/varnish/secret backend.list
+sudo varnishlog -n /var/lib/varnish/ip-172-31-16-114
+----------
+
+
+
+----------
+Deploy completo magento 2:
+----------
+rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
+php7.4 bin/magento setup:upgrade && php7.4 bin/magento setup:di:compile && php7.4 bin/magento setup:static-content:deploy en_US es_AR -f && php7.4 bin/magento cache:flush
+php7.4 bin/magento indexer:reindex
+
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+
+----------
+
+
+
+----------
+Script informe/análisis de espacio y cantidad de archivos en las carpetas (con max-depth)
+----------
+#!/bin/bash
+
+# Directorio base desde el cual iniciar la búsqueda
+base_dir="../"
+
+# Nombre del archivo de salida con fecha y hora
+output_file="$(date '+%Y-%m-%d_%H-%M-%S')_resultados.txt"
+
+# Número máximo de niveles de subdirectorios a incluir (1 = solo el directorio base, 4 = hasta tres niveles de subdirectorios)
+max_depth=4
+
+# Ejecuta el bucle y guarda la salida en el archivo
+find "$base_dir" -maxdepth $max_depth -type d | while read dir; do
+    # Cuenta cuántos archivos hay en este directorio (solo en el directorio actual, no en subdirectorios)
+    num_files=$(find "$dir" -maxdepth 1 -type f | wc -l)
+    # Calcula el tamaño total de los archivos en el directorio (incluyendo subdirectorios, opcional cambiar a -maxdepth 1 si necesario)
+    size=$(du -sh "$dir" | cut -f1)
+    # Imprime el resultado y lo redirige al archivo
+    echo "Directorio: $dir - Cantidad de Archivos: $num_files - Tamaño Total: $size" >> "$output_file"
+done
+----------
+
+curl -X GET "https://jmc.footolophy.com.ar/rest/onrunning_espanol/V1/orders?searchCriteria[filter_groups][0][filters][0][field]=created_at&searchCriteria[filter_groups][0][filters][0][value]=$(date --date='7 days ago' +'%Y-%m-%d')&searchCriteria[filter_groups][0][filters][0][condition_type]=gteq" -H "Authorization: Bearer hor66xx20ohgabfh0e8e2o97qp9rrr6u" -H "Content-Type: application/json"
+
+
+----------
+Corrección permisos de archivos para Magento2:
+----------
+# Cambia la propiedad de todos los archivos y directorios al usuario 'ubuntu' y al grupo 'www-data'
+sudo chown -R $USER:www-data .
+
+# Primero, asegura que el script 'bin/magento' sea ejecutable
+chmod +x bin/magento
+
+# Establece permisos amplios solo en directorios específicos que lo requieren
+find var generated pub/static pub/media app/etc -type d -exec chmod 775 {} \;
+sudo find var generated pub/static pub/media app/etc -type f -exec chmod 664 {} \;
+
+# Establece permisos más restrictivos de forma eficiente
+# Esto evita la necesidad de volver a establecer permisos en los archivos y directorios ya procesados
+find . -type d ! -path "./var/*" ! -path "./generated/*" ! -path "./pub/static/*" ! -path "./pub/media/*" ! -path "./app/etc/*" -exec chmod 755 {} \;
+sudo find . -type f ! -path "./var/*" ! -path "./generated/*" ! -path "./pub/static/*" ! -path "./pub/media/*" ! -path "./app/etc/*" -exec chmod 644 {} \;
+
+Versión resumida:
+sudo chown -R $USER:www-data .
+sudo chmod -R 664 .
+sudo find . -type d -exec chmod 775 {} \;
+(sudo chmod -R 775 .)
+----------
+
 
 
 ----------
@@ -46,23 +120,10 @@ alias composerfromcontainer='cd /home/ezeac/www/yogaworks && bin/cli bash -c "cp
 
 
 ----------
-Deploy completo magento 2:
-----------
-rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
-php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy -f && php bin/magento cache:flush && php bin/magento indexer:reindex
-
-php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
-
-----------
-
-1- Revisar fecha de creación em magento para saber si es demasiado reciente.
-2- Revisar el estado de la orden y si corresponde con los estados enviados a Celigo (celigo recibe processing y complete)
-3- Revisar en la bbdd, con el id de orden, si el campo is_exported_to_io es "1", lo que significa que sí se envió a Celigo esta orden (select * from celigo_sales_order where id = '333560';).
-4- Revisar, con una consulta de prueba si Celigo obtiene los datos de esta orden de forma correcta
-
-----------
 Coding standards magento (phpcs, phpcbf, phpstan y phpmd):
 ----------
+*VERSIÓN 1*
+
 https://github.com/magento/magento-coding-standard
 
 git clone git@github.com:magento/magento-coding-standard.git
@@ -71,13 +132,24 @@ composer install
 
 composer require --dev bitexpert/phpstan-magento
 composer require --dev phpstan/extension-installer
-composer require --dev ainnomix/magento2-quality-phpmd
 composer config allow-plugins.phpstan/extension-installer true
-vendor/bin/phpcs --standard=Magento2 ../modules/Nestle/Poligonos/
-vendor/bin/phpstan analyze -a ../vendor/autoload.php ../modules/Nestle/Poligonos/
-vendor/bin/phpmd ../modules/Nestle/Poligonos/ ansi vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
 
-vendor/bin/phpcbf --standard=Magento2 ../modules/Nestle/Poligonos/
+vendor/bin/phpcs --standard=Magento2 ../magento-2.3-jmc/app/code/Kudos/
+vendor/bin/phpstan analyze -a ../magento-2.3-jmc/vendor/autoload.php ../magento-2.3-jmc/app/code/Kudos/
+vendor/bin/phpmd ../magento-2.3-jmc/app/code/Kudos/ ansi ../magento-2.3-jmc/dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+vendor/bin/phpcbf --standard=Magento2 ../magento-2.3-jmc/app/code/Kudos/
+
+*VERSIÓN 2* (EN CARPETA DE MAGENTO)
+
+chmod +x vendor/bin/phpcs
+chmod +x vendor/bin/phpstan
+chmod +x vendor/bin/phpmd
+chmod +x vendor/bin/phpcbf
+
+vendor/bin/phpcs --standard=Magento2 app/code/Kudos/
+../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/ (Porque no funciona "vendor/bin/phpstan". Opcional: --level 1)
+../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/ ansi dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml (Porque no funciona "vendor/bin/phpmd")
+vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/
 ----------
 
 
