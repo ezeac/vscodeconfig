@@ -8,6 +8,20 @@ ctrl + n -> open file
 
 
 ----------
+Deploy completo magento 2:
+----------
+rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy en_US es_AR -f && php bin/magento cache:flush
+php bin/magento indexer:reindex
+
+php8.1 bin/magento setup:upgrade && php8.1 bin/magento setup:di:compile && php8.1 bin/magento setup:static-content:deploy en_US es_AR -f && php8.1 bin/magento cache:flush
+
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+
+----------
+
+
+----------
 Entidad o tabla en bbdd magento 2
 ----------
 Objetos claves al crear entidad o tabla en bbdd magento 2:
@@ -20,28 +34,91 @@ Objetos claves al crear entidad o tabla en bbdd magento 2:
 ----------
 
 
+
 ----------
-Comando varnish forever21:
+Instalación varnish forever21:
 ----------
-https://www.getpagespeed.com/server-setup/varnish-as-full-page-cache-for-magento-2
-https://magento.stackexchange.com/questions/221404/varnish-nginx-serving-all-resources-http-instead-of-https-magento-2
+#    1- En cada config ssl https del sitio agregar este proxy:
+#
+#    location / {
+#        proxy_pass http://varnish;
+#        proxy_buffering off;
+#        proxy_request_buffering off;
+#        proxy_set_header X-Real-IP  $remote_addr;
+#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        proxy_set_header X-Forwarded-Proto https;
+#        proxy_set_header X-Forwarded-Port 443;
+#        proxy_set_header Host $host;
+#        access_log off;
+#        log_not_found off;
+#        proxy_http_version 1.1;
+#        proxy_set_header Upgrade $http_upgrade;
+#        client_max_body_size 32M;
+#        proxy_set_header X-Forwarded-Host $http_host;
+#        proxy_set_header Ssl-Offloaded "1";
+#        proxy_read_timeout 600s;
+#    }
+#
+#    location ^~ /.well-known/acme-challenge/ {
+#        allow all;
+#        # Avoids having this request go through Varnish.
+#        root /var/www/html/jmc-group/pub;
+#    }
+#    location ^~ /.well-known/apple-developer-merchantid-domain-association {
+#        allow all;
+#        # Avoids having this request go through Varnish.
+#        root /var/www/html/jmc-group/pub;
+#    }
+#
+#    2- Mantener el config de redirect desde http a https
+#
+#    3- Agregar también el config con el puerto 8080 para magento y la config de varnish. varnish.conf:
+#
+#    set_real_ip_from 127.0.0.1;
+#    port_in_redirect off;
+#    absolute_redirect off;
+#    proxy_buffer_size 18k;
+#    proxy_buffers 4 256k;
+#    proxy_busy_buffers_size 256k;
+#
+#    upstream varnish {
+#       ip_hash;
+#       server 127.0.0.1:6081;
+#       keepalive 32;
+#    }
+#
+#    upstream fastcgi_magento23 {
+#       server   unix://var/run/php/php7.4-fpm.sock;
+#    }
+#
+#    server {
+#        listen 8080;
+#        server_name localhost;
+#        set $MAGE_ROOT /var/www/html/jmc-group/;
+#        set $MAGE_UPSTREAM fastcgi_magento23;
+#
+#        access_log /var/log/nginx/magento23_access.log;
+#        error_log /var/log/nginx/magento23_error.log error;
+#
+#        include /var/www/html/jmc-group/nginx.conf;
+#    }
+#
+#    4- Copiar los set $MAGE_..., logs y el include del nginx.conf al server 8080, quitarlos del server 443
+#
+#    5- Generar archivo default.vcl, revisar y seguir las instrucciones:
+#    https://www.getpagespeed.com/server-ssarnish-as-full-page-cache-for-magento-2
+#
+#    6- Aplicar fix en nginx.conf:
+#    https://magento.stackexchange.com/questions/221404/varnish-nginx-serving-all-resources-http-instead-of-https-magento-2
+#
+
+Comandos útiles para revisar estado del servicio y conexión con backend varnish:
 
 sudo varnishadm -T 127.0.0.1:6082 -S /etc/varnish/secret backend.list
 sudo varnishlog -n /var/lib/varnish/ip-172-31-16-114
-----------
-
-
 
 ----------
-Deploy completo magento 2:
-----------
-rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
-php7.4 bin/magento setup:upgrade && php7.4 bin/magento setup:di:compile && php7.4 bin/magento setup:static-content:deploy en_US es_AR -f && php7.4 bin/magento cache:flush
-php7.4 bin/magento indexer:reindex
 
-php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
-
-----------
 
 
 
@@ -70,7 +147,6 @@ find "$base_dir" -maxdepth $max_depth -type d | while read dir; do
 done
 ----------
 
-curl -X GET "https://jmc.footolophy.com.ar/rest/onrunning_espanol/V1/orders?searchCriteria[filter_groups][0][filters][0][field]=created_at&searchCriteria[filter_groups][0][filters][0][value]=$(date --date='7 days ago' +'%Y-%m-%d')&searchCriteria[filter_groups][0][filters][0][condition_type]=gteq" -H "Authorization: Bearer hor66xx20ohgabfh0e8e2o97qp9rrr6u" -H "Content-Type: application/json"
 
 
 ----------
@@ -79,23 +155,24 @@ Corrección permisos de archivos para Magento2:
 # Cambia la propiedad de todos los archivos y directorios al usuario 'ubuntu' y al grupo 'www-data'
 sudo chown -R $USER:www-data .
 
-# Primero, asegura que el script 'bin/magento' sea ejecutable
-chmod +x bin/magento
-
 # Establece permisos amplios solo en directorios específicos que lo requieren
 find var generated pub/static pub/media app/etc -type d -exec chmod 775 {} \;
 sudo find var generated pub/static pub/media app/etc -type f -exec chmod 664 {} \;
 
 # Establece permisos más restrictivos de forma eficiente
 # Esto evita la necesidad de volver a establecer permisos en los archivos y directorios ya procesados
-find . -type d ! -path "./var/*" ! -path "./generated/*" ! -path "./pub/static/*" ! -path "./pub/media/*" ! -path "./app/etc/*" -exec chmod 755 {} \;
+find . -type d ! -path "./var*" ! -path "./generated*" ! -path "./pub/static*" ! -path "./pub/media*" ! -path "./app/etc*" -exec chmod 755 {} \;
 sudo find . -type f ! -path "./var/*" ! -path "./generated/*" ! -path "./pub/static/*" ! -path "./pub/media/*" ! -path "./app/etc/*" -exec chmod 644 {} \;
+
+# Asegura que el script 'bin/magento' sea ejecutable
+chmod +x bin/magento
 
 Versión resumida:
 sudo chown -R $USER:www-data .
 sudo chmod -R 664 .
 sudo find . -type d -exec chmod 775 {} \;
 (sudo chmod -R 775 .)
+chmod +x bin/magento
 ----------
 
 
@@ -134,22 +211,11 @@ composer require --dev bitexpert/phpstan-magento
 composer require --dev phpstan/extension-installer
 composer config allow-plugins.phpstan/extension-installer true
 
-vendor/bin/phpcs --standard=Magento2 ../magento-2.3-jmc/app/code/Kudos/
-vendor/bin/phpstan analyze -a ../magento-2.3-jmc/vendor/autoload.php ../magento-2.3-jmc/app/code/Kudos/
-vendor/bin/phpmd ../magento-2.3-jmc/app/code/Kudos/ ansi ../magento-2.3-jmc/dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
-vendor/bin/phpcbf --standard=Magento2 ../magento-2.3-jmc/app/code/Kudos/
 
-*VERSIÓN 2* (EN CARPETA DE MAGENTO)
-
-chmod +x vendor/bin/phpcs
-chmod +x vendor/bin/phpstan
-chmod +x vendor/bin/phpmd
-chmod +x vendor/bin/phpcbf
-
-vendor/bin/phpcs --standard=Magento2 app/code/Kudos/
-../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/ (Porque no funciona "vendor/bin/phpstan". Opcional: --level 1)
-../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/ ansi dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml (Porque no funciona "vendor/bin/phpmd")
-vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/
+../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/PaymentExtension/
+../../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/PaymentExtension/ (Porque no funciona "vendor/bin/phpstan". Opcional: --level 1)
+../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/PaymentExtension/ ansi dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/PaymentExtension/
 ----------
 
 
@@ -292,7 +358,7 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 ----------
 Crear user magento 2 cli:
 ----------
-php bin/magento admin:user:create --admin-user="ezequielIURCO" --admin-password="magento123" --admin-email="ezequiel@iurco.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
+php bin/magento admin:user:create --admin-user="ezequiel" --admin-password="magento123" --admin-email="ezequiel@asd.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
 php bin/magento admin:user:create --admin-user="oguevara" --admin-password="magento123" --admin-email="o.guevara@tata.com.uy" --admin-firstname="Oscar" --admin-lastname="Guevara"
 php bin/magento admin:user:create --admin-user="johanna.gutierrez" --admin-password="Gonoca28." --admin-email="johanna.gutierrez@tata.com.uy" --admin-firstname="Johanna" --admin-lastname="Gurierrez"
 ----------
@@ -326,7 +392,7 @@ url=https://app.nestle.test/
 ----------
 Clonar bbdd en entorno local desde cloud (ejecutar desde carpeta src):
 ----------
-entorno=dev; remote_bbddName=magento; local_bbddName=magento; url=https://local.yogaworks.com/
+entorno=dev; remote_bbddName=magento; local_bbddName=magento; url=https://local.mosca.com.uy/
 echo '' && echo "Entorno: $entorno ------ Remote BBDD: $remote_bbddName ------ Local BBDD: $local_bbddName ------ URL: $url " && echo "Exportando BBDD" &&
 echo '' && rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz
 
@@ -338,15 +404,15 @@ echo '' && rsync --progress -zahe "ssh -i ~/staging.pem" ubuntu@ec2-44-207-203-1
 echo '' && sshdev "rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz" &&
 cd .. &&
 echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | bin/mysql &&
-echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
+echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed 's/\sDEFINER=`[^`]*`@`[^`]*`//g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
 # echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
 echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento magento -h db &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%iurco%";' | mysql -u root -pmagento magento -h db &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%iurco%";' | mysql -u root -pmagento magento -h db &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%grow%";' | mysql -u root -pmagento magento -h db &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%grow%";' | mysql -u root -pmagento magento -h db &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
-echo '' && bin/magento admin:user:create --admin-user="ezequielIURCO" --admin-password="magento123" --admin-email="ezequiel@iurco.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
+echo '' && bin/magento admin:user:create --admin-user="ezequiel" --admin-password="magento123" --admin-email="ezequiel@asd.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 # echo '' && bin/magento config:set web/secure/offloader_header X-Scheme &&
-bin/magento config:set web/url/use_store 1 && bin/magento config:set admin/security/session_lifetime 31536000 && bin/magento config:set catalog/search/elasticsearch7_server_hostname elasticsearch && bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
+bin/magento config:set web/url/use_store 1 && bin/magento config:set admin/security/session_lifetime 31536000 && bin/magento config:set catalog/search/elasticsearch7_server_hostname opensearch && bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
 echo '' && echo "Deploy magento y reindex" && bin/magento s:up && bin/magento indexer:reindex && echo "Listo."
 ----------
 
@@ -456,18 +522,66 @@ Cómo poner slider owl carrousel con padding a los costados:
 
 
 ----------
-Instalar grunt en docker magento:
+Instalar GRUNT en docker magento:
 ----------
-sudo apt install curl
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-sudo apt install nodejs
-copiar package.json.sample y Gruntfile.js.sample
-setear "grunt-contrib-less": "1.4.1" en package.json
-editar el dev/tools/grunt/configs/themes.js
-cp dev/tools/grunt/configs/themes.js dev/tools/grunt/configs/local-themes.js
-ejecutar bin/root npm install grunt-cli
-ejecutar npm install y npm update en el dir de magento
-usar con: bin/grunt exec && bin/grunt less && bin/grunt watch
+
+1-
+Si no existen, copiar "package.json.sample" a "package.json" y "Gruntfile.js.sample" a "Gruntfile.js"
+ejecutar "npm update" en el dir de magento.
+
+2-
+Agregar theme en: dev/tools/grunt/configs/themes.js
+Ejemplo:
+    kudos: {
+        area: 'frontend',
+        name: 'Kudos/theme',
+        locale: 'es_AR',
+        files: [
+            'css/styles-m',
+            'css/styles-l'
+        ],
+        dsl: 'less'
+    },
+
+3-
+Si ejecutando "grunt --version" no está instalado
+ejecutar "npm install -g grunt-cli"
+
+4-
+Cambiar versión de php en: dev/tools/grunt/configs/combo.js
+Ejemplo:
+        command = command + 'php8.1 bin/magento dev:source-theme:deploy ' +
+            theme[themeName].files.join(' ') +
+
+5-
+Usar grunt con:
+"grunt exec:kudos && grunt less:kudos && grunt watch:kudos"
+Si se pueden ver los archivos less en el inspector del navegador, está todo listo.
+Algunos cambios en los archivos serán reconocidos por el watch y éste refrescará los less para el inspector.
+Para reconocer los archivos nuevos, salir y ejecutar nuevamente el comando.
+
+Notas:
+- Revisar con javi si este sitio tiene habilitada la compresión de css de cloudflare, si es así Grunt NO VA A FUNCIONAR
+
+- En JMC tuve que agregar esto (el "sourceMapURL") en dev/tools/grunt/configs/less.js:
+    options: {
+        sourceMap: true,
+        strictImports: false,
+        sourceMapRootpath: '/',
+        dumpLineNumbers: false, // use 'comments' instead false to output line comments for source
+        ieCompat: false,
+        sourceMapURL: function(outputName) {
+            return '/' + outputName.replace(/\.css$/, '.css.map');
+        }
+    },
+
+- Instalación de npm (nvm) en el caso de que sea necesario (para controlar si está "npm -v"):
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    nvm list
+    nvm install 18
+    nvm use 18
+    nvm alias default 18
+
 ----------
 
 
@@ -557,4 +671,3 @@ Windows WSL2
 export DISPLAY=$(route.exe print | grep 0.0.0.0 | head -1 | awk '{print $4}'):0.0 && terminator
 vendor/bin/grumphp run --testsuite fix; vendor/bin/grumphp run --testsuite git_pre_commit
 ----------
-
