@@ -6,12 +6,21 @@ alt+j -> select next
 ctrl + n -> open file
 
 
+echo "Developers2017" && sshfs -p 25964 facundob@152.169.251.121:/home/facundob/www/pony ~/www/remote/pony && sshfs -p 25964 develop@152.169.251.121:/home/develop/Code/Magento2/ ~/www/remote/Magento2/ && sshfs -p 25964 nicolas@152.169.251.121:/home/nicolas/var/www/html/ricardoospital-new ~/www/remote/ricardoospital-new && sshfs -p 25964 develop@152.169.251.121:/var/www/html/ ~/www/remote/html/
+
+
+echo "Developers2017" && sshfs -p 25964 facundob@152.169.251.121:/home/facundob/www/pony ~/www/remote/pony && sshfs -p 25964 develop@152.169.251.121:/home/develop/Code/Magento2/ ~/www/remote/Magento2/ && sshfs -p 25964 nicolas@152.169.251.121:/home/nicolas/var/www/html/ricardoospital-new ~/www/remote/ricardoospital-new && sshfs -p 25964 develop@152.169.251.121:/var/www/html/ ~/www/remote/html/
+sshpass -p 'Developers2017' sshfs -p 25964 facundob@152.169.251.121:/home/facundob/www/pony ~/www/remote/pony && sshpass -p 'Developers2017' sshfs -p 25964 develop@152.169.251.121:/home/develop/Code/Magento2/ ~/www/remote/Magento2/ && sshpass -p 'Developers2017' sshfs -p 25964 nicolas@152.169.251.121:/home/nicolas/var/www/html/ricardoospital-new ~/www/remote/ricardoospital-new && sshpass -p 'Developers2017' sshfs -p 25964 develop@152.169.251.121:/var/www/html/ ~/www/remote/html/
+
+bin/magento setup:static-content:deploy --theme Kudos/biosalud -l es_AR -f
 
 ----------
 Deploy completo magento 2:
 ----------
+chmod -R 775 .
 rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
-php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy en_US es_AR -f && php bin/magento cache:flush
+
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy en_US es_AR -f && php bin/magento cache:flush && php bin/magento indexer:reindex
 php bin/magento indexer:reindex
 
 php8.1 bin/magento setup:upgrade && php8.1 bin/magento setup:di:compile && php8.1 bin/magento setup:static-content:deploy en_US es_AR -f && php8.1 bin/magento cache:flush
@@ -19,6 +28,83 @@ php8.1 bin/magento setup:upgrade && php8.1 bin/magento setup:di:compile && php8.
 php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
 
 ----------
+
+
+
+
+----------
+SCRIPT Elasticsearch
+----------
+#!/bin/bash
+# Temporal patch to fix empty categories
+# */3 * * * * /var/www/html/jmc-group/bash refresh_catalogsearch_fulltext_index.sh 9 172.31.27.121 9200 elastic 8iR81IYR2iplxAPeawpo magento2forever21 >> /var/www/html/jmc-group/var/log/refresh_catalogsearch_fulltext_index.log 2>&1
+#
+# Obtener info de todos lo índices: curl -s -X GET "http://${ELASTIC_USER}:${ELASTIC_PASS}@${ELASTIC_HOST}:${ELASTIC_PORT}/_cat/indices/"
+# Obtener count de un índice particular: curl -s -X GET "http://${ELASTIC_USER}:${ELASTIC_PASS}@${ELASTIC_HOST}:${ELASTIC_PORT}/magento2forever21_product_16_v137/_count"
+#
+
+if ! command -v jq &> /dev/null; then
+    echo "jq no está instalado. Por favor, instálalo antes de continuar."
+    exit 1
+fi
+
+# Verificar si STORE_ID ha sido pasado como primer argumento
+if [ -z "$1" ]; then
+    echo "El store_id es obligatorio."
+    echo "Uso: $0 <STORE_ID>"
+    echo "-----------------"
+    exit 1
+fi
+
+STORE_ID=$1
+
+# Imprimir las variables obtenidas si no se pasan como argumentos
+if [ -z "$2" ] || [ -z "$3" ] || [ -z "$4" ] || [ -z "$5" ] || [ -z "$6" ]; then
+    echo "Obteniendo variablas desde bin/magento:"
+    ELASTIC_HOST=$(php $(dirname "$(realpath $0)")/bin/magento config:show catalog/search/elasticsearch7_server_hostname)
+    echo "ELASTIC_HOST: $ELASTIC_HOST"
+    ELASTIC_PORT=$(php $(dirname "$(realpath $0)")/bin/magento config:show catalog/search/elasticsearch7_server_port)
+    echo "ELASTIC_PORT: $ELASTIC_PORT"
+    ELASTIC_USER=$(php $(dirname "$(realpath $0)")/bin/magento config:show catalog/search/elasticsearch7_username)
+    echo "ELASTIC_USER: $ELASTIC_USER"
+    ELASTIC_PASS=$(php $(dirname "$(realpath $0)")/bin/magento config:show catalog/search/elasticsearch7_password)
+    echo "ELASTIC_PASS: $ELASTIC_PASS"
+    ELASTIC_PREFIX=$(php $(dirname "$(realpath $0)")/bin/magento config:show catalog/search/elasticsearch7_index_prefix)
+    echo "ELASTIC_PREFIX: $ELASTIC_PREFIX"
+    echo "Uso: $0 <STORE_ID> [ELASTIC_HOST] [ELASTIC_PORT] [ELASTIC_USER] [ELASTIC_PASS] [ELASTIC_PREFIX]"
+    echo "Ejemplo: bash $0 $STORE_ID $ELASTIC_HOST $ELASTIC_PORT $ELASTIC_USER $ELASTIC_PASS $ELASTIC_PREFIX"
+    echo "-----------------"
+    exit 1
+fi
+
+# Asignar variables
+ELASTIC_HOST=$2
+ELASTIC_PORT=$3
+ELASTIC_USER=$4
+ELASTIC_PASS=$5
+ELASTIC_PREFIX=$6
+
+curl_output=$(curl -s -X GET "http://${ELASTIC_USER}:${ELASTIC_PASS}@${ELASTIC_HOST}:${ELASTIC_PORT}/${ELASTIC_PREFIX}_product_${STORE_ID}/_count")
+docs_count=$(echo $curl_output | jq '.count')
+
+if [ "$docs_count" == "0" ]; then
+    echo -e "$(date '+%Y-%m-%d %H:%M:%S'): El índice ${ELASTIC_PREFIX}_product_${STORE_ID} tiene ${docs_count} documentos. Realizando reindexado."
+    echo "$curl_output"
+    echo "ELASTIC_HOST: $ELASTIC_HOST"
+    echo "ELASTIC_PORT: $ELASTIC_PORT"
+    echo "ELASTIC_USER: $ELASTIC_USER"
+    echo "ELASTIC_PASS: $ELASTIC_PASS"
+    echo "ELASTIC_PREFIX: $ELASTIC_PREFIX"
+    echo "STORE_ID: $STORE_ID\n"
+    php $(dirname "$(realpath $0)")/bin/magento indexer:reindex catalogsearch_fulltext
+    php $(dirname "$(realpath $0)")/bin/magento cache:clean full_page
+    exit 1
+fi
+
+echo "$(date '+%Y-%m-%d %H:%M:%S'): Run refresh_catalogsearch_fulltext_index"
+----------
+
+
 
 
 ----------
@@ -106,10 +192,17 @@ Instalación varnish forever21:
 #    4- Copiar los set $MAGE_..., logs y el include del nginx.conf al server 8080, quitarlos del server 443
 #
 #    5- Generar archivo default.vcl, revisar y seguir las instrucciones:
-#    https://www.getpagespeed.com/server-ssarnish-as-full-page-cache-for-magento-2
+#    https://www.getpagespeed.com/server-setup/varnish-as-full-page-cache-for-magento-2
+#    - php bin/magento config:set system/full_page_cache/caching_application 2
+#    - php bin/magento config:set --scope=default --scope-code=0 system/full_page_cache/ttl 1209600
+#    - php bin/magento varnish:vcl:generate
+#    - sudo vim /etc/varnish default.vcl (copiar acá)
+#    - sudo sed -i 's@/pub/health_check.php@/health_check.php@g' /etc/varnish/default.vcl
 #
 #    6- Aplicar fix en nginx.conf:
 #    https://magento.stackexchange.com/questions/221404/varnish-nginx-serving-all-resources-http-instead-of-https-magento-2
+#    - Find the line like this in nginx.config: location ~ (index|get|static|report|404|503|health_check|phpinfo).php$ { .... }
+#    - Add this line: fastcgi_param HTTPS on; above: include fastcgi_params;
 #
 
 Comandos útiles para revisar estado del servicio y conexión con backend varnish:
@@ -119,6 +212,12 @@ sudo varnishlog -n /var/lib/varnish/ip-172-31-16-114
 
 ----------
 
+
+
+----------
+Capturas de pantalla con "Flameshot"
+Primer comentario en: https://stackoverflow.com/questions/69828508/warning-ignoring-xdg-session-type-wayland-on-gnome-use-qt-qpa-platform-wayland
+----------
 
 
 
@@ -212,10 +311,20 @@ composer require --dev phpstan/extension-installer
 composer config allow-plugins.phpstan/extension-installer true
 
 
-../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/PaymentExtension/
-../../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/PaymentExtension/ (Porque no funciona "vendor/bin/phpstan". Opcional: --level 1)
-../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/PaymentExtension/ ansi dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
-vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/PaymentExtension/
+(sudo update-alternatives --set php /usr/bin/php8.1)
+../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/BlockExtensions/
+../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/BlockExtensions/ ansi dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+
+(sudo update-alternatives --set php /usr/bin/php7.4 && chmod -R +x vendor/bin/)
+vendor/bin/phpcs --standard=Magento2 app/code/Kudos/BlockExtensions/
+vendor/bin/phpstan analyze app/code/Kudos/BlockExtensions/ --level 1
+vendor/bin/phpmd app/code/Kudos/BlockExtensions/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/BlockExtensions/
+
+
+// @codingStandardsIgnoreStart
+// @codingStandardsIgnoreEnd
+@SuppressWarnings(PHPMD.UnusedFormalParameter)
 ----------
 
 
@@ -348,7 +457,7 @@ $.ajax({
 ----------
 Fix bbdd después de clonar magento2:
 ----------
-update core_config_data set value = "http://shop.yogaworks.com/" where path like "%base_url%" or path like "%base_link_url%";
+update core_config_data set value = "https://dev-violettacosmeticos.kudosestudio.com/" where path like "%base_url%" or path like "%base_link_url%";
 update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
 update sales_flat_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
 update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";
@@ -653,6 +762,15 @@ $test = $obj->create('Magento\Backend\Cron\CleanCache')->execute()
 var_dump($test);
 
 $obj->get('\Magento\Framework\App\State')->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
+----------
+
+----------
+Magento 2 custom scipt logger log:
+----------
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$logger = $objectManager->get(\Psr\Log\LoggerInterface::class);
+
+$logger->info('collectRates method called');
 ----------
 
 
