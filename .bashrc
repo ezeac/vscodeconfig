@@ -158,7 +158,7 @@ alias sshbrooksprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-12-70-49.u
 alias sshricardospitalprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-224-99-102.us-east-2.compute.amazonaws.com -p32241'
 alias sshponyprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-223-179-54.us-east-2.compute.amazonaws.com -p32241'
 #Entornos STG
-alias sshdonwebstg='echo Pass: EkTd7r7qgUTsNed && ssh -t develop@66.97.37.118 -p5128'
+alias sshdonwebstg='echo "source <(curl -s https://raw.githubusercontent.com/ezeac/generalBash/main/hola-ezequiel.bash)" && echo Pass: EkTd7r7qgUTsNed && ssh -t develop@66.97.37.118 -p5128'
 
 #Grow
 alias sshmoscaprod='ssh 1.ent-4jrcib2tztjy4-production-vohbr3y@ssh.us-5.magento.cloud'

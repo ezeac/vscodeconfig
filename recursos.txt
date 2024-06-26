@@ -14,14 +14,19 @@ sshpass -p 'Developers2017' sshfs -p 25964 facundob@152.169.251.121:/home/facund
 
 bin/magento setup:static-content:deploy --theme Kudos/biosalud -l es_AR -f
 
+
+
 ----------
 Deploy completo magento 2:
 ----------
+sudo systemctl stop nginx.service
 chmod -R 775 .
-rm -rf var/cache/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
+rm -rf var/cache/* generated/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
 
-php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy en_US es_AR -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento indexer:reindex
 php bin/magento indexer:reindex
+
+sudo systemctl restart nginx.service
 
 php8.1 bin/magento setup:upgrade && php8.1 bin/magento setup:di:compile && php8.1 bin/magento setup:static-content:deploy en_US es_AR -f && php8.1 bin/magento cache:flush
 
@@ -312,14 +317,16 @@ composer config allow-plugins.phpstan/extension-installer true
 
 
 (sudo update-alternatives --set php /usr/bin/php8.1)
-../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/BlockExtensions/
-../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/BlockExtensions/ ansi dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/AndreaniExtension/
+../../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/AndreaniExtension/ --level 1
+../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/AndreaniExtension/ ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/AndreaniExtension/
 
 (sudo update-alternatives --set php /usr/bin/php7.4 && chmod -R +x vendor/bin/)
-vendor/bin/phpcs --standard=Magento2 app/code/Kudos/BlockExtensions/
-vendor/bin/phpstan analyze app/code/Kudos/BlockExtensions/ --level 1
-vendor/bin/phpmd app/code/Kudos/BlockExtensions/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
-vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/BlockExtensions/
+vendor/bin/phpcs --standard=Magento2 app/code/Kudos/AndreaniExtension/
+vendor/bin/phpstan analyze app/code/Kudos/AndreaniExtension/ --level 1
+vendor/bin/phpmd app/code/Kudos/AndreaniExtension/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/AndreaniExtension/
 
 
 // @codingStandardsIgnoreStart
@@ -764,14 +771,18 @@ var_dump($test);
 $obj->get('\Magento\Framework\App\State')->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
 ----------
 
+
+
 ----------
-Magento 2 custom scipt logger log:
+Magento 2 custom script logger log logs:
 ----------
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $logger = $objectManager->get(\Psr\Log\LoggerInterface::class);
 
 $logger->info('collectRates method called');
 ----------
+
+
 
 
 ----------
