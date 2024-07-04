@@ -21,16 +21,16 @@ Deploy completo magento 2:
 ----------
 sudo systemctl stop nginx.service
 chmod -R 775 .
-rm -rf var/cache/* generated/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
+rm -rf generated/* var/cache/* generated/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
 
-php bin/magento setup:upgrade && php bin/magento setup:di:compile && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento indexer:reindex
 php bin/magento indexer:reindex
 
 sudo systemctl restart nginx.service
 
-php8.1 bin/magento setup:upgrade && php8.1 bin/magento setup:di:compile && php8.1 bin/magento setup:static-content:deploy en_US es_AR -f && php8.1 bin/magento cache:flush
+php8.1 bin/magento setup:di:compile && php8.1 bin/magento setup:upgrade && php8.1 bin/magento setup:static-content:deploy en_US es_AR -f && php8.1 bin/magento cache:flush
 
-php bin/magento setup:upgrade && php bin/magento setup:di:compile && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
 
 ----------
 
@@ -778,8 +778,7 @@ Magento 2 custom script logger log logs:
 ----------
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $logger = $objectManager->get(\Psr\Log\LoggerInterface::class);
-
-$logger->info('collectRates method called');
+$logger->info('functionName function called');
 ----------
 
 

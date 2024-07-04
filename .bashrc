@@ -150,7 +150,7 @@ set mouse-=ah
 set nu" > /root/.vimrc'\'''
 
 #Kudos
-alias sshkudosdevelop='echo "Pass: Developers2017" && ssh develop@152.169.251.121 -p 25964'
+alias sshkudosdevelop='holaezequiel && echo "Pass: Developers2017" && ssh develop@152.169.251.121 -p 25964'
 alias sshkudosezequiel='echo "Pass: Developers2017" && ssh ezequiel@152.169.251.121 -p 25964'
 alias sshforever21prod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-136-117-78.us-east-2.compute.amazonaws.com -p32241'
 alias sshjmcprod='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-132-139-3.us-east-2.compute.amazonaws.com -p32241'
@@ -158,7 +158,10 @@ alias sshbrooksprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-12-70-49.u
 alias sshricardospitalprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-224-99-102.us-east-2.compute.amazonaws.com -p32241'
 alias sshponyprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-223-179-54.us-east-2.compute.amazonaws.com -p32241'
 #Entornos STG
-alias sshdonwebstg='echo "source <(curl -s https://raw.githubusercontent.com/ezeac/generalBash/main/hola-ezequiel.bash)" && echo Pass: EkTd7r7qgUTsNed && ssh -t develop@66.97.37.118 -p5128'
+alias sshdonwebstg='holaezequiel && echo Pass: EkTd7r7qgUTsNed && ssh -t develop@66.97.37.118 -p5128'
+
+#alias holaezequiel
+alias holaezequiel='echo "source <(curl -s https://raw.githubusercontent.com/ezeac/generalBash/main/hola-ezequiel.bash)"'
 
 #Grow
 alias sshmoscaprod='ssh 1.ent-4jrcib2tztjy4-production-vohbr3y@ssh.us-5.magento.cloud'
