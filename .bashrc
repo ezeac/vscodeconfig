@@ -157,8 +157,10 @@ alias sshjmcprod='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-132-139-3.us-ea
 alias sshbrooksprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-12-70-49.us-east-2.compute.amazonaws.com -p32241'
 alias sshricardospitalprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-224-99-102.us-east-2.compute.amazonaws.com -p32241'
 alias sshponyprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-223-179-54.us-east-2.compute.amazonaws.com -p32241'
+alias sshbiosaludprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-130-186-127.us-east-2.compute.amazonaws.com -p32241'
+alias sshpeussoprod="echo 'S9B|0?lYb}G0L&4q!#D!2T46j6E*z\$EB' && ssh tiendapeusso@159.89.187.197"
 #Entornos STG
-alias sshdonwebstg='holaezequiel && echo Pass: EkTd7r7qgUTsNed && ssh -t develop@66.97.37.118 -p5128'
+alias sshdonwebstg='holaezequiel && echo Pass: Pm3Yv!kquuRdWMVnjiw && ssh -t develop@66.97.37.118 -p5128'
 
 #alias holaezequiel
 alias holaezequiel='echo "source <(curl -s https://raw.githubusercontent.com/ezeac/generalBash/main/hola-ezequiel.bash)"'

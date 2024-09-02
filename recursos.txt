@@ -10,7 +10,6 @@ echo "Developers2017" && sshfs -p 25964 facundob@152.169.251.121:/home/facundob/
 
 
 echo "Developers2017" && sshfs -p 25964 facundob@152.169.251.121:/home/facundob/www/pony ~/www/remote/pony && sshfs -p 25964 develop@152.169.251.121:/home/develop/Code/Magento2/ ~/www/remote/Magento2/ && sshfs -p 25964 nicolas@152.169.251.121:/home/nicolas/var/www/html/ricardoospital-new ~/www/remote/ricardoospital-new && sshfs -p 25964 develop@152.169.251.121:/var/www/html/ ~/www/remote/html/
-sshpass -p 'Developers2017' sshfs -p 25964 facundob@152.169.251.121:/home/facundob/www/pony ~/www/remote/pony && sshpass -p 'Developers2017' sshfs -p 25964 develop@152.169.251.121:/home/develop/Code/Magento2/ ~/www/remote/Magento2/ && sshpass -p 'Developers2017' sshfs -p 25964 nicolas@152.169.251.121:/home/nicolas/var/www/html/ricardoospital-new ~/www/remote/ricardoospital-new && sshpass -p 'Developers2017' sshfs -p 25964 develop@152.169.251.121:/var/www/html/ ~/www/remote/html/
 
 bin/magento setup:static-content:deploy --theme Kudos/biosalud -l es_AR -f
 
@@ -23,7 +22,16 @@ sudo systemctl stop nginx.service
 chmod -R 775 .
 rm -rf generated/* var/cache/* generated/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
 
-php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento indexer:reindex
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush
+
+php bin/magento maintenance:enable
+sudo systemctl stop nginx.service
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy --theme Kudos/theme --theme Magento/backend en_US es_ES es_AR && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
+
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
+sudo systemctl start nginx.service
+
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush
 php bin/magento indexer:reindex
 
 sudo systemctl restart nginx.service
@@ -113,7 +121,7 @@ echo "$(date '+%Y-%m-%d %H:%M:%S'): Run refresh_catalogsearch_fulltext_index"
 
 
 ----------
-Entidad o tabla en bbdd magento 2
+Entidad o tabla en bbdd base de datos magento 2
 ----------
 Objetos claves al crear entidad o tabla en bbdd magento 2:
 1- Modelo: get y set de cada atributo del modelo.
@@ -121,7 +129,7 @@ Objetos claves al crear entidad o tabla en bbdd magento 2:
 3- Repository: métodos CRUD del modelo.
 4- Interface del repository.
 5- ResourceModel: operaciones con bbdd para el modelo.
-6- Collection: conjuntode datos para el modelo.
+6- Collection: conjunto de datos para el modelo.
 ----------
 
 
@@ -317,16 +325,16 @@ composer config allow-plugins.phpstan/extension-installer true
 
 
 (sudo update-alternatives --set php /usr/bin/php8.1)
-../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/AndreaniExtension/
-../../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/AndreaniExtension/ --level 1
-../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/AndreaniExtension/ ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
-../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/AndreaniExtension/
+../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 vendor/kudosestudio/module-addressattributes/
+../../magento-coding-standard/vendor/bin/phpstan analyze vendor/kudosestudio/module-addressattributes/ --level 1
+../../magento-coding-standard/vendor/bin/phpmd vendor/kudosestudio/module-addressattributes/ ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 vendor/kudosestudio/module-addressattributes/
 
 (sudo update-alternatives --set php /usr/bin/php7.4 && chmod -R +x vendor/bin/)
-vendor/bin/phpcs --standard=Magento2 app/code/Kudos/AndreaniExtension/
-vendor/bin/phpstan analyze app/code/Kudos/AndreaniExtension/ --level 1
-vendor/bin/phpmd app/code/Kudos/AndreaniExtension/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
-vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/AndreaniExtension/
+vendor/bin/phpcs --standard=Magento2 vendor/kudosestudio/module-addressattributes/
+vendor/bin/phpstan analyze vendor/kudosestudio/module-addressattributes/ --level 1
+vendor/bin/phpmd vendor/kudosestudio/module-addressattributes/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+vendor/bin/phpcbf --standard=Magento2 vendor/kudosestudio/module-addressattributes/
 
 
 // @codingStandardsIgnoreStart
@@ -464,10 +472,10 @@ $.ajax({
 ----------
 Fix bbdd después de clonar magento2:
 ----------
-update core_config_data set value = "https://dev-violettacosmeticos.kudosestudio.com/" where path like "%base_url%" or path like "%base_link_url%";
-update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
-update sales_flat_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%linets.cl%";
-update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%linets.cl%";
+update core_config_data set value = "https://local.mosca.com.uy/" where path like "%base_url%" or path like "%base_link_url%";
+update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%growecommerce.uy%";
+update sales_flat_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%growecommerce.uy%";
+update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%growecommerce.uy%";
 ----------
 
 
@@ -476,8 +484,45 @@ Crear user magento 2 cli:
 ----------
 php bin/magento admin:user:create --admin-user="ezequiel" --admin-password="magento123" --admin-email="ezequiel@asd.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
 php bin/magento admin:user:create --admin-user="oguevara" --admin-password="magento123" --admin-email="o.guevara@tata.com.uy" --admin-firstname="Oscar" --admin-lastname="Guevara"
+php bin/magento admin:user:create --admin-user="mdadomo" --admin-password="magento123" --admin-email="matias.dadomo@mosca.com.uy" --admin-firstname="Matias" --admin-lastname="Dadomo"
 php bin/magento admin:user:create --admin-user="johanna.gutierrez" --admin-password="Gonoca28." --admin-email="johanna.gutierrez@tata.com.uy" --admin-firstname="Johanna" --admin-lastname="Gurierrez"
 ----------
+
+
+----------
+Bakcup parcial con UPDATE en vez de insert en sql
+----------
+Para hacer un backup de las filas generadas por la consulta SELECT * FROM customer_entity_int WHERE attribute_id IN (155,156); y crear un archivo SQL que contenga sentencias UPDATE, puedes seguir estos pasos usando n98-magerun2 y un script en bash:
+
+Paso 1: Exportar los datos usando n98-magerun2
+Primero, exporta los datos a un archivo CSV:
+
+bash
+Copiar código
+n98-magerun2 db:query "SELECT * FROM customer_entity_int WHERE attribute_id IN (155,156);" > backup_customer_entity_int.csv
+Paso 2: Crear un script en bash para generar las sentencias UPDATE
+Aquí tienes un ejemplo de script en bash que convierte el archivo CSV en un archivo SQL con sentencias UPDATE:
+
+bash
+Copiar código
+#!/bin/bash
+
+input_file="backup_customer_entity_int.csv"
+output_file="backup_customer_entity_int_update.sql"
+
+# Remove header from CSV if it exists
+tail -n +2 "$input_file" > temp.csv && mv temp.csv "$input_file"
+
+# Create or clear the output file
+> "$output_file"
+
+while IFS=$'\t' read -r value_id entity_id attribute_id value; do
+    echo "UPDATE customer_entity_int SET value = '$value' WHERE value_id = $value_id AND entity_id = $entity_id AND attribute_id = $attribute_id;" >> "$output_file"
+done < "$input_file"
+
+echo "SQL update script has been generated in $output_file"
+----------
+
 
 
 ----------
@@ -521,7 +566,7 @@ echo '' && sshdev "rm /home/ubuntu/bbdd_dev_$(date -I).sql.gz" &&
 cd .. &&
 echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | bin/mysql &&
 echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed 's/\sDEFINER=`[^`]*`@`[^`]*`//g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
-# echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
+# echo '' && echo "Importando nueva bbdd" && 3 src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
 echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento magento -h db &&
 echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%grow%";' | mysql -u root -pmagento magento -h db &&
 echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%grow%";' | mysql -u root -pmagento magento -h db &&
@@ -779,6 +824,7 @@ Magento 2 custom script logger log logs:
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $logger = $objectManager->get(\Psr\Log\LoggerInterface::class);
 $logger->info('functionName function called');
+$logger->info(print_r($asd,true));
 ----------
 
 
