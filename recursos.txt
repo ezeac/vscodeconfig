@@ -325,16 +325,16 @@ composer config allow-plugins.phpstan/extension-installer true
 
 
 (sudo update-alternatives --set php /usr/bin/php8.1)
-../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 vendor/kudosestudio/module-addressattributes/
-../../magento-coding-standard/vendor/bin/phpstan analyze vendor/kudosestudio/module-addressattributes/ --level 1
-../../magento-coding-standard/vendor/bin/phpmd vendor/kudosestudio/module-addressattributes/ ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
-../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 vendor/kudosestudio/module-addressattributes/
+../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
+../../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/InstallmentsCalculator/ --level 1
+../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/InstallmentsCalculator/ ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
 
 (sudo update-alternatives --set php /usr/bin/php7.4 && chmod -R +x vendor/bin/)
-vendor/bin/phpcs --standard=Magento2 vendor/kudosestudio/module-addressattributes/
-vendor/bin/phpstan analyze vendor/kudosestudio/module-addressattributes/ --level 1
-vendor/bin/phpmd vendor/kudosestudio/module-addressattributes/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
-vendor/bin/phpcbf --standard=Magento2 vendor/kudosestudio/module-addressattributes/
+vendor/bin/phpcs --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
+vendor/bin/phpstan analyze app/code/Kudos/InstallmentsCalculator/ --level 1
+vendor/bin/phpmd app/code/Kudos/InstallmentsCalculator/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
 
 
 // @codingStandardsIgnoreStart
