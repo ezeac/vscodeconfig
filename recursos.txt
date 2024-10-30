@@ -22,25 +22,50 @@ sudo systemctl stop nginx.service
 chmod -R 775 .
 rm -rf generated/* var/cache/* generated/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
 
-php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush
-
 php bin/magento maintenance:enable
 sudo systemctl stop nginx.service
-php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy --theme Kudos/theme --theme Magento/backend en_US es_ES es_AR && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy --theme Kudos/theme --theme Magento/backend en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
 
-php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
 sudo systemctl start nginx.service
 
 php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy en_US es_ES es_AR -f && php bin/magento cache:flush
 php bin/magento indexer:reindex
 
 sudo systemctl restart nginx.service
+----------
 
-php8.1 bin/magento setup:di:compile && php8.1 bin/magento setup:upgrade && php8.1 bin/magento setup:static-content:deploy en_US es_AR -f && php8.1 bin/magento cache:flush
 
-php bin/magento setup:di:compile && php bin/magento setup:upgrade && bin/magento setup:static-content:deploy --theme WoOw/city --theme Pearl/misbeProductos -l es_ES -f && php bin/magento cache:flush && php bin/magento indexer:reindex
 
 ----------
+Backup bbdd parcial magento 2 usando n98m2:
+----------
+# Define el nombre del archivo de backup
+BACKUP_FILE="backup_imagenes.sql.gz"
+
+# Define las tablas a respaldar y truncar
+TABLES="catalog_product_entity_media_gallery catalog_product_entity_media_gallery_value catalog_product_entity_media_gallery_value_to_entity"
+
+n98-magerun2 db:dump --strip="@development" --only-tables="$TABLES" --compression=gzip "$BACKUP_FILE"
+n98-magerun2 db:sql --command="TRUNCATE TABLE $(echo $TABLES | sed 's/ /; TRUNCATE TABLE /g');"
+zcat "$BACKUP_FILE" | pv | n98-magerun2 db:import -
+----------
+
+
+
+----------
+Agregar módulo kudos de composer magento 2:
+----------
+git checkout staging
+git pull origin staging
+php8.1 $(which composer) require kudosestudio/module-warmcache:dev-master
+git status
+git add composer.json composer.lock
+git checkout -b "KE-264_Add_kudos_warmcache_module"
+git commit -m "KE-264_Add_kudos_warmcache_module"
+git push origin KE-264_Add_kudos_warmcache_module
+git checkout staging && git pull origin staging
+----------
+
 
 
 
@@ -208,7 +233,8 @@ Instalación varnish forever21:
 #    https://www.getpagespeed.com/server-setup/varnish-as-full-page-cache-for-magento-2
 #    - php bin/magento config:set system/full_page_cache/caching_application 2
 #    - php bin/magento config:set --scope=default --scope-code=0 system/full_page_cache/ttl 1209600
-#    - php bin/magento varnish:vcl:generate
+#    - php bin/magento setup:config:set --no-interaction --http-cache-hosts=127.0.0.1:6081
+#    - php bin/magento varnish:vcl:generate --export-version=6 --access-list localhost --backend-host localhost --backend-port 8080
 #    - sudo vim /etc/varnish default.vcl (copiar acá)
 #    - sudo sed -i 's@/pub/health_check.php@/health_check.php@g' /etc/varnish/default.vcl
 #
@@ -368,6 +394,12 @@ php bin/magento cache:clean
 sudo systemctl restart php7.2-fpm.service
 ----------
 
+----------
+Actualización masiva de atributos desde el admin
+----------
+Temporal patch to fix massive attributes updates
+0 * * * * /usr/bin/timeout 3540 php8.1 /var/www/html/forever21-kudos/bin/magento queue:consumers:start product_action_attribute.update >> /var/www/html/forever21-kudos/var/log/queue_consumers_start.log 2>&1
+----------
 
 ----------
 Subir rama de la tarea a rama gitlab + Merge rama intermedia gitlab + Deploy en rama cloud
@@ -483,9 +515,6 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 Crear user magento 2 cli:
 ----------
 php bin/magento admin:user:create --admin-user="ezequiel" --admin-password="magento123" --admin-email="ezequiel@asd.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
-php bin/magento admin:user:create --admin-user="oguevara" --admin-password="magento123" --admin-email="o.guevara@tata.com.uy" --admin-firstname="Oscar" --admin-lastname="Guevara"
-php bin/magento admin:user:create --admin-user="mdadomo" --admin-password="magento123" --admin-email="matias.dadomo@mosca.com.uy" --admin-firstname="Matias" --admin-lastname="Dadomo"
-php bin/magento admin:user:create --admin-user="johanna.gutierrez" --admin-password="Gonoca28." --admin-email="johanna.gutierrez@tata.com.uy" --admin-firstname="Johanna" --admin-lastname="Gurierrez"
 ----------
 
 

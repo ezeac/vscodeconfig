@@ -158,7 +158,7 @@ alias sshbrooksprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-12-70-49.u
 alias sshricardospitalprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-224-99-102.us-east-2.compute.amazonaws.com -p32241'
 alias sshponyprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-223-179-54.us-east-2.compute.amazonaws.com -p32241'
 alias sshbiosaludprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-130-186-127.us-east-2.compute.amazonaws.com -p32241'
-alias sshpeussoprod="echo 'S9B|0?lYb}G0L&4q!#D!2T46j6E*z\$EB' && ssh tiendapeusso@159.89.187.197"
+alias sshpeussoprod="echo 'XWRXftmvFTciiH3RidKX - S9B|0?lYb}G0L&4q!#D!2T46j6E*z\$EB' && ssh tiendapeusso@159.89.187.197"
 #Entornos STG
 alias sshdonwebstg='holaezequiel && echo Pass: Pm3Yv!kquuRdWMVnjiw && ssh -t develop@66.97.37.118 -p5128'
 
@@ -172,3 +172,23 @@ alias sshmoscaprod='ssh 1.ent-4jrcib2tztjy4-production-vohbr3y@ssh.us-5.magento.
 HOME=${HOME:-'/home/ezequiel'}
 export PATH="$HOME/"'.magento-cloud/bin':"$PATH"
 if [ -f "$HOME/"'.magento-cloud/shell-config.rc' ]; then . "$HOME/"'.magento-cloud/shell-config.rc'; fi # END SNIPPET
+
+alias sshviu2authogar="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-18-218-76-119.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2dash="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-134-242-88.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2elbalcon="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-132-157-48.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2elbloque="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-52-15-64-118.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2ferniplast="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-18-221-49-120.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2fratalmacen="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-134-15-32.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2granbazar="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-137-93-7.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2jhonfoos="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-136-1-205.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2losgallegos="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-52-14-36-58.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2matercon="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-18-218-46-51.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2monumental="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-136-69-134.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2mundofix="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-19-45-91.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2nicocalzados="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-22-28-65.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2qsltec="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-139-215-57.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2racein="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-139-0-100.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2randazzo="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-19-251-255.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2tate="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-18-224-209-217.us-east-2.compute.amazonaws.com -p32241"
+alias sshviu2topmega="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-52-15-64-118.us-east-2.compute.amazonaws.com -p32241"
+
