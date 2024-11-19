@@ -18,6 +18,8 @@ bin/magento setup:static-content:deploy --theme Kudos/biosalud -l es_AR -f
 ----------
 Deploy completo magento 2:
 ----------
+Para forever o multitienda es necesario ejecutar sudo chmod -R 775 . y sudo systemctl stop nginx
+
 sudo systemctl stop nginx.service
 chmod -R 775 .
 rm -rf generated/* var/cache/* generated/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
@@ -25,6 +27,7 @@ rm -rf generated/* var/cache/* generated/* var/generation/* var/di/* var/view_pr
 php bin/magento maintenance:enable
 sudo systemctl stop nginx.service
 php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy --theme Kudos/theme --theme Magento/backend en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy --theme Smartwave/forever --theme Magento/backend en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
 
 sudo systemctl start nginx.service
 
@@ -45,9 +48,12 @@ BACKUP_FILE="backup_imagenes.sql.gz"
 # Define las tablas a respaldar y truncar
 TABLES="catalog_product_entity_media_gallery catalog_product_entity_media_gallery_value catalog_product_entity_media_gallery_value_to_entity"
 
-n98-magerun2 db:dump --strip="@development" --only-tables="$TABLES" --compression=gzip "$BACKUP_FILE"
-n98-magerun2 db:sql --command="TRUNCATE TABLE $(echo $TABLES | sed 's/ /; TRUNCATE TABLE /g');"
-zcat "$BACKUP_FILE" | pv | n98-magerun2 db:import -
+# Comprimir
+php8.1 $(which n98m2) db:dump --strip="@development" --include="$TABLES" --compression=gzip "$BACKUP_FILE"
+
+# Borrar y restaurar
+php8.1 $(which n98m2) db:sql --command="TRUNCATE TABLE $(echo $TABLES | sed 's/ /; TRUNCATE TABLE /g');"
+zcat "$BACKUP_FILE" | pv | php8.1 $(which n98m2) db:import -
 ----------
 
 

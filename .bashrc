@@ -150,8 +150,8 @@ set mouse-=ah
 set nu" > /root/.vimrc'\'''
 
 #Kudos
-alias sshkudosdevelop='holaezequiel && echo "Pass: Developers2017" && ssh develop@186.137.241.128 -p 25964'
-alias sshkudosezequiel='echo "Pass: Developers2017" && ssh ezequiel@186.137.241.128 -p 25964'
+alias sshkudosdevelop='holaezequiel && echo "Pass: Developers2017" && ssh develop@181.165.127.151 -p 25964'
+alias sshkudosezequiel='echo "Pass: Developers2017" && ssh ezequiel@181.165.127.151 -p 25964'
 alias sshforever21prod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-136-117-78.us-east-2.compute.amazonaws.com -p32241'
 alias sshjmcprod='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-132-139-3.us-east-2.compute.amazonaws.com -p32241'
 alias sshbrooksprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-12-70-49.us-east-2.compute.amazonaws.com -p32241'
