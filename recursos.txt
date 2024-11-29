@@ -40,6 +40,30 @@ sudo systemctl restart nginx.service
 
 
 ----------
+YOUTUBE CSS Hide ocultar video
+----------
+#full-bleed-container { max-height: 150px !important; min-height: unset !important; overflow: hidden !important; opacity: .5; }
+#thumbnail { max-height: 40px; overflow: hidden; }
+#dismissible { max-height: 100px; overflow: hidden; }
+.ytd-masthead { max-height: 150px;overflow: hidden; }
+a.ShortsLockupViewModelHostEndpoint.reel-item-endpoint { max-width: 10px; opacity: .2; overflow: hidden; }
+span.yt-icon-shape.yt-icon { opacity: 0; }
+div#bottom-row, div#top-row, .ytd-reel-shelf-renderer, .yt-chip-cloud-renderer, .html5-video-container, .ytd-comments, a#thumbnail { display: none !important; }
+ytd-watch-metadata[title-headline-xs] h1.ytd-watch-metadata { font-size: 14px; }
+#video-title.ytd-compact-video-renderer { font-size: 11px; }
+#text.ytd-channel-name { font-size: 10px; }
+ytd-compact-video-renderer:not([watch-feed-big-thumbs]) ytd-thumbnail.ytd-compact-video-renderer { display: none; }
+div#masthead-container { max-height: 5px; overflow: hidden; }
+div#chat-container { display: none; }
+.html5-video-player { opacity: .2; }
+html:before { content: '';position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background: black;z-index: 999999999;opacity: .85; }
+html:hover:before { display:none; }
+#columns.ytd-watch-flexy { flex-direction: column; }
+----------
+
+
+
+----------
 Backup bbdd parcial magento 2 usando n98m2:
 ----------
 # Define el nombre del archivo de backup
@@ -510,7 +534,7 @@ $.ajax({
 ----------
 Fix bbdd después de clonar magento2:
 ----------
-update core_config_data set value = "https://local.mosca.com.uy/" where path like "%base_url%" or path like "%base_link_url%";
+update core_config_data set value = "https://demoforever21.com.ar/" where path like "%base_url%" or path like "%base_link_url%";
 update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%growecommerce.uy%";
 update sales_flat_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%growecommerce.uy%";
 update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%growecommerce.uy%";
