@@ -152,7 +152,7 @@ set nu" > /root/.vimrc'\'''
 #Kudos
 alias sshkudosdevelop='holaezequiel && echo "Pass: Developers2017" && ssh develop@181.165.127.151 -p 25964'
 alias sshkudosezequiel='echo "Pass: Developers2017" && ssh ezequiel@181.165.127.151 -p 25964'
-alias sshforever21prod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-136-117-78.us-east-2.compute.amazonaws.com -p32241'
+alias sshforever21prod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-134-3-69.us-east-2.compute.amazonaws.com -p32241'
 alias sshforever21prodnuevo='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-134-3-69.us-east-2.compute.amazonaws.com -p32241'
 alias sshjmcprod='ssh -i "kudos-template-basic.pem" ubuntu@ec2-3-132-139-3.us-east-2.compute.amazonaws.com -p32241'
 alias sshbrooksprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-12-70-49.us-east-2.compute.amazonaws.com -p32241'
@@ -160,6 +160,7 @@ alias sshricardospitalprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-22
 alias sshponyprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-18-223-179-54.us-east-2.compute.amazonaws.com -p32241'
 alias sshbiosaludprod='ssh -i "~/kudos-template-basic.pem" ubuntu@ec2-3-130-186-127.us-east-2.compute.amazonaws.com -p32241'
 alias sshpeussoprod="echo 'XWRXftmvFTciiH3RidKX - S9B|0?lYb}G0L&4q!#D!2T46j6E*z\$EB' && ssh tiendapeusso@159.89.187.197"
+alias sshgostoreprod="ssh -i '~/kudos-template-basic.pem' ubuntu@ec2-3-20-168-50.us-east-2.compute.amazonaws.com -p32241"
 #Entornos STG
 alias sshdonwebstg='holaezequiel && echo Pass: Pm3Yv!kquuRdWMVnjiw && ssh -t develop@66.97.37.118 -p5128'
 
@@ -192,4 +193,5 @@ alias sshviu2racein="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-139-0-100.
 alias sshviu2randazzo="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-3-19-251-255.us-east-2.compute.amazonaws.com -p32241"
 alias sshviu2tate="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-18-224-209-217.us-east-2.compute.amazonaws.com -p32241"
 alias sshviu2topmega="ssh -i \"kudos-template-basic.pem\" ubuntu@ec2-52-15-64-118.us-east-2.compute.amazonaws.com -p32241"
+alias sshnewsport="ssh -i \"~/kudos-template-basic.pem\" ubuntu@ec2-3-139-203-117.us-east-2.compute.amazonaws.com -p32241"
 

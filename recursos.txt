@@ -16,13 +16,26 @@ bin/magento setup:static-content:deploy --theme Kudos/biosalud -l es_AR -f
 
 
 ----------
+Nota Deploy JMC nuevo sitio:
+----------
+deshabilitar checkout pro
+corregir msj error checkout
+módulo address attributes
+país por defecto en "argentina" + utilizar "table rates" en vez de "flat rate" (para que recargue mét de envío al cambiar provincia y cód. postal)
+onestepcheckout con config para marcar billing = shipping en default
+----------
+
+
+
+----------
 Deploy completo magento 2:
 ----------
 Para forever o multitienda es necesario ejecutar sudo chmod -R 775 . y sudo systemctl stop nginx
 
 sudo systemctl stop nginx.service
-chmod -R 775 .
+sudo chmod -R 775 .
 rm -rf generated/* var/cache/* generated/* var/generation/* var/di/* var/view_preprocessed/* var/page_cache/* pub/static/*
+php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy --theme violetta/default --theme Magento/backend en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
 
 php bin/magento maintenance:enable
 sudo systemctl stop nginx.service
@@ -56,7 +69,7 @@ ytd-compact-video-renderer:not([watch-feed-big-thumbs]) ytd-thumbnail.ytd-compac
 div#masthead-container { max-height: 5px; overflow: hidden; }
 div#chat-container { display: none; }
 .html5-video-player { opacity: .2; }
-html:before { content: '';position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background: black;z-index: 999999999;opacity: .85; }
+html:before { content: '';position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background: black;z-index: 999999999;opacity: .95; }
 html:hover:before { display:none; }
 #columns.ytd-watch-flexy { flex-direction: column; }
 ----------
@@ -259,19 +272,22 @@ Instalación varnish forever21:
 #
 #    4- Copiar los set $MAGE_..., logs y el include del nginx.conf al server 8080, quitarlos del server 443
 #
-#    5- Generar archivo default.vcl, revisar y seguir las instrucciones:
-#    https://www.getpagespeed.com/server-setup/varnish-as-full-page-cache-for-magento-2
+#    5- Generar archivo default.vcl, revisar y seguir las instrucciones: (más info en https://www.getpagespeed.com/server-setup/varnish-as-full-page-cache-for-magento-2)
 #    - php bin/magento config:set system/full_page_cache/caching_application 2
 #    - php bin/magento config:set --scope=default --scope-code=0 system/full_page_cache/ttl 1209600
 #    - php bin/magento setup:config:set --no-interaction --http-cache-hosts=127.0.0.1:6081
 #    - php bin/magento varnish:vcl:generate --export-version=6 --access-list localhost --backend-host localhost --backend-port 8080
-#    - sudo vim /etc/varnish default.vcl (copiar acá)
+#    - sudo vim /etc/varnish/default.vcl (copiar acá)
 #    - sudo sed -i 's@/pub/health_check.php@/health_check.php@g' /etc/varnish/default.vcl
 #
 #    6- Aplicar fix en nginx.conf:
-#    https://magento.stackexchange.com/questions/221404/varnish-nginx-serving-all-resources-http-instead-of-https-magento-2
+#    (https://magento.stackexchange.com/questions/221404/varnish-nginx-serving-all-resources-http-instead-of-https-magento-2)
 #    - Find the line like this in nginx.config: location ~ (index|get|static|report|404|503|health_check|phpinfo).php$ { .... }
 #    - Add this line: fastcgi_param HTTPS on; above: include fastcgi_params;
+#
+#    7- sudo vim /etc/default/varnish
+#    cambiar el "-s malloc,256m" por la cantidad deseada, por ejemplo ""-s malloc,1g"
+#
 #
 
 Comandos útiles para revisar estado del servicio y conexión con backend varnish:
@@ -381,16 +397,17 @@ composer config allow-plugins.phpstan/extension-installer true
 
 
 (sudo update-alternatives --set php /usr/bin/php8.1)
-../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
-../../magento-coding-standard/vendor/bin/phpstan analyze app/code/Kudos/InstallmentsCalculator/ --level 1
-../../magento-coding-standard/vendor/bin/phpmd app/code/Kudos/InstallmentsCalculator/ ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
-../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
+../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 vendor/kudosestudio/module-addressattributes/
+../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 vendor/kudosestudio/module-addressattributes/
+../../magento-coding-standard/vendor/bin/phpstan analyze vendor/kudosestudio/module-addressattributes/ --level 1
+../../magento-coding-standard/vendor/bin/phpmd vendor/kudosestudio/module-addressattributes/ ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+
 
 (sudo update-alternatives --set php /usr/bin/php7.4 && chmod -R +x vendor/bin/)
+vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
 vendor/bin/phpcs --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
 vendor/bin/phpstan analyze app/code/Kudos/InstallmentsCalculator/ --level 1
 vendor/bin/phpmd app/code/Kudos/InstallmentsCalculator/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
-vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
 
 
 // @codingStandardsIgnoreStart
@@ -884,6 +901,7 @@ $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $logger = $objectManager->get(\Psr\Log\LoggerInterface::class);
 $logger->info('functionName function called');
 $logger->info(print_r($asd,true));
+$logger->info(print_r(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 10), true));
 ----------
 
 
