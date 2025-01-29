@@ -163,6 +163,7 @@ alias sshpeussoprod="echo 'XWRXftmvFTciiH3RidKX - S9B|0?lYb}G0L&4q!#D!2T46j6E*z\
 alias sshgostoreprod="ssh -i '~/kudos-template-basic.pem' ubuntu@ec2-3-20-168-50.us-east-2.compute.amazonaws.com -p32241"
 #Entornos STG
 alias sshdonwebstg='holaezequiel && echo Pass: Pm3Yv!kquuRdWMVnjiw && ssh -t develop@66.97.37.118 -p5128'
+alias sshviolettastg="ssh -i '~/.ssh/javier.kudos' ubuntu@10.1.61.31"
 
 #alias holaezequiel
 alias holaezequiel='echo "source <(curl -s https://raw.githubusercontent.com/ezeac/generalBash/main/hola-ezequiel.bash)"'
