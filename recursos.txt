@@ -38,6 +38,9 @@ rm -rf generated/* var/cache/* generated/* var/generation/* var/di/* var/view_pr
 
 php8.1 bin/magento s:d:c && php8.1 bin/magento s:up && php8.1 bin/magento s:s:d --theme Kudos/theme --theme Magento/backend -f && php8.1 bin/magento c:f
 
+php7.4 bin/magento s:d:c && php7.4 bin/magento s:up && php7.4 bin/magento s:s:d --theme violetta/default --theme Magento/backend -f && php7.4 bin/magento c:f
+php7.4 bin/magento s:d:c && php7.4 bin/magento s:up && php7.4 bin/magento s:s:d --theme Kudos/biosalud --theme Kudos/biofrozz --theme Magento/backend -f && php7.4 bin/magento c:f
+
 php bin/magento setup:di:compile && php bin/magento setup:upgrade && php bin/magento setup:static-content:deploy --theme violetta/default --theme Magento/backend en_US es_ES es_AR -f && php bin/magento cache:flush && php bin/magento maintenance:disable && php bin/magento indexer:reindex
 
 php bin/magento maintenance:enable
@@ -59,7 +62,7 @@ sudo systemctl restart nginx.service
 YOUTUBE CSS Hide ocultar video
 ----------
 #columns {opacity: .4}
-#full-bleed-container { max-height: 150px !important; min-height: unset !important; overflow: hidden !important; opacity: .5; }
+#full-bleed-container {max-height: 200px !important;min-height: unset !important;overflow: hidden !important;opacity: .5;}
 #thumbnail { max-height: 40px; overflow: hidden; }
 #dismissible { max-height: 100px; overflow: hidden; }
 .ytd-masthead { max-height: 150px;overflow: hidden; }
@@ -72,7 +75,7 @@ ytd-watch-metadata[title-headline-xs] h1.ytd-watch-metadata { font-size: 14px; }
 ytd-compact-video-renderer:not([watch-feed-big-thumbs]) ytd-thumbnail.ytd-compact-video-renderer { display: none; }
 div#masthead-container { max-height: 5px; overflow: hidden; }
 div#chat-container { display: none; }
-.html5-video-player { opacity: 1; }
+.html5-video-player { opacity: .3; }
 html:before { content: '';position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;background: black;z-index: 999999999;opacity: .95; }
 html:hover:before { display:none; }
 #columns.ytd-watch-flexy { flex-direction: column; }
@@ -401,17 +404,17 @@ composer config allow-plugins.phpstan/extension-installer true
 
 
 (sudo update-alternatives --set php /usr/bin/php8.1)
-../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 vendor/kudosestudio/module-syncsimplesbutton
-../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 vendor/kudosestudio/module-syncsimplesbutton
-../../magento-coding-standard/vendor/bin/phpstan analyze vendor/kudosestudio/module-syncsimplesbutton --level 1
-../../magento-coding-standard/vendor/bin/phpmd vendor/kudosestudio/module-syncsimplesbutton ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
+../../magento-coding-standard/vendor/bin/phpcbf --standard=Magento2 app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less
+../../magento-coding-standard/vendor/bin/phpcs --standard=Magento2 app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less
+../../magento-coding-standard/vendor/bin/phpstan analyze app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less --level 1
+../../magento-coding-standard/vendor/bin/phpmd app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less ansi ../../magento-coding-standard/vendor/ainnomix/magento2-quality-phpmd/rulesets/rulset.xml
 
 
 (sudo update-alternatives --set php /usr/bin/php7.4 && chmod -R +x vendor/bin/)
-vendor/bin/phpcbf --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
-vendor/bin/phpcs --standard=Magento2 app/code/Kudos/InstallmentsCalculator/
-vendor/bin/phpstan analyze app/code/Kudos/InstallmentsCalculator/ --level 1
-vendor/bin/phpmd app/code/Kudos/InstallmentsCalculator/ text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+php8.1 vendor/bin/phpcbf --standard=Magento2 app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less
+php8.1 vendor/bin/phpcs --standard=Magento2 app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less
+php8.1 vendor/bin/phpstan analyze app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less --level 1
+php8.1 vendor/bin/phpmd app/design/frontend/Kudos/theme/web/css/source/module/_modal-newsletter.less text dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
 
 
 // @codingStandardsIgnoreStart
@@ -645,16 +648,21 @@ echo '' && rsync --progress -zahe "ssh -i ~/staging.pem" ubuntu@ec2-44-207-203-1
 echo '' && sshdev "rm bbdd_dev_$(date -I).sql.gz" &&
 cd .. &&
 echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | bin/mysql &&
-echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed 's/\sDEFINER=`[^`]*`@`[^`]*`//g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
+echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed '1s/\\-/-/g' | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed 's/\sDEFINER=`[^`]*`@`[^`]*`//g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
 # echo '' && echo "Importando nueva bbdd" && 3 src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
+#echo "update core_config_data set value = \"https://stg-forever21-kudos.kudosestudio.com/\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento magento -h db &&
 echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento magento -h db &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%kudos%";' | mysql -u root -pmagento magento -h db &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%kudos%";' | mysql -u root -pmagento magento -h db &&
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%kudos%";' | mysql -u develop -pHJ7qrR7eUi9cVhp stg_forever21_kudos_2 &&
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%kudos%";' | mysql -u develop -pHJ7qrR7eUi9cVhp stg_forever21_kudos_2 &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
 echo '' && bin/magento admin:user:create --admin-user="ezequiel" --admin-password="magento123" --admin-email="ezequiel@asd.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 # echo '' && bin/magento config:set web/secure/offloader_header X-Scheme &&
 php8.1 bin/magento config:set web/url/use_store 1 && php8.1 bin/magento config:set admin/security/session_lifetime 31536000 && php8.1 bin/magento config:set catalog/search/elasticsearch7_server_hostname localhost && php8.1 bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
 echo '' && echo "Deploy magento y reindex" && php8.1 bin/magento s:up && php8.1 bin/magento indexer:reindex && echo "Listo."
+
+php8.1 bin/magento config:set catalog/search/elasticsearch7_server_hostname localhost
+php8.1 bin/magento config:set catalog/search/elasticsearch7_server_port 9200
+php8.1 bin/magento config:set catalog/search/elasticsearch7_index_prefix magento2_f21
 ----------
 
 
