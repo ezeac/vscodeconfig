@@ -27,6 +27,24 @@ onestepcheckout con config para marcar billing = shipping en default
 
 
 
+
+----------
+Crear documentación módulo chat ai
+----------
+find app/code/Kudos/BulkAddToCart/ -type f -print -exec cat {} \;
+
+escribe la documentación para este módulo con la siguiente estructura:
+título: Documentación Módulo Kudos_...
+Introducción: resumen compacto sobre lo que realiza, explica de forma sencilla
+Configuración y uso: dependencias de versiones de magento, php, y módulos. Secciones de configuración en el admin
+Pasos para usar el módulo: cómo se utiliza el módulo y secciones visibles para su uso. Explica de forma entendible
+Pruebas y Validación: qué pasos se deberían realizar y qué resultados debería ver para entender si el módulo funciona una vez instalado. Explica el paso a paso de forma sencilla. Si tiene varias formas, explica todas.
+Referencia general de archivos: listado de archivos separados en categorías: generales, configuración y administración, lógica principal, vista y frontend. Agrega una descripción de menos de 40 catacteres sólo en los archivos importantes. Escribe esto en formato de listado, no tabla.
+----------
+
+
+
+
 ----------
 Deploy completo magento 2:
 ----------
@@ -286,13 +304,14 @@ Instalación varnish forever21:
 #    - php bin/magento varnish:vcl:generate --export-version=6 --access-list localhost --backend-host localhost --backend-port 8080
 #    - sudo vim /etc/varnish/default.vcl (copiar acá)
 #    - sudo sed -i 's@/pub/health_check.php@/health_check.php@g' /etc/varnish/default.vcl
+#    - cambiar el timeout del health_check a 10s
 #
 #    6- Aplicar fix en nginx.conf:
 #    (https://magento.stackexchange.com/questions/221404/varnish-nginx-serving-all-resources-http-instead-of-https-magento-2)
 #    - Find the line like this in nginx.config: location ~ (index|get|static|report|404|503|health_check|phpinfo).php$ { .... }
 #    - Add this line: fastcgi_param HTTPS on; above: include fastcgi_params;
 #
-#    7- sudo vim /etc/default/varnish
+#    7- sudo vim /lib/systemd/system/varnish.service
 #    cambiar el "-s malloc,256m" por la cantidad deseada, por ejemplo ""-s malloc,1g"
 #
 #
@@ -568,7 +587,7 @@ update customer_entity set email = replace(email, "@", "@test") where email NOT 
 ----------
 Crear user magento 2 cli:
 ----------
-php bin/magento admin:user:create --admin-user="ezequiel" --admin-password="magento123" --admin-email="ezequiel@asd.com" --admin-firstname="Ezequiel" --admin-lastname="Crosa"
+php bin/magento admin:user:create --admin-user="nicob" --admin-password="magento1234" --admin-email="nicob@kudosestudio.com" --admin-firstname="Nico" --admin-lastname="B"
 ----------
 
 
@@ -632,37 +651,48 @@ bin/cli sed -i 's/production/staging/g' app/etc/env.php
 ----------
 
 
-url=https://app.nestle.test/
+
 ----------
 Clonar bbdd en entorno local desde cloud (ejecutar desde carpeta src):
 ----------
-entorno=dev; remote_bbddName=magento; local_bbddName=magento; url=https://dev-gostore.kudosestudio.com/
-echo '' && echo "Entorno: $entorno ------ Remote BBDD: $remote_bbddName ------ Local BBDD: $local_bbddName ------ URL: $url " && echo "Exportando BBDD" &&
-echo '' && rm bbdd_dev_$(date -I).sql.gz
 
-Password: xJe3CtLY7iYzeFdEbs
-Ejecutar en dev: mysqldump --quick --single-transaction --lock-tables=false -u magento -p magento | gzip -9 > bbdd_dev_$(date -I).sql.gz
-# echo '' && sshdev "mysqldump --quick --single-transaction --lock-tables=false -u magento -p $(echo $remote_bbddName) | gzip -9 > bbdd_$(echo $entorno)_$(date -I).sql.gz"
+# DB_INFO=$(php7.4 $(which n98-m2) db:info)
+DB_INFO=$(php7.4 $(which n98m2) db:info)
 
-echo '' && rsync --progress -zahe "ssh -i ~/staging.pem" ubuntu@ec2-44-207-203-158.compute-1.amazonaws.com:bbdd_dev_$(date -I).sql.gz . &&
-echo '' && sshdev "rm bbdd_dev_$(date -I).sql.gz" &&
-cd .. &&
-echo '' && echo "Borrando bbdd local ($local_bbddName) anterior" && echo "drop database $local_bbddName; create database $local_bbddName" | bin/mysql &&
-echo '' && echo "Importando nueva bbdd" && pv src/bbdd_dev_$(date -I).sql.gz | zcat | sed '1s/\\-/-/g' | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed 's/\sDEFINER=`[^`]*`@`[^`]*`//g' | sed '/@@GLOBAL.GTID_PURGED=/d' | bin/mysql &&
-# echo '' && echo "Importando nueva bbdd" && 3 src/bbdd_dev_$(date -I).sql.gz | zcat | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | bin/mysql &&
-#echo "update core_config_data set value = \"https://stg-forever21-kudos.kudosestudio.com/\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento magento -h db &&
-echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u root -pmagento magento -h db &&
-echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%kudos%";' | mysql -u develop -pHJ7qrR7eUi9cVhp stg_forever21_kudos_2 &&
-echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%kudos%";' | mysql -u develop -pHJ7qrR7eUi9cVhp stg_forever21_kudos_2 &&
+DB_HOST=$(echo "$DB_INFO" | grep -E '^\| host ' | awk -F '|' '{print $3}' | xargs)
+DB_NAME=$(echo "$DB_INFO" | grep -E '^\| dbname ' | awk -F '|' '{print $3}' | xargs)
+DB_USER=$(echo "$DB_INFO" | grep -E '^\| username ' | awk -F '|' '{print $3}' | xargs)
+DB_PASS=$(echo "$DB_INFO" | grep -E '^\| password ' | awk -F '|' '{print $3}' | xargs)
+
+echo '----' && echo 'Datos:' && echo '----' && echo "DB: $DB_NAME" && echo "User: $DB_USER / $DB_PASS" && echo "Host: $DB_HOST" && echo '----'
+
+mysqldump --quick --single-transaction --lock-tables=false -u $DB_USER -p"$DB_PASS" -h $DB_HOST $DB_NAME | gzip -9 > bbdd_"$DB_NAME"_$(date -I).sql.gz
+
+
+url=https://devbiosaludm2.kudosestudio.com/
+
+# Guardar variables para ES:
+ES_HOST=$(php7.4 bin/magento config:show catalog/search/elasticsearch7_server_hostname)
+ES_PORT=$(php7.4 bin/magento config:show catalog/search/elasticsearch7_server_port)
+ES_PREFIX=$(php7.4 bin/magento config:show catalog/search/elasticsearch7_index_prefix)
+
+echo '----' && echo 'Datos ES:' && echo '----' && echo "Host: $ES_HOST" && echo "Port: $ES_PORT" && echo "Prefix: $ES_PREFIX" && echo '----'
+
+echo "Borrando bbdd local ($DB_NAME) anterior" && echo "drop database $DB_NAME; create database $DB_NAME" | mysql -u $DB_USER -p"$DB_PASS" -h $DB_HOST $DB_NAME
+echo "Importando nueva bbdd" && pv ./bbdd_biosaludm2_2025-04-07.sql.gz | zcat | sed '1s/\\-/-/g' | sed 's/utf8mb4_0900_ai_ci/utf8mb4_unicode_ci/g' | sed 's/\sDEFINER=`[^`]*`@`[^`]*`//g' | sed '/@@GLOBAL.GTID_PURGED=/d' | mysql -u $DB_USER -p"$DB_PASS" -h $DB_HOST $DB_NAME
+echo "update core_config_data set value = \"$url\" where path like \"%base_url%\" or path like \"%base_link_url%\";" | mysql -u $DB_USER -p"$DB_PASS" -h $DB_HOST $DB_NAME
+echo 'update sales_order set customer_email = replace(customer_email , "@", "@test") where customer_email NOT LIKE "%kudos%";' | mysql -u $DB_USER -p"$DB_PASS" -h $DB_HOST $DB_NAME
+echo 'update customer_entity set email = replace(email, "@", "@test") where email NOT LIKE "%kudos%";' | mysql -u $DB_USER -p"$DB_PASS" -h $DB_HOST $DB_NAME &&
 echo '' && echo "Importando config en magento" && bin/magento app:config:import &&
 echo '' && bin/magento admin:user:create --admin-user="ezequiel" --admin-password="magento123" --admin-email="ezequiel@asd.com" --admin-firstname="Admin" --admin-lastname="Admin" &&
 # echo '' && bin/magento config:set web/secure/offloader_header X-Scheme &&
-php8.1 bin/magento config:set web/url/use_store 1 && php8.1 bin/magento config:set admin/security/session_lifetime 31536000 && php8.1 bin/magento config:set catalog/search/elasticsearch7_server_hostname localhost && php8.1 bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
-echo '' && echo "Deploy magento y reindex" && php8.1 bin/magento s:up && php8.1 bin/magento indexer:reindex && echo "Listo."
+php7.4 bin/magento config:set web/url/use_store 1 && php7.4 bin/magento config:set admin/security/session_lifetime 31536000 && php7.4 bin/magento config:set catalog/search/elasticsearch7_server_hostname localhost && php7.4 bin/magento config:set catalog/search/elasticsearch7_server_port 9200 &&
+echo '' && echo "Deploy magento y reindex" && php7.4 bin/magento s:up && php7.4 bin/magento indexer:reindex && echo "Listo."
 
-php8.1 bin/magento config:set catalog/search/elasticsearch7_server_hostname localhost
-php8.1 bin/magento config:set catalog/search/elasticsearch7_server_port 9200
-php8.1 bin/magento config:set catalog/search/elasticsearch7_index_prefix magento2_f21
+# Setear valores de ES
+php7.4 bin/magento config:set catalog/search/elasticsearch7_server_hostname $ES_HOST
+php7.4 bin/magento config:set catalog/search/elasticsearch7_server_port $ES_PORT
+php7.4 bin/magento config:set catalog/search/elasticsearch7_index_prefix $ES_PREFIX
 ----------
 
 
